@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /9789050117548/
+
+Sitemap: https://mush-id.jitsedesmet.be/sitemap.xml

@@ -1,0 +1,11 @@
+services:
+  app:
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile
+      network: host
+    ports:
+      - 4173:4173
+    volumes:
+      - ../mush-id-data/hosted:/var/www/mush-id-data
