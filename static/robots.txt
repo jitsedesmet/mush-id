@@ -1,5 +1,6 @@
 User-agent: *
-Allow: /
-Disallow: /9789050117548/
+Allow: /$
+Allow: robots.txt
+Disallow: /
 
 Sitemap: https://mush-id.jitsedesmet.be/sitemap.xml

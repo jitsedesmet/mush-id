@@ -2,7 +2,7 @@ FROM node:latest
 LABEL authors="jitsedesmet"
 
 WORKDIR /var/www/mush-id
-VOLUME /var/www/mush-id-data
+VOLUME /var/www/mush-id/.svelte-kit/output/client/keys
 
 COPY package.json package-lock.json ./
 
