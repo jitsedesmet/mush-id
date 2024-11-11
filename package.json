@@ -32,7 +32,7 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"dompurify": "^3.1.7",
+		"dompurify": "^3.2.0",
 		"marked": "^14.1.3"
 	}
 }
