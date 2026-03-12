@@ -1,8 +1,7 @@
-FROM node:latest
+FROM node:latest AS builder
 LABEL authors="jitsedesmet"
 
 WORKDIR /var/www/mush-id
-VOLUME /var/www/mush-id/.svelte-kit/output/client/keys
 
 COPY package.json package-lock.json ./
 
@@ -12,7 +11,11 @@ COPY . .
 
 RUN npm run build
 
+FROM nginx:alpine
 
-EXPOSE 4173
+COPY --from=builder /var/www/mush-id/build /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-CMD ["npm", "run", "preview", "--", "--host"]
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]
