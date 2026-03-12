@@ -17,7 +17,7 @@
         return num < 10 ? `0${num}` : num;
     }
     function formatDate(date: Date) {
-        return `${toTwoDigits(date.getHours())}:${toTwoDigits(date.getMinutes())}  ${toTwoDigits(date.getDate())}/${toTwoDigits(date.getMonth())}/${date.getFullYear()}`;
+        return `${toTwoDigits(date.getHours())}:${toTwoDigits(date.getMinutes())}  ${toTwoDigits(date.getDate())}/${toTwoDigits(date.getMonth() + 1)}/${date.getFullYear()}`;
     }
 </script>
 

@@ -25,7 +25,7 @@
     <!-- Hero section -->
     <section class="hero">
         <Hex/>
-        <h1>Welkom bij Mush&#8209;ID</h1>
+        <h1>Welkom bij Mush-ID</h1>
         <p class="subtitle">
             Identificeer paddenstoelen stap voor stap met behulp van binaire sleutels.
             Installeer de app op je thuisscherm — ook offline beschikbaar!
