@@ -9,7 +9,7 @@
 <header class="site-header">
     <div class="header-inner">
         <a href={homeUrl} class="brand" aria-label="Mush ID home">
-            <span class="brand-icon" aria-hidden="true">🍄</span>
+            <img src={resolve('/orig_icon.png')} class="brand-logo" alt="" />
             <span class="brand-name">Mush ID</span>
         </a>
         {#if !isHome}
@@ -48,9 +48,10 @@
         color: #fff;
     }
 
-    .brand-icon {
-        font-size: 1.5em;
-        line-height: 1;
+    .brand-logo {
+        width: 32px;
+        height: 32px;
+        object-fit: contain;
     }
 
     .brand-name {

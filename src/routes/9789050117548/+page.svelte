@@ -213,7 +213,6 @@
     .image-wrapper {
         margin: 0 auto 14px;
         max-width: 260px;
-        max-height: 260px;
     }
 
     .sources-label {
