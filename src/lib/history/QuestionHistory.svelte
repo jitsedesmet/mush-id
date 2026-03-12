@@ -12,11 +12,15 @@
 <div class="history">
     <h6>Geschiedenis</h6>
     <div class="history-grid">
-        <div class="hist-question current">{currentItem}</div>
-        <div class="hist-vote current">…</div>
+        <div class="hist-row current">
+            <span class="hist-question">{currentItem}</span>
+            <span class="hist-vote">…</span>
+        </div>
         {#each stateTagList.questionHistory.toReversed() as hisItem (hisItem.question)}
-            <div class="hist-question">{hisItem.question}</div>
-            <div class="hist-vote">{labels[hisItem.voting + 3]}</div>
+            <div class="hist-row">
+                <span class="hist-question">{hisItem.question}</span>
+                <span class="hist-vote">{labels[hisItem.voting + 3]}</span>
+            </div>
         {/each}
     </div>
 </div>
@@ -29,9 +33,8 @@
     }
 
     .history-grid {
-        display: grid;
-        grid-template-columns: 1fr auto;
-        gap: 2px 16px;
+        display: flex;
+        flex-direction: column;
         width: 100%;
         margin-top: 8px;
         background: var(--c-surface);
@@ -40,22 +43,32 @@
         overflow: hidden;
     }
 
-    .hist-question,
-    .hist-vote {
+    .hist-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
         padding: 6px 10px;
-        font-size: 0.88em;
         border-bottom: 1px solid var(--c-border);
     }
 
-    .hist-question:last-of-type,
-    .hist-vote:last-of-type {
+    .hist-row:last-child {
         border-bottom: none;
     }
 
+    .hist-question {
+        font-size: 0.88em;
+        flex: 1 1 0;
+        min-width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
     .hist-vote {
+        font-size: 0.88em;
         color: var(--c-text-muted);
         white-space: nowrap;
-        text-align: right;
     }
 
     .current {

@@ -28,8 +28,11 @@
         .map(x => ({ voting: computeCombinedScore(x.question, x.voting, limitedQuestions.complete), question: x.question }))
         .toSorted((a, b) => Math.abs(a.voting) - Math.abs(b.voting)) ?? [];
 
-    $: minConfidence = questionsByConfidence ? Math.abs(questionsByConfidence[0].voting) : 0;
-    $: maxConfidence = questionsByConfidence ? Math.abs(questionsByConfidence[questionsByConfidence.length - 1].voting) : 0;
+    // normalised: 0 = most uncertain (top), 1 = most certain (bottom)
+    $: questionsWithConfidence = questionsByConfidence.map((q, i) => ({
+        ...q,
+        confidence: questionsByConfidence.length > 1 ? i / (questionsByConfidence.length - 1) : 0,
+    }));
 </script>
 
 
@@ -40,16 +43,15 @@
     De vragen zijn gesorteerd op zekerheid — het meest onzekere antwoord staat bovenaan.
 </p>
 
-<div class="history">
-    <div class="color-gradient"
-         style={`background-image: linear-gradient(0deg, hsl(142, 40%, ${30 + maxConfidence*30}%), hsl(142, 40%, ${60 + minConfidence*20}%) 100%);`}
-    ></div>
-    <div class="question-list">
-        {#each questionsByConfidence as question (question.question)}
-            <AlternativeItem question={limitedQuestions.complete[question.question]} vote={question.voting}/>
+<div class="question-list">
+        {#each questionsWithConfidence as question (question.question)}
+            <AlternativeItem
+                question={limitedQuestions.complete[question.question]}
+                vote={question.voting}
+                confidence={question.confidence}
+            />
         {/each}
     </div>
-</div>
 
 
 
@@ -61,23 +63,10 @@
         line-height: 1.6;
     }
 
-    .history {
-        display: grid;
-        grid-template-columns: 8px 1fr;
-        gap: 12px;
-        width: 100%;
-    }
-
-    .color-gradient {
-        height: 100%;
-        width: 8px;
-        border-radius: 4px;
-    }
-
     .question-list {
         width: 100%;
         display: flex;
         flex-direction: column;
-        gap: 2px;
+        gap: 6px;
     }
 </style>

@@ -6,14 +6,24 @@
 
     export let question: ParsedQuestion;
     export let vote: number;
+    /** 0 = most uncertain (top of list), 1 = most certain (bottom of list) */
+    export let confidence: number = 0;
 
     $: chosenQuestion = (vote > 0) ? question.first_option : question.second_option;
     $: alternativeQuestion = (vote > 0) ? question.second_option : question.first_option;
     $: alternativeOption = (vote > 0) ? question.second_link : question.first_link;
+
+    // Saturation: 18% (very uncertain) → 65% (very certain)
+    // Lightness:  75% (very uncertain) → 35% (very certain)
+    $: borderColor = `hsl(142, ${Math.round(18 + confidence * 47)}%, ${Math.round(75 - confidence * 40)}%)`;
+    $: isLeastCertain = confidence === 0;
 </script>
 
 {#if !$page.url.searchParams.has(alternativeOption)}
-    <div class="alt-item">
+    <div class="alt-item" style="border-left-color: {borderColor}">
+        {#if isLeastCertain}
+            <span class="uncertainty-badge">Meest onzeker</span>
+        {/if}
         <div class="chosen">
             <span class="chosen-label">Gekozen:</span>
             <MarkdownQuestion markdownText={chosenQuestion} renderDetails={false}/>
@@ -30,11 +40,26 @@
     .alt-item {
         background: var(--c-surface);
         border: 1px solid var(--c-border);
+        border-left: 5px solid var(--c-primary-light); /* overridden by inline style */
         border-radius: var(--radius-md);
         padding: 12px 14px;
         display: flex;
         flex-direction: column;
         gap: 8px;
+    }
+
+    .uncertainty-badge {
+        display: inline-block;
+        font-size: 0.72em;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        background: var(--c-primary-pale);
+        color: var(--c-primary-dark);
+        border: 1px solid var(--c-primary-light);
+        border-radius: 99px;
+        padding: 2px 10px;
+        align-self: flex-start;
     }
 
     .chosen {
@@ -47,7 +72,8 @@
 
     .alternative {
         padding: 8px 10px;
-        background: var(--c-primary-pale);
+        background: var(--c-surface-alt);
+        border: 1px solid var(--c-border);
         border-radius: var(--radius-sm);
         font-size: 0.9em;
         display: flex;
