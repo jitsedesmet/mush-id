@@ -1,32 +1,37 @@
+import { browser } from '$app/environment';
 import {writable} from "svelte/store";
 import {type ParsedQuestions} from "./parser";
 import type {SavedLink, SavedLinks} from "./savedLinks";
 
-export const preferredSubKeys = writable(
+export const preferredSubKeys = writable<string[]>(
     // The "||" handles the case when the key is the empty string
-    (localStorage.getItem("preferredSubKeys") || undefined)?.split(";") || []
+    browser ? (localStorage.getItem("preferredSubKeys") || undefined)?.split(";") || [] : []
 );
-preferredSubKeys.subscribe(x => localStorage.setItem("preferredSubKeys", x.join(";")));
+preferredSubKeys.subscribe(x => {
+    if (browser) localStorage.setItem("preferredSubKeys", x.join(";"));
+});
+
+function loadSavedHistory(): SavedLinks {
+    const raw = JSON.parse(localStorage.getItem("savedHistory") || "{}");
+    if (!raw.version) return { version: "1", links: [] };
+    return Object.fromEntries(
+        Object.entries(raw).map(([key, value]) => {
+            if (key === "links") {
+                return [key, (value as SavedLink[]).map((x: { creationDate: Date, link: string }) => ({
+                    link: x.link,
+                    creationDate: new Date(x.creationDate),
+                }))];
+            }
+            return [key, value];
+        })
+    ) as unknown as SavedLinks;
+}
 
 export const savedHistory = writable<SavedLinks>(
-    JSON.parse(localStorage.getItem("savedHistory") || "{}").version ?
-        (
-            Object.fromEntries(Object.entries(JSON.parse(localStorage.getItem("savedHistory") || "{}"))
-                .map(([key, value]) => {
-                    if (key === "links") {
-                        return [key, (value as SavedLink[]).map((x: { creationDate: Date, link: string }) => {
-                            return {
-                                link: x.link,
-                                creationDate: new Date(x.creationDate),
-                            }
-                        })];
-                    }
-                    return [key, value];
-                })
-            ) as unknown as SavedLinks
-        ) : { version: "1", links: [] }
-)
+    browser ? loadSavedHistory() : { version: "1", links: [] }
+);
 savedHistory.subscribe(x => {
+    if (!browser) return;
     if (x.version !== "1") {
         x.version = "1";
         x.links = [];
