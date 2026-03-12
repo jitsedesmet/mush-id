@@ -9,7 +9,7 @@
 <header class="site-header">
     <div class="header-inner">
         <a href={homeUrl} class="brand" aria-label="Mush ID home">
-            <img src={resolve('/orig_icon.png')} class="brand-logo" alt="" />
+            <img src={resolve('/cropped_orig.png')} class="brand-logo" alt="" />
             <span class="brand-name">Mush ID</span>
         </a>
         {#if !isHome}
