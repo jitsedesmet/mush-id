@@ -60,6 +60,29 @@ export async function parseMushroomCSV(fetchApi?: Fetch): Promise<{ [key: string
     return res;
 }
 
+export function getMushroomsForSubKey(
+    subKeyId: string,
+    parsedQuestions: ParsedQuestions,
+    parsedMushrooms: { [key: string]: Mushroom }
+): Mushroom[] {
+    const result: Mushroom[] = [];
+    const visited = new Set<string>();
+
+    function traverse(id: string): void {
+        if (visited.has(id)) return;
+        visited.add(id);
+        if (parsedMushrooms[id]) {
+            result.push(parsedMushrooms[id]);
+        } else if (parsedQuestions[id]) {
+            traverse(parsedQuestions[id].first_link);
+            traverse(parsedQuestions[id].second_link);
+        }
+    }
+
+    traverse(subKeyId);
+    return result.sort((a, b) => a.id.localeCompare(b.id));
+}
+
 export type ParsedQuestions = { [key: string]: ParsedQuestion };
 
 export async function parseQuestionsCSV(fetchApi?: Fetch): Promise<ParsedQuestions> {
