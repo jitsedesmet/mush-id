@@ -24,28 +24,53 @@
 
 <style>
     .button {
-        display: flex;
+        display: inline-flex;
         justify-content: center;
         align-items: center;
-        font-weight: bold;
-
+        font-weight: 600;
+        letter-spacing: 0.03em;
         border: none;
-        text-decoration: underline;
+        text-decoration: none;
         cursor: pointer;
+        border-radius: var(--radius-md);
+        transition: background 0.18s, box-shadow 0.18s, transform 0.12s, color 0.18s;
+        white-space: nowrap;
+        -webkit-tap-highlight-color: transparent;
     }
+
+    .button:active {
+        transform: scale(0.97);
+    }
+
     .primary {
-        border-radius: 9px;
-        padding: 16px 33px;
-        color: white;
-        background: red;
+        padding: 14px 32px;
+        color: #fff;
+        background: var(--c-primary);
+        box-shadow: var(--shadow-sm);
     }
+
+    .primary:hover,
+    .primary:focus-visible {
+        background: var(--c-primary-dark);
+        box-shadow: var(--shadow-md);
+    }
+
     .secondary {
-        border-radius: 5px;
-        padding: 8px 33px;
-        color: grey;
-        background: white;
+        padding: 8px 20px;
+        color: var(--c-primary-dark);
+        background: var(--c-surface);
+        border: 1.5px solid var(--c-border);
+        box-shadow: var(--shadow-sm);
     }
+
+    .secondary:hover,
+    .secondary:focus-visible {
+        background: var(--c-primary-pale);
+        border-color: var(--c-primary-light);
+        box-shadow: var(--shadow-md);
+    }
+
     .outlined {
-        border: 1px solid black;
+        /* already handled by .secondary; keep for legacy compatibility */
     }
 </style>

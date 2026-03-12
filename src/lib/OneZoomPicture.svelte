@@ -47,7 +47,6 @@
 <style>
     .image-div {
         width: 100%;
-        height: 100%;
         padding: 0;
         margin: 0;
         display: flex;
@@ -59,16 +58,18 @@
         display: flex;
         justify-content: center;
         flex-direction: column;
-        height: 100%;
         width: 100%;
     }
     figure figcaption {
         caption-side: bottom;
         margin: 5px auto;
+        font-size: 0.75em;
+        color: var(--c-text-muted, #888);
+        text-align: center;
     }
     img {
         width: 100%;
-        height: 100%;
+        max-height: 220px;
         object-fit: contain;
     }
 </style>

@@ -8,9 +8,8 @@
     $: nextOptionUrl = `${$page.route.id!}/next-decision${$page.url.search}`;
 </script>
 
-
-<div class="container">
-    <FancyButton id="not-that" style="grid-column: span 2"
+<div class="deny-container">
+    <FancyButton id="not-that" color="primary"
                  href={nextOptionUrl}>Niet deze
     </FancyButton>
 
@@ -21,28 +20,40 @@
         });
         goto(resolve(`/saved`))
     }}>
-        <FancyButton class="outlined" color="secondary">
-            Da is em! Save
+        <FancyButton color="secondary">
+            Da is em! Opslaan
         </FancyButton>
     </form>
 
-    <FancyButton class="outlined" color="secondary"
-                 href="/">Stoppen?
+    <FancyButton color="secondary"
+                 href="/">Stoppen
     </FancyButton>
 </div>
-<label for="not-that">Bekijk je geschiedenis en kies een punt om verder te gaan.</label>
+<p class="deny-hint">Bekijk je geschiedenis en kies een punt om verder te gaan.</p>
 
 
 <style>
-    .container {
+    .deny-container {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        column-gap: 20px;
-        row-gap: 5px;
+        gap: 8px;
+        width: 100%;
     }
+
+    .deny-container :global(.button.primary) {
+        grid-column: span 2;
+    }
+
     form {
         margin: 0;
         padding: 0;
         display: contents;
+    }
+
+    .deny-hint {
+        font-size: 0.8em;
+        color: var(--c-text-muted);
+        margin: 6px 0 0;
+        text-align: center;
     }
 </style>

@@ -21,72 +21,187 @@
     let selectedKeys = $preferredSubKeys || [];
 </script>
 
-<h1>Welkom bij Mush-ID</h1>
+<div class="home-wrapper">
+    <!-- Hero section -->
+    <section class="hero">
+        <Hex/>
+        <h1>Welkom bij Mush-ID</h1>
+        <p class="subtitle">
+            Identificeer paddenstoelen stap voor stap met behulp van binaire sleutels.
+            Installeer de app op je thuisscherm — ook offline beschikbaar!
+        </p>
+    </section>
 
-In deze web applicatie helpen we jou doorheen binaire identificatie sleutels.<br/>
-U kan deze applicatie zelf installeren, toevoegen aan je thuis scherm, je hebt voor het gebruik niet eens internet nodig!
-<br/>
+    <!-- Start form card -->
+    <section class="card start-card">
+        <form method="POST" on:submit|preventDefault={() => {
+            const limiter = questionLimiter(data.parsedQuestions, selectedKeys);
+            preferredSubKeys.set(selectedKeys);
 
-<form method="POST" on:submit|preventDefault={() => {
-    console.log(selectedKeys)
-    const limiter = questionLimiter(data.parsedQuestions, selectedKeys);
-    preferredSubKeys.set(selectedKeys);
+            if (selectedKeys.length > 0) {
+                goto(resolve(`/9789050117548?keys=${selectedKeys.join(';')}&state=${limiter.start}`))
+            } else {
+                goto(resolve(`/9789050117548?state=start1`))
+            }
+        }}>
+            <div class="start-btn-row">
+                <FancyButton color="primary">START DE SLEUTEL</FancyButton>
+            </div>
 
-    if (selectedKeys.length > 0) {
-        goto(resolve(`/9789050117548?keys=${selectedKeys.join(';')}&state=${limiter.start}`))
-    } else {
-        goto(resolve(`/9789050117548?state=start1`))
-    }
-}}>
-    <div class="button-wrapper">
-        <FancyButton color="primary">START DE TEST</FancyButton>
-    </div>
+            <details class="key-filter">
+                <summary>Deelsleutels filteren
+                    <span class="badge">{selectedKeys.length === 0 ? "alle" : String(selectedKeys.length)}</span>
+                </summary>
+                <div id='active_keys'>
+                    {#each keys as key (key.value)}
+                    <label class="key-option">
+                        <input type="checkbox" value={key.value} name="keys" bind:group={selectedKeys}>
+                        <span>{key.name}</span>
+                    </label>
+                    {/each}
+                </div>
+            </details>
+        </form>
 
-    <details>
-        <summary>Kies actieve deelsleutels ({selectedKeys.length === 0 ? "alle" : String(selectedKeys.length)})</summary>
-        <div id='active_keys'>
-            {#each keys as key (key.value)}
-            <span>
-                <input type="checkbox" id={key.value} value={key.value} name="keys" bind:group={selectedKeys}>
-                <label for={key.value}>{key.name}</label>
-            </span>
-            {/each}
+        <div class="saved-row">
+            <FancyButton color="secondary" href="/saved">Opgeslagen zoekopdrachten</FancyButton>
         </div>
-    </details>
-</form>
+    </section>
 
-De sleutel is afkomstig van de <a href="https://knnvuitgeverij.nl/artikel/veldgids-paddenstoelen-i-2.html">Veldgids Paddenstoelen I</a>
-geschreven door Nico Dam en Thomas W. Kuyper, uitgegeven door KNNV Uitgeverij, ISBN: 9789050117548.
-Voor het gebruik van de sleutel moet ik nog de toestemming vragen.
-
-<div>
-    <FancyButton color="secondary" class="outlined"
-                href="/saved">Saved</FancyButton>
+    <!-- Attribution -->
+    <p class="attribution">
+        Sleutel ontleend aan de
+        <a href="https://knnvuitgeverij.nl/artikel/veldgids-paddenstoelen-i-2.html" target="_blank" rel="noopener">Veldgids Paddenstoelen I</a>
+        door Nico Dam &amp; Thomas W. Kuyper (KNNV Uitgeverij, ISBN&nbsp;9789050117548).
+        Toestemming voor gebruik wordt nog aangevraagd.
+    </p>
 </div>
 
 
-<Hex/>
-
-
-
 <style>
-    #active_keys {
-        display: grid;
-        align-self: center;
-        grid-template-columns: 1fr;
-        grid-gap: 10px;
-    }
-    summary {
-        cursor: pointer;
-        text-decoration: underline;
-    }
-    div {
+    .home-wrapper {
         display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 24px;
+        padding: 8px 0 32px;
         width: 100%;
+    }
+
+    /* ── Hero ── */
+    .hero {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 8px;
+        width: 100%;
+    }
+
+    .subtitle {
+        color: var(--c-text-muted);
+        font-size: 1em;
+        max-width: 480px;
+        line-height: 1.6;
+        margin: 0;
+    }
+
+    /* ── Card ── */
+    .card {
+        background: var(--c-surface);
+        border: 1px solid var(--c-border);
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-sm);
+        padding: 24px;
+        width: 100%;
+        max-width: 480px;
+    }
+
+    .start-btn-row {
+        display: flex;
         justify-content: center;
         margin-bottom: 20px;
     }
-    .button-wrapper {
-        margin: 20px auto 20px auto;
+
+    /* ── Key filter ── */
+    .key-filter {
+        border: 1px solid var(--c-border);
+        border-radius: var(--radius-md);
+        padding: 0;
+        overflow: hidden;
+    }
+
+    .key-filter summary {
+        cursor: pointer;
+        user-select: none;
+        padding: 10px 14px;
+        font-weight: 500;
+        list-style: none;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: var(--c-surface-alt);
+        color: var(--c-primary-dark);
+    }
+
+    .key-filter summary::-webkit-details-marker { display: none; }
+
+    .key-filter[open] summary {
+        border-bottom: 1px solid var(--c-border);
+    }
+
+    .badge {
+        background: var(--c-primary);
+        color: #fff;
+        font-size: 0.78em;
+        font-weight: 700;
+        padding: 2px 8px;
+        border-radius: 99px;
+        min-width: 2em;
+        text-align: center;
+    }
+
+    #active_keys {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4px 8px;
+        padding: 12px 14px;
+    }
+
+    .key-option {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 0.95em;
+        cursor: pointer;
+        padding: 4px 2px;
+        border-radius: var(--radius-sm);
+    }
+
+    .key-option:hover {
+        background: var(--c-primary-pale);
+    }
+
+    .key-option input[type="checkbox"] {
+        accent-color: var(--c-primary);
+        width: 16px;
+        height: 16px;
+    }
+
+    /* ── Saved row ── */
+    .saved-row {
+        margin-top: 16px;
+        display: flex;
+        justify-content: center;
+    }
+
+    /* ── Attribution ── */
+    .attribution {
+        font-size: 0.82em;
+        color: var(--c-text-muted);
+        text-align: center;
+        max-width: 480px;
+        line-height: 1.6;
+        margin: 0;
     }
 </style>

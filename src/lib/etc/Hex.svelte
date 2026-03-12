@@ -22,36 +22,38 @@
 
     .hexagon-container {
         position: relative;
-        width: 230px;
-        height: 260.94px; /* add additional 30 for the buttons */
+        width: 200px;
+        height: 227px;
     }
 
     .hexagon {
         position: absolute;
-        margin-top: 15px;
-        margin-left: 15px;
-        width: 200px;
-        height: 230.94px;
-        background-color: #3498db; /* Change the background color as needed */
+        margin-top: 13px;
+        margin-left: 13px;
+        width: 174px;
+        height: 200px;
+        background: linear-gradient(135deg, var(--c-primary-mid) 0%, var(--c-primary-dark) 100%);
         clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
         cursor: pointer;
+        filter: drop-shadow(0 4px 8px rgba(0,0,0,.2));
     }
 
     .button {
         position: absolute;
-        width: 30px; /* Adjust button size as needed */
-        height: 30px;
-        background-color: #2ecc71; /* Change the button color as needed */
+        width: 26px;
+        height: 26px;
+        background: var(--c-amber);
         border-radius: 50%;
         cursor: pointer;
         transform-box: content-box;
         transform: translate(-50%, 0%);
+        box-shadow: 0 2px 6px rgba(0,0,0,.25);
     }
 
     .button1 { left: 50%; top: 0; }
     .button2 { left: 93%; top: 25%; }
     .button3 { left: 93%; top: 67%; }
     .button4 { left: 50%; top: 89%; }
-    .button5 { left: 6%; top: 67%; }
-    .button6 { left: 6%; top: 25%; }
+    .button5 { left: 6%;  top: 67%; }
+    .button6 { left: 6%;  top: 25%; }
 </style>
