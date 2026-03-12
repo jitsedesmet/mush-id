@@ -46,7 +46,6 @@
     <link property="url" href="https://mush-id.jitsedesmet.be/">
     <!-- Hero section -->
     <section class="hero">
-        <Hex/>
         <h1>Welkom bij Mush-ID</h1>
         <p class="subtitle" property="description">
             Identificeer paddenstoelen stap voor stap met behulp van binaire sleutels.
