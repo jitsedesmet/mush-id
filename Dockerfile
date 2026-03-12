@@ -11,11 +11,6 @@ COPY . .
 
 RUN npm run build
 
-FROM nginx:alpine
+FROM httpd:2 AS runner
 
-COPY --from=builder /var/www/mush-id/build /usr/share/nginx/html
-COPY nginx.conf /etc/nginx/conf.d/default.conf
-
-EXPOSE 80
-
-CMD ["nginx", "-g", "daemon off;"]
+COPY --from=builder /var/www/mush-id/build /usr/local/apache2/htdocs
