@@ -1,6 +1,6 @@
 import {extractSubKeys, parseMushroomCSV, parseQuestionsCSV} from "$lib/viewModel/parser";
 
-export const ssr = false;
+export const prerender = true;
 
 export async function load({ fetch }) {
     const parsedQuestions = await parseQuestionsCSV(fetch);

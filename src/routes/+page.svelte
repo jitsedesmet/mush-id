@@ -2,19 +2,22 @@
     <title>Mush-ID — Paddenstoelen identificatie</title>
     <meta name="description" content="Identificeer paddenstoelen stap voor stap met behulp van binaire sleutels uit de Veldgids Paddenstoelen I van Nico Dam en Thomas W. Kuyper.">
     <link rel="canonical" href="https://mush-id.jitsedesmet.be/">
-    <!-- Open Graph -->
+    <!-- Open Graph (overrides defaults in app.html) -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://mush-id.jitsedesmet.be/">
     <meta property="og:site_name" content="Mush-ID">
     <meta property="og:title" content="Mush-ID — Paddenstoelen identificatie">
     <meta property="og:description" content="Identificeer paddenstoelen stap voor stap met behulp van binaire sleutels uit de Veldgids Paddenstoelen I van Nico Dam en Thomas W. Kuyper.">
     <meta property="og:locale" content="nl_NL">
-    <meta property="og:image" content="https://mush-id.jitsedesmet.be/android/android-launchericon-512-512.png">
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary">
+    <meta property="og:image" content="https://mush-id.jitsedesmet.be/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Mush-ID — Paddenstoelen identificatie">
+    <!-- Twitter / X Card -->
+    <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Mush-ID — Paddenstoelen identificatie">
     <meta name="twitter:description" content="Identificeer paddenstoelen stap voor stap met behulp van binaire sleutels uit de Veldgids Paddenstoelen I.">
-    <meta name="twitter:image" content="https://mush-id.jitsedesmet.be/android/android-launchericon-512-512.png">
+    <meta name="twitter:image" content="https://mush-id.jitsedesmet.be/og-image.png">
 </svelte:head>
 
 <script lang="ts">
