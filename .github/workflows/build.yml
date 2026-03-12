@@ -14,4 +14,3 @@ jobs:
       contents: read
     with:
       deploy: false
-
