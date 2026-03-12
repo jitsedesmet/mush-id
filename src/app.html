@@ -9,7 +9,7 @@
 		<link href="/css/inter.scss" rel="stylesheet">
 
 		<link rel="apple-touch-icon" href="/apple-touch-icon.png" type="image/png">
-		<meta name="theme-color" content="#ffffff"/>
+		<meta name="theme-color" content="#1B4332"/>
 		<!-- Google Tag Manager -->
 		<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 					new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -31,53 +31,103 @@
 </html>
 
 <style>
+	:root {
+		/* Forest / nature colour palette */
+		--c-primary:        #2D6A4F;
+		--c-primary-dark:   #1B4332;
+		--c-primary-mid:    #40916C;
+		--c-primary-light:  #74C69D;
+		--c-primary-pale:   #D8F3DC;
+
+		--c-amber:          #E07B39;
+		--c-amber-light:    #F4A261;
+		--c-amber-pale:     #FDEBD0;
+
+		--c-bg:             #F4F8F5;
+		--c-surface:        #FFFFFF;
+		--c-surface-alt:    #EEF4F0;
+
+		--c-text:           #1A1A1A;
+		--c-text-muted:     #5A6B62;
+		--c-border:         #C9DDD2;
+
+		/* Spacing / radius tokens */
+		--radius-sm:  6px;
+		--radius-md:  10px;
+		--radius-lg:  16px;
+		--shadow-sm:  0 1px 3px rgba(0,0,0,.08);
+		--shadow-md:  0 4px 12px rgba(0,0,0,.12);
+	}
+
+	*, *::before, *::after {
+		box-sizing: border-box;
+	}
+
 	* {
 		font-family: "Inter", sans-serif;
 		font-optical-sizing: auto;
 		font-weight: 300;
 		font-style: normal;
-		font-variation-settings:
-				"slnt" 0;
+		font-variation-settings: "slnt" 0;
 		font-size: 1em;
 	}
+
 	body {
 		text-align: left;
 		display: table-cell;
 		vertical-align: top;
-		horiz-align: center;
 		padding: 0;
 		margin: 0;
-
+		background: var(--c-bg);
+		color: var(--c-text);
 		width: min(1000px, 100svw);
 	}
+
 	h1 {
-		font-size: 3em;
+		font-size: 2.8em;
+		font-weight: 700;
 		text-align: center;
+		color: var(--c-primary-dark);
+		margin: 0.4em 0;
+		line-height: 1.15;
 	}
+
 	h2 {
-		font-size: 2.25em;
-		text-align: center;
-	}
-	h3 {
 		font-size: 2em;
+		font-weight: 600;
+		text-align: center;
+		color: var(--c-primary-dark);
+		margin: 0.4em 0 0.6em;
 	}
-	h4 {
-		font-size: 1.75em;
-	}
-	h5 {
-		font-size: 0.5em;
-	}
+
+	h3 { font-size: 1.75em; font-weight: 600; }
+	h4 { font-size: 1.5em;  font-weight: 600; }
+	h5 { font-size: 0.9em;  font-weight: 500; }
+
 	h6 {
-		font-size: 1.25em;
+		font-size: 1.1em;
+		font-weight: 600;
 		padding: 3px 0;
 		margin: 0;
+		color: var(--c-primary-dark);
+	}
+
+	a {
+		color: var(--c-primary-mid);
+	}
+	a:visited {
+		color: var(--c-primary);
+	}
+	a:hover {
+		color: var(--c-primary-dark);
 	}
 
 	html {
 		display: table;
 		margin: auto;
 	}
+
 	.padder {
-		padding: 10px;
+		padding: 10px 12px;
 	}
 </style>

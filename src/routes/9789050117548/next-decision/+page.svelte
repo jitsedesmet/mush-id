@@ -1,5 +1,5 @@
 <svelte:head>
-    <title>Alternatieve paded | Mush ID</title>
+    <title>Alternatieve paden | Mush ID</title>
     <meta name="description" content="Lijst van alternatieve paden vanuit huidige zoekopdracht">
 </svelte:head>
 
@@ -33,18 +33,17 @@
 </script>
 
 
-<h2>Vragenlijst Veldgids Paddenstoelen 1</h2>
+<h2>Alternatieve paden</h2>
 
-Kies het punt waarvan je wenst verder te zoeken vertrekken.
-Hieronder zie je een lijst van vragen die je al beantwoord hebt, maar waarvan je het alternatief nog niet geprobeert hebt.
-De items zijn gesorteerd op hoe zeker het antwoord juist is.
-Het meest onzeker antwoord staat bovenaan.
-
+<p class="intro">
+    Kies het punt waarvan je wenst verder te zoeken.
+    De vragen zijn gesorteerd op zekerheid — het meest onzekere antwoord staat bovenaan.
+</p>
 
 <div class="history">
     <div class="color-gradient"
-         style={`background-image: linear-gradient(0deg, hsl(360, 100%, ${maxConfidence*100}%), hsl(360, 100%, ${minConfidence*100}%) 100%);`}
-    />
+         style={`background-image: linear-gradient(0deg, hsl(142, 40%, ${30 + maxConfidence*30}%), hsl(142, 40%, ${60 + minConfidence*20}%) 100%);`}
+    ></div>
     <div class="question-list">
         {#each questionsByConfidence as question (question.question)}
             <AlternativeItem question={limitedQuestions.complete[question.question]} vote={question.voting}/>
@@ -55,16 +54,30 @@ Het meest onzeker antwoord staat bovenaan.
 
 
 <style>
-    div {
-        width: 100%;
+    .intro {
+        color: var(--c-text-muted);
+        font-size: 0.95em;
+        margin: 0 0 20px;
+        line-height: 1.6;
     }
+
     .history {
         display: grid;
-        grid-template-columns: 10px 1fr;
-        gap: 10px;
+        grid-template-columns: 8px 1fr;
+        gap: 12px;
+        width: 100%;
     }
+
     .color-gradient {
         height: 100%;
-        width: 10px;
+        width: 8px;
+        border-radius: 4px;
+    }
+
+    .question-list {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
     }
 </style>

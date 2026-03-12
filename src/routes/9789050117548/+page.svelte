@@ -36,77 +36,79 @@
 
 <div class="page">
 <div class="content">
-<h2>Vragenlijst Veldgids Paddenstoelen 1</h2>
-{#if scopedSubKeys.length > 0}
-    <span>Vragenlijst gefocust op deelsleutels: {scopedSubKeys.map(x => x.substring(0, x.length -1)).join(", ")}</span>
-{/if}
+    <h2>Veldgids Paddenstoelen 1</h2>
 
-<div id="focus-point">
-    {#if currentQuestion}
-    <div id="question-listing">
-        <h6>Vraag:</h6>
-        <MarkdownQuestion markdownText={"**A:** " + currentQuestion.first_option} link={currentQuestion.first_link} />
-        of
-        <MarkdownQuestion markdownText={"**B:** " + currentQuestion.second_option} link={currentQuestion.second_link} />
-    </div>
+    {#if scopedSubKeys.length > 0}
+        <p class="scope-notice">
+            Gefocust op deelsleutels:
+            <strong>{scopedSubKeys.map(x => x.substring(0, x.length - 1)).join(", ")}</strong>
+        </p>
     {/if}
 
-    {#if currentMushroom}
-    <div id="mushroom-listing">
-    <h6>Mogelijk resultaat:</h6>
-    <div>
-        Je antwoorden wijzen aan dat de gezochte zwam vermoedelijk <a href={`https://www.google.com/search?q=${currentMushroom.id}`}>{currentMushroom.id}</a> is.
-        <br/>
-        Je kan verschillende bronnen raadplegen om je bevinding te evalueren.
-        <div class="mushroom-info">
-            <a href={`https://www.google.com/search?tbm=isch&q=${currentMushroom.id}`}>
-                <InfoIcon/>
-                Google afbeeldingen</a>
-            <a href={`https://en.wikipedia.org/w/index.php?search=${currentMushroom.id}&title=Special:Search`}>
-                <InfoIcon/>
-                Engelse Wikipedia</a>
-            <a href={`https://nl.wikipedia.org/w/index.php?search=${currentMushroom.id}&title=Special:Search`}>
-                <InfoIcon/>
-                Nederlandse Wikipedia</a>
-            {#if currentMushroom.OToLId}
-                <a href={`https://tree.opentreeoflife.org/opentree/argus/ottol@${currentMushroom.OToLId}/`}>
-                    <InfoIcon/>
-                    Open Tree of Life</a>
-                <a href={`https://www.onezoom.org/life/@=${currentMushroom.OToLId}`}>
-                    <InfoIcon/>
-                    Visualizatie in OneZoom</a>
-            {/if}
-            {#if currentMushroom.lifeUrl}
-                <a href={`https://eol.org/pages/${currentMushroom.lifeUrl}`}>
-                    <InfoIcon/>
-                    Encyclopedia of life</a>
-            {/if}
-            {#if currentMushroom.waarnemingId}
-                <a href={`https://waarnemingen.be/species/${currentMushroom.waarnemingId}/`}>
-                    <InfoIcon/>
-                    Waarnemingen.be</a>
-            {/if}
+    <div id="focus-point">
+        {#if currentQuestion}
+        <div class="card question-card">
+            <p class="card-label">Vraag</p>
+            <div class="option option-a">
+                <span class="option-badge option-badge-a">A</span>
+                <MarkdownQuestion markdownText={currentQuestion.first_option} link={currentQuestion.first_link} />
+            </div>
+            <div class="option-divider">of</div>
+            <div class="option option-b">
+                <span class="option-badge option-badge-b">B</span>
+                <MarkdownQuestion markdownText={currentQuestion.second_option} link={currentQuestion.second_link} />
+            </div>
         </div>
-        <div class="image-wrapper">
-            <OneZoomPicture mushroom={currentMushroom} />
+        {/if}
+
+        {#if currentMushroom}
+        <div class="card mushroom-card">
+            <p class="card-label">Mogelijk resultaat</p>
+            <p class="mushroom-name">
+                Je antwoorden wijzen op:
+                <a href={`https://www.google.com/search?q=${currentMushroom.id}`}
+                   class="mushroom-link">{currentMushroom.id}</a>
+            </p>
+            <div class="image-wrapper">
+                <OneZoomPicture mushroom={currentMushroom} />
+            </div>
+            <p class="sources-label">Raadpleeg bronnen:</p>
+            <div class="mushroom-info">
+                <a href={`https://www.google.com/search?tbm=isch&q=${currentMushroom.id}`}>
+                    <InfoIcon/>Google afbeeldingen</a>
+                <a href={`https://en.wikipedia.org/w/index.php?search=${currentMushroom.id}&title=Special:Search`}>
+                    <InfoIcon/>Engelse Wikipedia</a>
+                <a href={`https://nl.wikipedia.org/w/index.php?search=${currentMushroom.id}&title=Special:Search`}>
+                    <InfoIcon/>Nederlandse Wikipedia</a>
+                {#if currentMushroom.OToLId}
+                    <a href={`https://tree.opentreeoflife.org/opentree/argus/ottol@${currentMushroom.OToLId}/`}>
+                        <InfoIcon/>Open Tree of Life</a>
+                    <a href={`https://www.onezoom.org/life/@=${currentMushroom.OToLId}`}>
+                        <InfoIcon/>OneZoom visualisatie</a>
+                {/if}
+                {#if currentMushroom.lifeUrl}
+                    <a href={`https://eol.org/pages/${currentMushroom.lifeUrl}`}>
+                        <InfoIcon/>Encyclopedia of Life</a>
+                {/if}
+                {#if currentMushroom.waarnemingId}
+                    <a href={`https://waarnemingen.be/species/${currentMushroom.waarnemingId}/`}>
+                        <InfoIcon/>Waarnemingen.be</a>
+                {/if}
+            </div>
         </div>
+        {/if}
     </div>
-    </div>
-    {/if}
-</div>
 
-
-<QuestionHistory stateTagList={stateTagList} currentItem={currentItem} />
+    <QuestionHistory stateTagList={stateTagList} currentItem={currentItem} />
 </div>
 
 <div class="navigationOptions">
     {#if currentQuestion}
-        <h6>Antwoord:</h6>
-        <Rater
-                currentQuestion={currentQuestion}/>
+        <p class="nav-label">Jouw antwoord:</p>
+        <Rater currentQuestion={currentQuestion}/>
     {/if}
     {#if currentMushroom}
-        {currentMushroom.id}
+        <p class="nav-mushroom-name">{currentMushroom.id}</p>
         <MushroomDenyButton />
     {/if}
 </div>
@@ -114,14 +116,6 @@
 
 
 <style>
-    div {
-        width: 100%;
-    }
-    .mushroom-info {
-        display: grid;
-        grid-template-columns: auto auto;
-        width: 100%;
-    }
     .page {
         display: flex;
         flex-direction: column;
@@ -129,31 +123,162 @@
         justify-content: flex-start;
         min-height: calc(100dvh - 20px);
     }
+
     .content {
         flex: 1 1 0;
+        width: 100%;
     }
+
+    .scope-notice {
+        text-align: center;
+        font-size: 0.9em;
+        color: var(--c-text-muted);
+        margin: 0 0 12px;
+    }
+
+    /* ── Cards ── */
+    .card {
+        background: var(--c-surface);
+        border: 1px solid var(--c-border);
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-sm);
+        padding: 16px 18px;
+        margin-bottom: 16px;
+        width: 100%;
+    }
+
+    .card-label {
+        font-size: 0.78em;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--c-text-muted);
+        margin: 0 0 10px;
+    }
+
+    /* ── Question card ── */
+    .option {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 10px 12px;
+        border-radius: var(--radius-md);
+    }
+
+    .option-a { background: var(--c-primary-pale); }
+    .option-b { background: var(--c-amber-pale); }
+
+    .option-badge {
+        flex-shrink: 0;
+        font-size: 0.85em;
+        font-weight: 700;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 1px;
+    }
+
+    .option-badge-a {
+        background: var(--c-primary);
+        color: #fff;
+    }
+
+    .option-badge-b {
+        background: var(--c-amber);
+        color: #fff;
+    }
+
+    .option-divider {
+        text-align: center;
+        font-size: 0.85em;
+        color: var(--c-text-muted);
+        font-style: italic;
+        padding: 4px 0;
+    }
+
+    /* ── Mushroom card ── */
+    .mushroom-name {
+        margin: 0 0 12px;
+        font-size: 1em;
+    }
+
+    .mushroom-link {
+        font-weight: 600;
+        font-style: italic;
+    }
+
+    .image-wrapper {
+        margin: 0 auto 14px;
+        max-width: 260px;
+        max-height: 260px;
+    }
+
+    .sources-label {
+        font-size: 0.85em;
+        font-weight: 600;
+        color: var(--c-text-muted);
+        margin: 0 0 8px;
+    }
+
+    .mushroom-info {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 6px;
+        width: 100%;
+    }
+
+    .mushroom-info a {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        font-size: 0.88em;
+        padding: 6px 8px;
+        border-radius: var(--radius-sm);
+        background: var(--c-surface-alt);
+        border: 1px solid var(--c-border);
+        text-decoration: none;
+        transition: background 0.15s;
+    }
+
+    .mushroom-info a:hover {
+        background: var(--c-primary-pale);
+    }
+
+    /* ── Sticky navigation ── */
     .navigationOptions {
         position: -webkit-sticky;
         position: sticky;
-        width: min(calc(1000px - 40px), calc(100svw - 60px));
+        width: min(calc(1000px - 40px), calc(100svw - 24px));
         height: min-content;
         min-height: min-content;
-        background: white;
-        padding: 20px 20px 5px 20px;
+        background: var(--c-surface);
+        padding: 14px 16px 8px;
         bottom: 0;
         align-content: center;
         align-self: flex-end;
         margin: auto;
         z-index: 999;
+        border-top: 1px solid var(--c-border);
+        box-shadow: 0 -4px 16px rgba(0,0,0,.08);
+        border-radius: var(--radius-lg) var(--radius-lg) 0 0;
     }
-/*    A clicked <a> does not change colors*/
-    a:visited {
-        color: blue;
+
+    .nav-label {
+        font-size: 0.85em;
+        font-weight: 600;
+        color: var(--c-text-muted);
+        margin: 0 0 8px;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
     }
-    .image-wrapper {
-        margin: auto;
-        max-width: 300px;
-        max-height: 300px;
-        padding: 20px
+
+    .nav-mushroom-name {
+        font-weight: 600;
+        font-style: italic;
+        font-size: 1em;
+        margin: 0 0 8px;
     }
 </style>

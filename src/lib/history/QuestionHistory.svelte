@@ -4,41 +4,63 @@
     export let stateTagList: pageRatingOptions | undefined;
     export let currentItem: string | undefined;
 
+    const labels = ["Zeker B", "Waarschijnlijk B", "Mogelijks B", "Onzeker",
+        "Mogelijks A", "Waarschijnlijk A", "Zeker A"];
 </script>
 
 {#if stateTagList && currentItem}
-
 <div class="history">
-    <h6>Geschiedenis:</h6>
-    Je hebt een geschiedenis, het eerste is meest recent:
+    <h6>Geschiedenis</h6>
     <div class="history-grid">
-        <div>{currentItem}:</div>
-        <div>...</div>
+        <div class="hist-question current">{currentItem}</div>
+        <div class="hist-vote current">…</div>
         {#each stateTagList.questionHistory.toReversed() as hisItem (hisItem.question)}
-            <div>{hisItem.question}:</div>
-            <div>
-                {["Zeker B", "Waarschijnlijk B", "Mogelijks B", "Onzeker",
-                    "Mogelijks A", "Waarschijnlijk A", "Zeker A"][hisItem.voting + 3]}
-            </div>
+            <div class="hist-question">{hisItem.question}</div>
+            <div class="hist-vote">{labels[hisItem.voting + 3]}</div>
         {/each}
     </div>
 </div>
 {/if}
 
 <style>
-    div {
-        width: 100%;
-    }
     .history {
-        display: grid;
-        grid-template-rows: auto auto 1fr;
-        overflow: hidden;
+        width: 100%;
+        margin-top: 16px;
     }
+
     .history-grid {
         display: grid;
-        grid-template-columns: auto auto;
-        align-content: flex-start;
-        column-gap: 20px;
+        grid-template-columns: 1fr auto;
+        gap: 2px 16px;
         width: 100%;
+        margin-top: 8px;
+        background: var(--c-surface);
+        border: 1px solid var(--c-border);
+        border-radius: var(--radius-md);
+        overflow: hidden;
+    }
+
+    .hist-question,
+    .hist-vote {
+        padding: 6px 10px;
+        font-size: 0.88em;
+        border-bottom: 1px solid var(--c-border);
+    }
+
+    .hist-question:last-of-type,
+    .hist-vote:last-of-type {
+        border-bottom: none;
+    }
+
+    .hist-vote {
+        color: var(--c-text-muted);
+        white-space: nowrap;
+        text-align: right;
+    }
+
+    .current {
+        font-weight: 600;
+        background: var(--c-surface-alt);
+        color: var(--c-primary-dark);
     }
 </style>
