@@ -23,7 +23,6 @@
 <script lang="ts">
     import type { PageData } from './$types';
     import { preferredSubKeys } from "$lib/viewModel/viewModel";
-    import Hex from "$lib/etc/Hex.svelte";
     import {goto} from "$app/navigation";
     import {resolve} from "$app/paths";
     import {questionLimiter} from "$lib/viewModel/paramHelper";
@@ -46,7 +45,6 @@
     <link property="url" href="https://mush-id.jitsedesmet.be/">
     <!-- Hero section -->
     <section class="hero">
-        <Hex/>
         <h1>Welkom bij Mush-ID</h1>
         <p class="subtitle" property="description">
             Identificeer paddenstoelen stap voor stap met behulp van binaire sleutels.
