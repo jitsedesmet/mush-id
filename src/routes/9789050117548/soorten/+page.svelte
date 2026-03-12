@@ -1,6 +1,11 @@
 <svelte:head>
+    {#if data.key}
     <title>{data.keyName} — Soortenoverzicht | Mush ID</title>
     <meta name="description" content="Overzicht van alle soorten in de deelsleutel {data.keyName}">
+    {:else}
+    <title>Paddenstoelen per deelsleutel | Mush ID</title>
+    <meta name="description" content="Bekijk alle paddenstoelen per deelsleutel">
+    {/if}
     <meta name="robots" content="noindex">
 </svelte:head>
 
@@ -12,53 +17,81 @@
 
     export let data: PageData;
 
-    $: displayName = data.keyName.charAt(0).toUpperCase() + data.keyName.slice(1);
+    $: displayName = data.keyName
+        ? data.keyName.charAt(0).toUpperCase() + data.keyName.slice(1)
+        : "";
+
+    $: subKeyList = data.subKeys.map(val => ({
+        value: val,
+        name: val.charAt(0).toUpperCase() + val.substring(1, val.length - 1),
+    }));
 </script>
 
 <div class="page">
 <div class="content">
-    <h2>{displayName}</h2>
-    <p class="subtitle">
-        {data.mushrooms.length} soort{data.mushrooms.length === 1 ? "" : "en"} in deze deelsleutel
-    </p>
+    {#if data.key && data.mushrooms}
+        <!-- ── Species list for a single sub-key ── -->
+        <a class="back-link" href="/9789050117548/soorten">← Alle deelsleutels</a>
+        <h2>{displayName}</h2>
+        <p class="subtitle">
+            {data.mushrooms.length} soort{data.mushrooms.length === 1 ? "" : "en"} in deze deelsleutel
+        </p>
 
-    <div class="species-grid">
-        {#each data.mushrooms as mushroom (mushroom.id)}
-        <div class="species-card">
-            <div class="picture-wrapper">
-                <MushroomPicture {mushroom} credits={false} />
-            </div>
-            <div class="species-info">
-                <a class="species-name"
-                   href={`https://www.google.com/search?q=${encodeURIComponent(mushroom.id)}`}
-                   target="_blank" rel="noopener">
-                    {mushroom.id}
-                </a>
-                <div class="species-links">
-                    {#if mushroom.waarnemingId}
-                    <a href={`https://waarnemingen.be/species/${mushroom.waarnemingId}/`}
-                       target="_blank" rel="noopener" class="species-link">
-                        <InfoIcon/>Waarnemingen.be
+        <div class="species-grid">
+            {#each data.mushrooms as mushroom (mushroom.id)}
+            <div class="species-card">
+                <div class="picture-wrapper">
+                    <MushroomPicture {mushroom} credits={false} />
+                </div>
+                <div class="species-info">
+                    <a class="species-name"
+                       href={`https://www.google.com/search?q=${encodeURIComponent(mushroom.id)}`}
+                       target="_blank" rel="noopener">
+                        {mushroom.id}
                     </a>
-                    {/if}
-                    {#if mushroom.OToLId}
-                    <a href={`https://www.onezoom.org/life/@=${mushroom.OToLId}`}
-                       target="_blank" rel="noopener" class="species-link">
-                        <InfoIcon/>OneZoom
-                    </a>
-                    {/if}
+                    <div class="species-links">
+                        {#if mushroom.waarnemingId}
+                        <a href={`https://waarnemingen.be/species/${mushroom.waarnemingId}/`}
+                           target="_blank" rel="noopener" class="species-link">
+                            <InfoIcon/>Waarnemingen.be
+                        </a>
+                        {/if}
+                        {#if mushroom.OToLId}
+                        <a href={`https://www.onezoom.org/life/@=${mushroom.OToLId}`}
+                           target="_blank" rel="noopener" class="species-link">
+                            <InfoIcon/>OneZoom
+                        </a>
+                        {/if}
+                    </div>
                 </div>
             </div>
+            {/each}
         </div>
-        {/each}
-    </div>
-</div>
 
-<div class="nav-bar">
-    <FancyButton color="secondary" href="/">Home</FancyButton>
-    <FancyButton color="primary" href={`/9789050117548?keys=${data.key}&state=${data.key}`}>
-        Sleutel starten
-    </FancyButton>
+        <div class="nav-bar">
+            <FancyButton color="secondary" href="/">Home</FancyButton>
+            <FancyButton color="primary" href={`/9789050117548?keys=${data.key}&state=${data.key}`}>
+                Sleutel starten
+            </FancyButton>
+        </div>
+    {:else}
+        <!-- ── Sub-key index ── -->
+        <h2>Paddenstoelen per deelsleutel</h2>
+        <p class="subtitle">Kies een deelsleutel om alle bijbehorende soorten te bekijken.</p>
+
+        <div class="subkey-grid">
+            {#each subKeyList as key (key.value)}
+            <a class="subkey-card" href={`/9789050117548/soorten?key=${key.value}`}>
+                <span class="subkey-name">{key.name}</span>
+                <span class="subkey-arrow">→</span>
+            </a>
+            {/each}
+        </div>
+
+        <div class="nav-bar">
+            <FancyButton color="secondary" href="/">Home</FancyButton>
+        </div>
+    {/if}
 </div>
 </div>
 
@@ -87,6 +120,55 @@
         font-size: 0.9em;
         color: var(--c-text-muted);
         margin: 0 0 20px;
+    }
+
+    .back-link {
+        display: inline-block;
+        font-size: 0.88em;
+        color: var(--c-primary);
+        text-decoration: none;
+        margin-bottom: 10px;
+    }
+
+    .back-link:hover {
+        text-decoration: underline;
+    }
+
+    /* ── Sub-key index ── */
+    .subkey-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        width: 100%;
+    }
+
+    .subkey-card {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 14px 18px;
+        background: var(--c-surface);
+        border: 1px solid var(--c-border);
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-sm);
+        text-decoration: none;
+        transition: background 0.15s, box-shadow 0.15s;
+    }
+
+    .subkey-card:hover {
+        background: var(--c-primary-pale);
+        box-shadow: var(--shadow-md);
+    }
+
+    .subkey-name {
+        font-size: 1em;
+        font-weight: 600;
+        color: var(--c-primary-dark);
+    }
+
+    .subkey-arrow {
+        font-size: 1em;
+        color: var(--c-text-muted);
     }
 
     /* ── Species grid ── */
@@ -191,3 +273,4 @@
         justify-content: center;
     }
 </style>
+

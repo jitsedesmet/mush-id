@@ -23,7 +23,6 @@
 <script lang="ts">
     import type { PageData } from './$types';
     import { preferredSubKeys } from "$lib/viewModel/viewModel";
-    import Hex from "$lib/etc/Hex.svelte";
     import {goto} from "$app/navigation";
     import {resolve} from "$app/paths";
     import {questionLimiter} from "$lib/viewModel/paramHelper";
@@ -78,16 +77,15 @@
                     <label class="key-option">
                         <input type="checkbox" value={key.value} name="keys" bind:group={selectedKeys}>
                         <span>{key.name}</span>
-                        <a class="species-list-link"
-                           href={resolve(`/9789050117548/soorten?key=${key.value}`)}
-                           title="Bekijk alle soorten in {key.name}"
-                           on:click|stopPropagation>🍄</a>
                     </label>
                     {/each}
                 </div>
             </details>
         </form>
 
+        <div class="saved-row">
+            <FancyButton color="secondary" href={resolve("/9789050117548/soorten")}>Bekijk paddenstoelen in deelsleutels</FancyButton>
+        </div>
         <div class="saved-row">
             <FancyButton color="secondary" href="/saved">Opgeslagen zoekopdrachten</FancyButton>
         </div>
@@ -216,22 +214,6 @@
         accent-color: var(--c-primary);
         width: 16px;
         height: 16px;
-    }
-
-    .species-list-link {
-        margin-left: auto;
-        font-size: 1em;
-        text-decoration: none;
-        line-height: 1;
-        padding: 2px;
-        border-radius: var(--radius-sm);
-        opacity: 0.7;
-        transition: opacity 0.15s;
-    }
-
-    .species-list-link:hover {
-        opacity: 1;
-        background: var(--c-primary-pale);
     }
 
     /* ── Saved row ── */
