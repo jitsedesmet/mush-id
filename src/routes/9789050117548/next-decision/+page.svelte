@@ -10,6 +10,7 @@
     import {computeCombinedScore} from "$lib/viewModel/viewModel.js";
     import {computeLimitedQuestions, computeTagList} from "$lib/viewModel/paramHelper";
     import AlternativeItem from "$lib/history/AlternativeItem.svelte";
+    import {resolve} from "$app/paths";
 
     export let data: PageData;
 
@@ -17,7 +18,7 @@
     $: limitedQuestions = computeLimitedQuestions($page.url.searchParams, data.parsedQuestions);
 
     $: if (!stateTagList) {
-        goto(`/9789050117548?state=${limitedQuestions.start}`, {
+        goto(resolve(`/9789050117548?state=${limitedQuestions.start}`), {
             replaceState: true,
         })
     }
@@ -45,7 +46,7 @@ Het meest onzeker antwoord staat bovenaan.
          style={`background-image: linear-gradient(0deg, hsl(360, 100%, ${maxConfidence*100}%), hsl(360, 100%, ${minConfidence*100}%) 100%);`}
     />
     <div class="question-list">
-        {#each questionsByConfidence as question}
+        {#each questionsByConfidence as question (question.question)}
             <AlternativeItem question={limitedQuestions.complete[question.question]} vote={question.voting}/>
         {/each}
     </div>

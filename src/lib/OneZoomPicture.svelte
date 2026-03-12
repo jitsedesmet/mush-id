@@ -37,7 +37,7 @@
             <figcaption>{res.by}</figcaption>
             {/if}
         </figure>
-    {:catch _}
+    {:catch}
         <p>Er kan geen foto worden opgehaald</p>
     {/await}
 </div>

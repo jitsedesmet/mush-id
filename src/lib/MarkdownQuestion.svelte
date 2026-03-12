@@ -26,20 +26,22 @@
         };
     }
 
-    $: parsedMarkdown =  DOMPurify.sanitize(marked.parseInline(markdownText, { gfm: true, breaks: true }));
+    $: parsedMarkdown =  DOMPurify.sanitize(marked.parseInline(markdownText, { gfm: true, breaks: true, async: false }));
     $: cleansed = removeImages(parsedMarkdown);
 </script>
 
 <div>
 
     {#if (cleansed.images.length === 0 && cleansed.details.length === 0) || !renderDetails}
+        <!-- eslint-disable-next-line svelte/no-at-html-tags -->
         {@html cleansed.markdown} {#if link}-> {link}{/if}
     {:else}
         <details>
+            <!-- eslint-disable-next-line svelte/no-at-html-tags -->
             <summary>{@html cleansed.markdown} <em>(<u>Meer info</u>)</em> {#if link}-> {link}{/if}</summary>
 
             <div class="term-definitions">
-                {#each cleansed.details as detail}
+                {#each cleansed.details as detail (detail.term)}
                     <div>
                         <strong>{detail.term}</strong>: {detail.details}
                     </div>
@@ -47,7 +49,7 @@
             </div>
 
             <div class="image-div">
-                {#each cleansed.images as image}
+                {#each cleansed.images as image (image.src)}
                     <div class="single-item">
                         <p>{image.alt}:</p>
                         <img src={image.src} alt={`caption: ${image.alt}`} />

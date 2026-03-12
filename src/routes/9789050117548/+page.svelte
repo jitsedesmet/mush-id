@@ -21,6 +21,7 @@
     $: limitedQuestions = computeLimitedQuestions($page.url.searchParams, data.parsedQuestions);
 
     $: if (!stateTagList) {
+        // eslint-disable-next-line svelte/no-navigation-without-resolve
         goto(`?state=${limitedQuestions.start}`, {
             replaceState: true,
         })
@@ -102,7 +103,7 @@
     {#if currentQuestion}
         <h6>Antwoord:</h6>
         <Rater
-                bind:currentQuestion={currentQuestion}/>
+                currentQuestion={currentQuestion}/>
     {/if}
     {#if currentMushroom}
         {currentMushroom.id}
