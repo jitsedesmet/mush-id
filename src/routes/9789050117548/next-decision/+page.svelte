@@ -1,6 +1,7 @@
 <svelte:head>
     <title>Alternatieve paden | Mush ID</title>
     <meta name="description" content="Lijst van alternatieve paden vanuit huidige zoekopdracht">
+    <meta name="robots" content="noindex, nofollow">
 </svelte:head>
 
 <script lang="ts">
