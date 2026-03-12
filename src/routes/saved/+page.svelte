@@ -29,7 +29,7 @@
 </h2>
 
 <div class="complete-saved">
-{#each sortedSavedHistory as item}
+{#each sortedSavedHistory as item (item.link)}
     {@const date = new Date(item.creationDate)}
     {@const state = computeTagListUnsafe(new URL(item.link).searchParams)}
     {@const currentMushroom = state.currentQuestion}
@@ -47,6 +47,7 @@
                 {formatDate(date)}
             </div>
 
+            <!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
             <a class="view-search" href={item.link}>
                 Ga verder met zoeken
             </a>

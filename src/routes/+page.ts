@@ -3,9 +3,10 @@ import {extractSubKeys, parseMushroomCSV, parseQuestionsCSV} from "$lib/viewMode
 export const ssr = false;
 
 export async function load({ fetch }) {
+    const parsedQuestions = await parseQuestionsCSV(fetch);
     return {
-        parsedQuestions: await parseQuestionsCSV(fetch),
+        parsedQuestions,
         parsedMushrooms: await parseMushroomCSV(fetch),
-        subKeys: extractSubKeys(await parseQuestionsCSV()).filter(x => x !== "start1")
+        subKeys: extractSubKeys(parsedQuestions).filter(x => x !== "start1")
     };
 }

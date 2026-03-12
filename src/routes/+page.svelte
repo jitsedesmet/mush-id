@@ -8,6 +8,7 @@
     import { preferredSubKeys } from "$lib/viewModel/viewModel";
     import Hex from "$lib/etc/Hex.svelte";
     import {goto} from "$app/navigation";
+    import {resolve} from "$app/paths";
     import {questionLimiter} from "$lib/viewModel/paramHelper";
     import FancyButton from "$lib/FancyButton.svelte";
     export let data: PageData;
@@ -32,9 +33,9 @@ U kan deze applicatie zelf installeren, toevoegen aan je thuis scherm, je hebt v
     preferredSubKeys.set(selectedKeys);
 
     if (selectedKeys.length > 0) {
-        goto(`/9789050117548/?keys=${selectedKeys.join(';')}&state=${limiter.start}`)
+        goto(resolve(`/9789050117548?keys=${selectedKeys.join(';')}&state=${limiter.start}`))
     } else {
-        goto(`/9789050117548/?state=start1`)
+        goto(resolve(`/9789050117548?state=start1`))
     }
 }}>
     <div class="button-wrapper">
@@ -44,7 +45,7 @@ U kan deze applicatie zelf installeren, toevoegen aan je thuis scherm, je hebt v
     <details>
         <summary>Kies actieve deelsleutels ({selectedKeys.length === 0 ? "alle" : String(selectedKeys.length)})</summary>
         <div id='active_keys'>
-            {#each keys as key}
+            {#each keys as key (key.value)}
             <span>
                 <input type="checkbox" id={key.value} value={key.value} name="keys" bind:group={selectedKeys}>
                 <label for={key.value}>{key.name}</label>

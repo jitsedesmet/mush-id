@@ -3,6 +3,7 @@
     import FancyButton from "$lib/FancyButton.svelte";
     import {savedHistory} from "$lib/viewModel/viewModel";
     import {goto} from "$app/navigation";
+    import {resolve} from "$app/paths";
 
     $: nextOptionUrl = `${$page.route.id!}/next-decision${$page.url.search}`;
 </script>
@@ -18,7 +19,7 @@
             ...$savedHistory,
             links: $savedHistory.links.concat([{ creationDate: new Date(Date.now()), link: $page.url.href }])
         });
-        goto(`/saved`)
+        goto(resolve(`/saved`))
     }}>
         <FancyButton class="outlined" color="secondary">
             Da is em! Save

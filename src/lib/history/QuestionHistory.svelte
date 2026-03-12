@@ -14,7 +14,7 @@
     <div class="history-grid">
         <div>{currentItem}:</div>
         <div>...</div>
-        {#each stateTagList.questionHistory.reverse() as hisItem}
+        {#each stateTagList.questionHistory.toReversed() as hisItem (hisItem.question)}
             <div>{hisItem.question}:</div>
             <div>
                 {["Zeker B", "Waarschijnlijk B", "Mogelijks B", "Onzeker",

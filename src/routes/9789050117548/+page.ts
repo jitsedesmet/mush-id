@@ -1,4 +1,4 @@
-import {extractSubKeys, parseMushroomCSV, parseQuestionsCSV} from "$lib/viewModel/parser";
+import {parseMushroomCSV, parseQuestionsCSV} from "$lib/viewModel/parser";
 
 export const ssr = false;
 
