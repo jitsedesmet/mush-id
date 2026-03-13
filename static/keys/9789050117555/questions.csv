@@ -1,0 +1,117 @@
+"id","first_option","first_link","second_option","second_link","probability"
+"start1","Paddenstoel met duidelijke hoed en met plaatjes (lamellen) aan de onderzijde. ◊ Paddenstoel kurkachtig, zittend. (Indien gesteeld, of paddenstoel zachtvlezig, zie Veldgids, deel 1). Plaatjes duidelijk, soms meer onregelmatig en eerder doolhofachtig","plaatjeszwammen1","Paddenstoel zonder plaatjes; onderzijde soms met onduidelijke tot vrij duidelijke aderen of plooien die enigszins op plaatjes lijken","start2","1"
+"start2","Paddenstoel met poriën aan de onderzijde. ◊ Paddenstoel met duidelijke hoed, met poriën (buisjes of gaatjes), meestal aan de onderzijde, soms aan de zijkant aan het substraat gehecht en paddenstoel dan korstvormig en zonder hoedjes. Paddenstoel kurk- tot houtachtig taai, indien vlezig, dan met vrije buisjes, of paddenstoel geheel op het substraat gehecht en dan makkelijk van het substraat te wrijven. Poriën in omtrek meest rondachtig, hoekig, langgerekt of onregelmatig, soms min of meer doolhofvormig","gaatjeszwammen1","Paddenstoel zonder poriën","start3","1"
+"start3","Paddenstoel met naar beneden hangende stekels. ◊ Meestal met duidelijke hoed, soms aan de zijkant van het substraat aangehecht en paddenstoel dan korstvormig, zonder duidelijke hoedjes. Stekels meestal 1 mm lang of langer","stekelzwammen1","Paddenstoel zonder stekels. ◊ Indien paddenstoel korstvormig, dan soms met onregelmatig en verspreid staande korte stekeltjes die meestal korter dan 1 mm zijn (in twijfelgevallen eerst dit alternatief volgen)","start4","1"
+"start4","Paddenstoel met duidelijke hoed en gladde, gerimpelde, geaderde, geplooide of getande onderzijde, of paddenstoel korstvormig met gladde, gerimpelde, geaderde, geplooide of getande onderzijde en plat op het substraat groeiend, maar uiterste rand soms afstaand en dan met onduidelijke hoedjes. ◊ Sporendragend oppervlak naar beneden (nooit opwaarts) gericht. Paddenstoel nooit als een donkere tot zwarte korst met kleine oneffenheden (minuscule vruchtlichaampjes) op het substraat","korstzwammen1","Paddenstoel niet korstvormig of met afstaande hoedjes met min of meer gladde onderzijde. ◊ Indien sporendragend oppervlak glad, paddenstoel knots- of koraalvormig (en sporen op alle zijden van de knots en de takken van de koraal gevormd), of beker- of schijfvormig (en sporendragend oppervlak dan naar boven gericht) of als een platte donkere tot zwarte korst met zeer kleine vruchtlichaampjes die in de korst zijn ingebed (en sporendragend oppervlak naar boven gericht)","start5","1"
+"start5","Paddenstoel beker-, kom- of schijfvormig, al dan niet gesteeld. Sporendragend oppervlak naar boven gericht. ◊ Beker zeer klein tot zeer groot, (minder dan 0,3 tot meer dan 100 mm). De schijf of beker is soms onregelmatig of gelobd, of aan één kant open",bekerzwammen1","Paddenstoel anders van vorm","start6","1"
+"start6","Paddenstoel recht omhoog groeiend vanaf het substraat, cilindrisch of knotsvormig; of struikvormig of koraalvormig vertakt. ◊ Sporendragend oppervlak rondom de knots of de takken van het koraal zijwaarts gericht. Soms met een opvallend verschil in vorm of kleur tussen onderste (steel) en bovenste helft (sporendragend oppervlak). Vertakte soorten kunnen vanaf de basis vertakt zijn maar soms ook pas bij de top","knotsenkoraal1","Paddenstoel anders van vorm","start7","1"
+"start7","Paddenstoel week-gelatineus of rubberachtig elastisch","trilzwammen1","Paddenstoel anders van consistentie, hard of juist nogal breekbaar, nooit gelatineus of elastisch","start8","1"
+"start8","Rijpe paddenstoel van binnen geheel of alleen bovenin gevuld met een poederige massa, die uit sporen bestaat. ◊ Door wind of regen kan de sporenmassa verdwijnen, waardoor een lege schaal achterblijft. Paddenstoel meestal bovengronds, soms zich ondergronds ontwikkelend en bij rijpheid al dan niet gedeeltelijk bovengronds verschijnend","buikzwammen1","Rijpe paddenstoel binnenin niet poederig","start9","1"
+"start9","Eigenlijke vruchtlichaam (paddenstoel) klein, nauwelijks 1 mm diameter, maar bij sommige soorten met vele gegroepeerd groeiend in een veel groter gemeenschappelijk steunweefsel (stroma), met een stevige schil. Individuele vruchtlichamen vaak direct onder het stroma-oppervlak ingebed, in doorsnede zichtbaar als kleine holtes","kernzwammen1","Paddenstoel anders van vorm","overige1","1"
+"plaatjeszwammen1","Hymenium schijnbaar bestaande uit plaatjes, in de lengte gespleten, bij droogte omkrullend. Paddenstoel zachtvlezig. Hoed grijs, wollig. Op liggende stammen en takken, vaak op open standplaatsen","Schizophyllum commune","Hymenium anders. Paddenstoel taai, kurk- of houtachtig","plaatjeszwammen2","1"
+"plaatjeszwammen2","Paddenstoel met (vrijwel) centrale steel","Lentinus, Neolentinus, Cantharellus","Paddenstoel excentrisch gesteeld of ongesteeld","plaatjeszwammen3","1"
+"plaatjeszwammen3","Lamellen gezaagd. Paddenstoel met sterke anijsgeur","Lentinellus cochleatus","Lamellen niet gezaagd. Paddenstoel zonder anijsgeur","plaatjeszwammen4","1"
+"plaatjeszwammen4","Paddenstoel vliezig, wittig, aan de onderzijde met sterk ontwikkelde plooien en aderen","Plicaturopsis crispa","Paddenstoel kurkachtig, taai","plaatjeszwammen5","1"
+"plaatjeszwammen5","Plaatjes bruin. Vruchtlichaam met KOH zwart wordend. Op naaldhout of loofhout","plaatjeszwammen6","Plaatjes wittig of licht houtkleurig. Vruchtlichaam met KOH niet zwart wordend. Op loofhout","plaatjeszwammen7","1"
+"plaatjeszwammen6","Plaatjes duidelijk ontwikkeld. Hoed behaard, concentrisch gezoneerd in verschillende bruintinten, maar groeirand geelbruin. Op naaldhout","Gloeophyllum sepiarium","Plaatjes meer doolhofachtig, variërend van bijna ronde tot zeer langgerekte poriën. Hoed (vrijwel) kaal, eenkleurig, grijsbruin. Meestal op loofhout, soms op naaldhout","Gloeophyllum trabeum","1"
+"plaatjeszwammen7","Plaatjes dik, doolhofachtig. Op eikenhout, bruinrot veroorzakend","Daedalea quercina","Plaatjes dunner. Op hout van (meestal) andere bomen, witrot veroorzakend","plaatjeszwammen8","1"
+"plaatjeszwammen8","Vlees wit. Plaatjes duidelijk ontwikkeld, niet verkleurend. Op droge, zonnige standplaatsen, vaak op berkenhout","Lenzites betulinus","Vlees lichtbruin. Plaatjes onregelmatiger, bij beschadiging roodachtig verkleurend. Meestal op vochtige standplaatsen","Daedaleopsis confragosa","1"
+"gaatjeszwammen1","Poriënlaag gemakkelijk van hoedvlees te scheiden. Paddenstoelen met duidelijke hoed en steel, zachtvlezig, altijd op de grond groeiend","boleten1","Poriënlaag continu met hoedvlees, niet gemakkelijk van elkaar te scheiden. Paddenstoel meestal taai, soms tamelijk zachtvlezig, meestal op hout groeiend","gaatjeszwammen2","1"
+"gaatjeszwammen2","Buisjes niet met elkaar vergroeid. Paddenstoel bloedrood of leverkleurig (de buisjes zijn geler), ook in doorsnede, zeer zachtvlezig en sappig. Op eik of tamme kastanje, bruinrot veroorzakend","Fistulina hepatica","Buisjes met elkaar vergroeid. Paddenstoel meestal met andere kleur","gaatjeszwammen3","1"
+"gaatjeszwammen3","Paddenstoel met centrale steel","gaatjeszwammen4","Paddenstoel met excentrische steel of ongesteeld","gaatjeszwammen13","1"
+"gaatjeszwammen4","Poriën bruingeel tot bruin. Op de grond groeiend, of ogenschijnlijk op de grond op begraven wortels groeiend","gaatjeszwammen5","Poriën wittig tot licht beige-grijs. Op hout groeiend (maar soms op begraven hout, en dan schijnbaar op de grond groeiend)","gaatjeszwammen7","1"
+"gaatjeszwammen5","Onderzijde met grote hoekige poriën, vaak getand lijkend door de onregelmatige tussenwanden. Paddenstoel groot, tot 25 cm doorsnede, dikvlezig, bruin, jong met gele groeirand. Aan de voet van naaldbomen, meestal van Douglasspar","Phaeolus schweinitzii","Onderzijde met kleine ronde poriën, niet getand. Paddenstoel tot 10 cm doorsnede, dunvlezig. In loof- en naaldbos","gaatjeszwammen6","1"
+"gaatjeszwammen6","Hoed opvallend concentrisch gezoneerd. Hoeden niet of nauwelijks met elkaar vergroeid. In naald- of loofbos, op voedselarm en humusarm zand","Coltricia perennis","Hoeden niet of weinig gezoneerd, vaak zijdelings met elkaar vergroeid. In loofbos, op meestal voedselrijke of humusrijke bodem","Coltricia confluens","1"
+"gaatjeszwammen7","Poriën wittig, roze vlekkend. Hoed roze tot roodbruin, vaak roodachtig vlekkerig, soms met rode druppels","Abortiporus biennis","Poriën niet roze vlekkend. Hoed zonder roze of rode tinten","gaatjeszwammen8","1"
+"gaatjeszwammen8","Steel tenminste aan de basis bruin of bruinzwart, soms over de gehele lengte. Hoedrand niet gewimperd","gaatjeszwammen9","Steel ook aan de basis niet bruin tot zwart. Hoedrand gewimperd","gaatjeszwammen11","1"
+"gaatjeszwammen9","Hoed tot 30 cm in doorsnede, met grote aangedrukte bruine schubben","Polyporus squamosus","Hoed tot hoogstens 15 cm in doorsnede, glad of met weinig contrasterende schubben","gaatjeszwammen10","1"
+"gaatjeszwammen10","Hoed dof, geelbruin, fijn radiair-vezelig. Steel over vrijwel de hele lengte zwart","Polyporus varius","Hoed glanzend, jong licht grijsbruin, later donker roodbruin, vrijwel glad. Steel alleen aan de basis zwart, wittig in de bovenste helft","Polyporus badius","1"
+"gaatjeszwammen11","Poriën langgerekt, meer dan 1 mm lang. Hoed bleekgeel met donkerder schubjes","Polyporus tuberaster","Poriën rond tot iets langwerpig, minder dan 1 mm lang. Hoed grijsbruin, zonder schubjes","gaatjeszwammen12","1"
+"gaatjeszwammen12","Poriën rond, zeer klein, 5-7 per mm. Paddenstoel in voorjaar en zomer groeiend","Polyporus ciliatus","Poriën hoekig tot iets langwerpig (vooral rond de steelaanhechting), duidelijk groter, 2-4 per mm. Paddenstoel in (late) herfst en winter groeiend","Polyporus brumalis","1"
+"gaatjeszwammen13","Paddenstoel met zijdelingse steel, of aan de rand steelvormig uitgetrokken","gaatjeszwammen14","Paddenstoel ongesteeld","gaatjeszwammen20","1"
+"gaatjeszwammen14","Hoed en steel glanzend, gelakt, oranjebruin tot roodbruin","Ganoderma lucidum","Hoed en steel dof, niet gelakt","gaatjeszwammen15","1"
+"gaatjeszwammen15","Paddenstoel geelbruin tot bruin, dof, bij jonge exemplaren met heldergele rand. Poriën met dezelfde kleur, vaak onregelmatig. Op naaldhout of op in de grond begraven wortels van naaldbomen, vooral Douglasspar","Phaeolus schweinitzii","Paddenstoel met andere kleuren. Poriën met andere kleur. Op loofhout","gaatjeszwammen16","1"
+"gaatjeszwammen16","Steel met vrijwel zwarte basis of over de gehele lengte zwart","gaatjeszwammen9","Steel niet met zwarte basis; steel soms onduidelijk","gaatjeszwammen17","1"
+"gaatjeszwammen17","Op berkenhout, vaak op staande berken op enige afstand van de bodem (na afbreken ook op stammen die op de grond liggen). Hoedrand ingerold. Hoedbedekking papierachtig, gemakkelijk van hoedvlees te scheiden","Piptoporus betulinus","Niet op berkenstammen. Hoedbedekking niet papierachtig","gaatjeszwammen18","1"
+"gaatjeszwammen18","Paddenstoel met een groot aantal hoedjes die vanuit een gemeenschappelijke basis ontspringen. Aan de voet van levende eiken","Grifola frondosa","Paddenstoel niet vanuit een gemeenschappelijke basis ontspringend, met een klein tot groot aantal hoedjes","gaatjeszwammen18","1"
+"gaatjeszwammen19","Paddenstoel (zeer) groot, tot 100 cm doorsnede. Hoed geelbruin, gezoneerd. Poriënlaag zeer dun, poriën geel, bij druk bruin wordend","Meripilus giganteus","Paddenstoel aanmerkelijk kleiner, tot hoogstens 15 cm doorsnede. Hoed rozebruin tot roodbruin, vaak roodachtig vlekkend, niet gezoneerd. Poriënlaag vrij dik, ongelijk lang en vaak scheef eindigend, poriën wittig, grauw-roze vlekkend","Abortiporus biennis","1"
+"gaatjeszwammen20","Vruchtlichaam met afstaande hoedjes (pileaat), deze tenminste 10 mm van substraat afstaand","gaatjeszwammen21","Vruchtlichaam als een laag van poriën op het substraat liggend (resupinaat), in het geheel niet afstaand of nauwelijks (minder dan 10 mm) afstaand (in twijfelgevallen eerst het eerste alternatief raadplegen)","gaatjeszwammen80","1"
+"gaatjeszwammen21","Gehele paddenstoel opvallend zwavelgeel tot oranje","Laetiporus sulphureus","Gehele paddenstoel niet opvallend zwavelgeel","gaatjeszwammen22","1"
+"gaatjeszwammen22","Gehele paddenstoel helder oranjerood","Pycnoporus cinnabarinus","Gehele paddenstoel niet helder rood gekleurd (maar soms poriën oranjerood)","gaatjeszwammen23","1"
+"gaatjeszwammen23","Paddenstoel aan de onderzijde met plaatjesachtige structuur","gaatjeszwammen24","Paddenstoel aan de onderzijde met ronde, elliptische of hoogstens iets langwerpige poriën","gaatjeszwammen28","1"
+"gaatjeszwammen24",'Plaatjes bruin. Vruchtlichaam met loog zwart wordend. Op naaldhout of loofhout","gaatjeszwammen25","Plaatjes wittig of licht houtkleurig. Vruchtlichaam met loog niet zwart wordend. Op loofhout","gaatjeszwammen26","1"
+"gaatjeszwammen25","Plaatjes duidelijk ontwikkeld. Hoed behaard, concentrisch gezoneerd in verschillende bruintinten, maar groeirand geelbruin. Op naaldhout","Gloeophyllum sepiarium","Plaatjes meer doolhofachtig, variërend van bijna ronde tot zeer langgerekte poriën. Hoed (vrijwel) kaal, eenkleurig, grijsbruin. Meestal op loofhout, soms op naaldhout","Gloeophyllum trabeum","1"
+"gaatjeszwammen26","Plaatjes dik, doolhofachtig. Op eikenhout, bruinrot veroorzakend","Daedalea quercina","Plaatjes dunner. Op hout van (meestal) andere bomen, witrot veroorzakend","gaatjeszwammen27","1"
+"gaatjeszwammen27","Vlees wit. Plaatjes duidelijk ontwikkeld, niet verkleurend. Op droge, zonnige standplaatsen, vaak op berkenhout","Lenzites betulinus","Vlees lichtbruin. Plaatjes onregelmatiger, bij beschadiging roodachtig verkleurend. Meestal op vochtige standplaatsen","Daedaleopsis confragosa","1"
+"gaatjeszwammen28","Hoedbedekking papierachtig, lichtbruin, gemakkelijk van hoedvlees te scheiden. Hoedrand ingerold. Poriën wit. Uitsluitend op berk","Piptoporus betulinus","Hoedbedekking niet papierachtig. Hoedrand niet ingerold","gaatjeszwammen29","1"
+"gaatjeszwammen29","Hoed met duidelijke scheiding tussen vlees en harde, soms harsachtig-kleverige korst","gaatjeszwammen30","Hoed zonder harde korst","gaatjeszwammen45"
+"gaatjeszwammen30",
+"gaatjeszwammen31",
+"gaatjeszwammen32",
+"gaatjeszwammen33",
+"gaatjeszwammen34",
+"gaatjeszwammen35",
+"gaatjeszwammen36",
+"gaatjeszwammen37",
+"gaatjeszwammen38",
+"gaatjeszwammen39",
+"gaatjeszwammen40",
+"gaatjeszwammen41",
+"gaatjeszwammen42",
+"gaatjeszwammen43",
+"gaatjeszwammen44",
+"gaatjeszwammen45",
+"gaatjeszwammen46",
+"gaatjeszwammen47",
+"gaatjeszwammen48",
+"gaatjeszwammen49",
+"gaatjeszwammen40",
+"gaatjeszwammen41",
+"gaatjeszwammen42",
+"gaatjeszwammen43",
+"gaatjeszwammen44",
+"gaatjeszwammen45",
+"gaatjeszwammen46",
+"gaatjeszwammen47",
+"gaatjeszwammen48",
+"gaatjeszwammen49",
+"gaatjeszwammen50",
+"gaatjeszwammen51",
+"gaatjeszwammen52",
+"gaatjeszwammen53",
+"gaatjeszwammen54",
+"gaatjeszwammen55",
+"gaatjeszwammen56",
+"gaatjeszwammen57",
+"gaatjeszwammen58",
+"gaatjeszwammen59",
+"gaatjeszwammen60",
+"gaatjeszwammen61",
+"gaatjeszwammen62",
+"gaatjeszwammen63",
+"gaatjeszwammen64",
+"gaatjeszwammen65",
+"gaatjeszwammen66",
+"gaatjeszwammen67",
+"gaatjeszwammen68",
+"gaatjeszwammen69",
+"gaatjeszwammen70",
+"gaatjeszwammen71",
+"gaatjeszwammen72",
+"gaatjeszwammen73",
+"gaatjeszwammen74",
+"gaatjeszwammen75",
+"gaatjeszwammen76",
+"gaatjeszwammen77",
+"gaatjeszwammen78",
+"gaatjeszwammen79",
+"gaatjeszwammen80",
+"gaatjeszwammen81",
+"gaatjeszwammen82",
+"gaatjeszwammen83",
+"gaatjeszwammen84",
+"gaatjeszwammen85",
+"gaatjeszwammen86",
+"gaatjeszwammen87",
+"gaatjeszwammen88",
+"gaatjeszwammen89",
