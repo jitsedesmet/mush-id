@@ -1,6 +1,10 @@
 <script lang="ts">
     import type {Mushroom} from "$lib/viewModel/parser";
     export let credits: boolean = true;
+    /** When true, renders the credit text as a translucent overlay at the
+     *  bottom of the image instead of below it. Useful inside fixed-size
+     *  containers where a figcaption below the image would overflow. */
+    export let creditsOverlay: boolean = false;
     interface OneZoomImage {
         name: string;
         url: string;
@@ -24,7 +28,7 @@
 </script>
 
 {#if mushroom && mushroom.OToLId}
-<div class="image-div">
+<div class="image-div" class:overlay-credits={creditsOverlay}>
     {#await fetchOneZoomPic(mushroom.OToLId)}
     {:then res}
         <figure>
@@ -33,8 +37,11 @@
                     class="fit-picture"
                     src={res.url}
                     alt={`Geverifieerde foto van ${mushroom.id} gebracht door OneZoom`} />
-            {#if credits}
+            {#if credits && !creditsOverlay}
             <figcaption>{res.by}</figcaption>
+            {/if}
+            {#if credits && creditsOverlay}
+            <figcaption class="overlay">{res.by}</figcaption>
             {/if}
         </figure>
     {:catch}
@@ -52,6 +59,9 @@
         display: flex;
         justify-content: center;
     }
+    .image-div.overlay-credits {
+        position: relative;
+    }
     figure {
         margin: 0;
         padding: 0;
@@ -59,6 +69,7 @@
         justify-content: center;
         flex-direction: column;
         width: 100%;
+        position: relative;
     }
     figure figcaption {
         caption-side: bottom;
@@ -66,6 +77,21 @@
         font-size: 0.75em;
         color: var(--c-text-muted, #888);
         text-align: center;
+    }
+    figure figcaption.overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: 0;
+        padding: 2px 4px;
+        background: rgba(0, 0, 0, 0.45);
+        color: #fff;
+        font-size: 0.65em;
+        text-align: center;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
     img {
         width: 100%;
