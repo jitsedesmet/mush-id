@@ -67,13 +67,6 @@
             </div>
             {/each}
         </div>
-
-        <div class="nav-bar">
-            <FancyButton color="secondary" href="/">Home</FancyButton>
-            <FancyButton color="primary" href={`/9789050117548?keys=${data.key}&state=${data.key}`}>
-                Sleutel starten
-            </FancyButton>
-        </div>
     {:else}
         <!-- ── Sub-key index ── -->
         <h2>Paddenstoelen per deelsleutel</h2>
@@ -87,10 +80,15 @@
             </a>
             {/each}
         </div>
+    {/if}
+</div>
 
-        <div class="nav-bar">
-            <FancyButton color="secondary" href="/">Home</FancyButton>
-        </div>
+<div class="nav-bar">
+    <FancyButton color="secondary" href="/">Home</FancyButton>
+    {#if data.key}
+    <FancyButton color="primary" href={`/9789050117548?keys=${data.key}&state=${data.key}`}>
+        Sleutel starten
+    </FancyButton>
     {/if}
 </div>
 </div>
@@ -262,8 +260,7 @@
         background: var(--c-surface);
         padding: 14px 16px 8px;
         bottom: 0;
-        align-self: flex-end;
-        margin: auto;
+        align-self: center;
         z-index: 999;
         border-top: 1px solid var(--c-border);
         box-shadow: 0 -4px 16px rgba(0,0,0,.08);
