@@ -1,9 +1,7 @@
 <script lang="ts">
     import type {Mushroom} from "$lib/viewModel/parser";
-    export let credits: boolean = true;
-    /** When true, renders the credit text as a translucent overlay at the
-     *  bottom of the image instead of below it. Useful inside fixed-size
-     *  containers where a figcaption below the image would overflow. */
+    /** When true, renders the photographer credit as a translucent overlay
+     *  pinned to the bottom of the image. */
     export let creditsOverlay: boolean = false;
     interface OneZoomImage {
         name: string;
@@ -28,7 +26,7 @@
 </script>
 
 {#if mushroom && mushroom.OToLId}
-<div class="image-div" class:overlay-credits={creditsOverlay}>
+<div class="image-div">
     {#await fetchOneZoomPic(mushroom.OToLId)}
     {:then res}
         <figure>
@@ -37,10 +35,7 @@
                     class="fit-picture"
                     src={res.url}
                     alt={`Geverifieerde foto van ${mushroom.id} gebracht door OneZoom`} />
-            {#if credits && !creditsOverlay}
-            <figcaption>{res.by}</figcaption>
-            {/if}
-            {#if credits && creditsOverlay}
+            {#if creditsOverlay}
             <figcaption class="overlay">{res.by}</figcaption>
             {/if}
         </figure>
@@ -59,9 +54,6 @@
         display: flex;
         justify-content: center;
     }
-    .image-div.overlay-credits {
-        position: relative;
-    }
     figure {
         margin: 0;
         padding: 0;
@@ -70,13 +62,6 @@
         flex-direction: column;
         width: 100%;
         position: relative;
-    }
-    figure figcaption {
-        caption-side: bottom;
-        margin: 5px auto;
-        font-size: 0.75em;
-        color: var(--c-text-muted, #888);
-        text-align: center;
     }
     figure figcaption.overlay {
         position: absolute;
