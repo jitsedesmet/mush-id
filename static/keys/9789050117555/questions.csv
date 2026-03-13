@@ -57,20 +57,20 @@
 "gaatjeszwammen39","Hoed 5-20 cm van substraat afstaand. Paddenstoel aan de voet van loofbomen. Poriën bleek beige","Perenniporia fraxinea","Hoed minder dan 5 cm van substraat afstaand, vaak hoog in de boom op wondplekken. Poriën gelig of bleek beige","Oxyporus populinus","1"
 "gaatjeszwammen40","Paddenstoel aan de basis van kardinaalsmuts of ribes groeiend. Poriën zeer klein, met het blote oog nauwelijks zichtbaar","Phylloporia ribis","Paddenstoel op andere boomsoorten groeiend. Poriën meestal niet zeer klein, met het blote oog meestal duidelijk zichtbaar","gaatjeszwammen41","1"
 "gaatjeszwammen41","Paddenstoel op duindoorn groeiend","Fomitiporia hippophaëicola","Paddenstoel niet op duindoorn groeiend","gaatjeszwammen42","1"
-"gaatjeszwammen42",
-"gaatjeszwammen43",
-"gaatjeszwammen44",
-"gaatjeszwammen45",
-"gaatjeszwammen46",
-"gaatjeszwammen47",
-"gaatjeszwammen48",
-"gaatjeszwammen49",
-"gaatjeszwammen40",
-"gaatjeszwammen41",
-"gaatjeszwammen42",
-"gaatjeszwammen43",
-"gaatjeszwammen44",
-"gaatjeszwammen45",
+"gaatjeszwammen42","Paddenstoel op prunus (kers, pruim, sierkers, sleedoorn) groeiend. Poriën zeer fijn (7-9 per mm), nauwelijks zichtbaar","Phellinus tuberculosus","Paddenstoel niet op prunus groeiend. Poriën niet zeer fijn (minder dan 6 per mm)","gaatjeszwammen43","1"
+"gaatjeszwammen43","Vruchtlichaam vlak, dun, dakpansgewijs groeiend, met een korstvormig op het substraat liggend deel","Phellinus conchatus","Vruchtlichaam gewelfd, dik, zonder korstvormig deel","gaatjeszwammen44","1"
+"gaatjeszwammen44","Paddenstoel op eik groeiend","Fomitiporia robusta","Paddenstoel op populier of wilg groeiend","Phellinus igniarius","1"
+"gaatjeszwammen45","Poriën aan de onderzijde violet, tenminste bij de hoedrand. Op naaldhout","Trichaptum abietinum","Poriën aan de onderzijde zonder violette kleuren. Op loof- of naaldhout","gaatjeszwammen46","1"
+"gaatjeszwammen46","Vruchtlichaam wollig-viltig, bruin, viltlaag later verdwijnend en oppervlak dan bijna zwart wordend, in jonge toestand vaak met donkere druppels die opdrogen tot zwarte teervlekken. Op naaldhout","Ischnoderma benzoinum","Vruchtlichaam zonder teervlekken, niet vrijwel zwart wordend","gaatjeszwammen47","1"
+"gaatjeszwammen47","Poriën onregelmatig, vrij groot, wittig, bij druk en ouderdom soms grauw-roze tot roodbruin","gaatjeszwammen48","Poriën niet opvallend onregelmatig, bij druk of oude exemplaren niet grauw-roze tot roodbruin verkleurend","gaatjeszwammen50","1"
+"gaatjeszwammen48","Poriën bij druk niet verkleurend","Datronia mollis","Poriën bij druk grauwroze tot roodbruin","gaatjeszwammen49"
+"gaatjeszwammen49",'Hoed niet of maar weinig behaard, vaak concentrisch gezoneerd, bruin","Daedaleopsis confragosa","Hoed viltig tot harig, niet gezoneerd, roze tot roodbruin","Abortiporus biennis"
+"gaatjeszwammen40","Gehele paddenstoel kaneelkleurig tot meer oranjebruin; met een druppeltje KOH intens paars","Hapalopilus rutilans","Paddenstoel niet geheel kaneelkleurig, met KOH niet paars verkleurend (maar soms zwart wordend)","gaatjeszwammen51","1"
+"gaatjeszwammen41","Vlees bruin, met KOH zwart","gaatjeszwammen52","Vlees wittig, geelachtig of bleek houtkleurig, met KOH niet zwart (in geval van twijfel eerst dit alternatief uitproberen!)","gaatjeszwammen58","1"
+"gaatjeszwammen42","Op naaldhout (vooral spar). Paddenstoel met sterke geur naar anijs of venkel","Osmoporus odoratus","Op loofhout. Paddenstoel zonder anijs- of venkelgeur","gaatjeszwammen53","1"
+"gaatjeszwammen43","Grote paddenstoel aan de basis van oude eiken; bovenzijde vaak met waterige oranjebruine druppels","Pseudoinonotus dryadeus","Op andere standplaatsen; niet met oranjebruine waterige druppels","gaatjeszwammen54","1"
+"gaatjeszwammen44","Hoed dicht-viltig of ruig behaard","gaatjeszwammen55","Hoed in jonge toestand enigszins behaard, maar beharing spoedig verdwijnend","gaatjeszwammen56","1"
+"gaatjeszwammen45","Paddenstoel tot 10 cm dik, dikvlezig. Op levende bomen, vaak in parken of anderszins vrijstaande bomen, vaak op es, vrij hoog in de boom","Inonotus hispidus","Paddenstoel tot 3 cm dik, minder dikvlezig. Meestal in bossen, op wondplekken van beuk","Inonotus cuticularis","1"
 "gaatjeszwammen46",
 "gaatjeszwammen47",
 "gaatjeszwammen48",
