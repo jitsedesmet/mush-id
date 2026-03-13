@@ -11,7 +11,7 @@
 
 <script lang="ts">
     import type { PageData } from './$types';
-    import MushroomPicture from "$lib/MushroomPicture.svelte";
+    import OneZoomPicture from "$lib/OneZoomPicture.svelte";
     import InfoIcon from "$lib/heroicons/InfoIcon.svelte";
     import FancyButton from "$lib/FancyButton.svelte";
 
@@ -41,7 +41,7 @@
             {#each data.mushrooms as mushroom (mushroom.id)}
             <div class="species-card">
                 <div class="picture-wrapper">
-                    <MushroomPicture {mushroom} credits={false} />
+                    <OneZoomPicture {mushroom} />
                 </div>
                 <div class="species-info">
                     <a class="species-name"
@@ -50,16 +50,38 @@
                         {mushroom.id}
                     </a>
                     <div class="species-links">
+                        <a href={`https://www.google.com/search?tbm=isch&q=${encodeURIComponent(mushroom.id)}`}
+                           target="_blank" rel="noopener" class="species-link">
+                            <InfoIcon/>Google afbeeldingen
+                        </a>
+                        <a href={`https://en.wikipedia.org/w/index.php?search=${encodeURIComponent(mushroom.id)}&title=Special:Search`}
+                           target="_blank" rel="noopener" class="species-link">
+                            <InfoIcon/>Engelse Wikipedia
+                        </a>
+                        <a href={`https://nl.wikipedia.org/w/index.php?search=${encodeURIComponent(mushroom.id)}&title=Special:Search`}
+                           target="_blank" rel="noopener" class="species-link">
+                            <InfoIcon/>Nederlandse Wikipedia
+                        </a>
+                        {#if mushroom.OToLId}
+                        <a href={`https://tree.opentreeoflife.org/opentree/argus/ottol@${mushroom.OToLId}/`}
+                           target="_blank" rel="noopener" class="species-link">
+                            <InfoIcon/>Open Tree of Life
+                        </a>
+                        <a href={`https://www.onezoom.org/life/@=${mushroom.OToLId}`}
+                           target="_blank" rel="noopener" class="species-link">
+                            <InfoIcon/>OneZoom
+                        </a>
+                        {/if}
+                        {#if mushroom.lifeUrl}
+                        <a href={`https://eol.org/pages/${mushroom.lifeUrl}`}
+                           target="_blank" rel="noopener" class="species-link">
+                            <InfoIcon/>Encyclopedia of Life
+                        </a>
+                        {/if}
                         {#if mushroom.waarnemingId}
                         <a href={`https://waarnemingen.be/species/${mushroom.waarnemingId}/`}
                            target="_blank" rel="noopener" class="species-link">
                             <InfoIcon/>Waarnemingen.be
-                        </a>
-                        {/if}
-                        {#if mushroom.OToLId}
-                        <a href={`https://www.onezoom.org/life/@=${mushroom.OToLId}`}
-                           target="_blank" rel="noopener" class="species-link">
-                            <InfoIcon/>OneZoom
                         </a>
                         {/if}
                     </div>
