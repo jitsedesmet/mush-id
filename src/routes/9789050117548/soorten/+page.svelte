@@ -41,7 +41,7 @@
             {#each data.mushrooms as mushroom (mushroom.id)}
             <div class="species-card">
                 <div class="picture-wrapper">
-                    <OneZoomPicture {mushroom} />
+                    <OneZoomPicture {mushroom} credits={false} />
                 </div>
                 <div class="species-info">
                     <a class="species-name"
