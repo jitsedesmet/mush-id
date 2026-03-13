@@ -84,24 +84,33 @@
 "gaatjeszwammen66","Poriën wittig en bij druk oranjerood verkleurend, of al in jonge toestand oranje tot rood","gaatjeszwammen67","Poriën zonder oranje tot rode kleur","gaatjeszwammen68","1"
 "gaatjeszwammen67","Poriën wittig, oranje verkleurend. Op naaldhout","Skeletocutis amorpha","Poriën oranje tot rood. Op loofhout, hoofdzakelijk berk. Boven de buisjeslaag met een opvallende gelatineuze laag, daardoor kan poriënlaag als een velletje worden losgetrokken","Gloeoporus dichrous","1"
 "gaatjeszwammen68","Poriën groot, hoogstens 1-2 per mm, vaak langgerekt of hoekig of iets doolhofachtig, soms rondachtig","gaatjeszwammen69","Poriën kleiner, gewoonlijk 3-5 per mm of meer, vrijwel rond","gaatjeszwammen73","1"
-"gaatjeszwammen69",'Poriën enigszins doolhofachtig. Hoed borstelig-harig, maar bij ouderdom soms vrijwel glad wordend, vaak met groene tint door algen. Poriënlaag dun, tot 1 mm","Cerrena unicolor"
-"gaatjeszwammen70",
-"gaatjeszwammen71",
-"gaatjeszwammen72",
-"gaatjeszwammen73",
-"gaatjeszwammen74",
-"gaatjeszwammen75",
-"gaatjeszwammen76",
-"gaatjeszwammen77",
-"gaatjeszwammen78",
-"gaatjeszwammen79",
-"gaatjeszwammen80",
-"gaatjeszwammen81",
-"gaatjeszwammen82",
-"gaatjeszwammen83",
-"gaatjeszwammen84",
-"gaatjeszwammen85",
-"gaatjeszwammen86",
-"gaatjeszwammen87",
-"gaatjeszwammen88",
-"gaatjeszwammen89",
+"gaatjeszwammen69",'Poriën enigszins doolhofachtig. Hoed borstelig-harig, maar bij ouderdom soms vrijwel glad wordend, vaak met groene tint door algen. Poriënlaag dun, tot 1 mm","Cerrena unicolor","Poriën niet doolhofachtig","gaatjeszwammen70","1"
+"gaatjeszwammen70","Paddenstoel met duidelijke anijsgeur. Poriën rond. Op wilg","Trametes suaveolens","Paddenstoel zonder anijsgeur. Poriën wat langgerekt of hoekig","gaatjeszwammen71","1"
+"gaatjeszwammen71","Vruchtlichaam dik, groot (tot 20 cm), fijn behaard tot vrijwel kaal, wittig maar vaak met groene algen overdekt. Op stronken en stammen van beuk, vaak samen met Bjerkandera adusta","Trametes gibbosa","Vruchtlichaam aan de basis minder dik (tot 5 cm), aanvankelijk borstelharig","gaatjeszwammen72","1"
+"gaatjeszwammen72","Geur zoetig, als stoofperen. Hoed donkerbruin, met kort afstaande hoedjes en een korstvormig deel op het substraat","Datronia mollis","Geur anders of afwezig. Hoed zonder korstvormig deel op het substraat","Coriolopsis trogii","1"
+"gaatjeszwammen73","Poriën grijs, met opvallende roze tint. Op naaldhout, vrijwel altijd samengroeiend met Trichaptum abietinum","Skeletocutis carneogrisea","Poriën niet grijs. Op loofhout, indien op naaldhout, dan niet samengroeiend met Trichaptum abietinum","gaatjeszwammen74","1"
+"gaatjeszwammen74","Vruchtlichaam wit, vanaf aanhechting van de hoed bruin verkleurend. Poriën zeer fijn, 5-9 per mm, nauwelijks met het blote oog zichtbaar, wit, met blauwe zweem","Skeletocutis nivea","Vruchtlichaam niet wit en vanaf aanhechting van de hoed bruin verkleurend. Poriën groter, hoogstens 5 per mm, met het blote oog zichtbaar, zonder blauwe zweem","gaatjeszwammen75","1"
+"gaatjeszwammen75","Hoed aan de rand geelachtig tot geel. Hoed kaal","gaatjeszwammen76","Hoed niet geelachtig tot geel aan de rand; indien hoed bleekoranje, dan hoed fijn zijdeachtig behaard","gaatjeszwammen77","1"
+"gaatjeszwammen76","Vruchtlichaam driehoekig, aan de basis 1 cm dik. Meestal op els of beuk, vaak samen met Mensularia radiata of M. nodulosa","Antrodiella serpula","Vruchtlichaam vlak, aan de basis minder dan 5 mm dik. Meestal op berk en wilg, vaak samen met vuurzwammen","Antrodiella semisupina ss. lato","1"
+"gaatjeszwammen77","Op naaldhout groeiend, bruinrot veroorzakend. Vruchtlichaam deels tegen het substraat aanliggend, deels met smalle afstaande hoedjes","Antrodia serialis","Op loofhout groeiend, witrot veroorzakend. Vruchtlichaam niet of nauwelijks als korst tegen het substraat, met bredere hoedjes","gaatjeszwammen78","1"
+"gaatjeszwammen78","Hoedoppervlak grofharig, vaak concentrisch gezoneerd","Trametes hirsuta","Hoedoppervlak fijnviltig tot zijdeachtig","gaatjeszwammen79","1"
+"gaatjeszwammen79","Vruchtlichaam aan de bovenzijde zijdeachtig-glanzend; vruchtlichaam dun, aan de basis 1-4 mm dik","Trametes versicolor","Vruchtlichaam aan de bovenzijde niet glanzend; vruchtlichaam enigszins driehoekig, aan de basis meer dan 5 mm dik, met knobbel aan de basis","Trametes ochracea","1"
+"gaatjeszwammen80","Poriën glazig, wit, bij beschadiging soms verkleurend","gaatjeszwammen81","Poriën niet glazig, wittig, gelig, houtkleurig, kaneelkleurig, roze, rood, paars tot donkerbruin","gaatjeszwammen82","1"
+"gaatjeszwammen81",'Poriën bij druk rood tot roodbruin verkleurend","Physisporinus sanguinolentus","Poriën bij druk niet verkleurend of hoogstens langzaam iets bruinig wordend","Physisporinus vitreus","1"
+"gaatjeszwammen82","Poriën lichtbruin tot donkerbruin, met KOH zwart wordend","gaatjeszwammen83","Poriën wittig, gelig, bleek houtkleurig, kaneelkleurig, roze, oranje, rood of paars, met KOH niet zwart wordend","gaatjeszwammen84","1"
+"gaatjeszwammen83","Vruchtlichaam dik; op fruitbomen","Phellinus tuberculosus","Vruchtlichaam dun; op andere houtsoorten","Fuscoporia ferrea-groep","1"
+"gaatjeszwammen84","Vruchtlichaam teer, relatief gemakkelijk van substraat af te wrijven","gaatjeszwammen85",Vruchtlichaam taai, niet of nauwelijks van het substraat af te wrijven","gaatjeszwammen88","1"
+"gaatjeszwammen85","Vruchtlichaam aan de rand met opvallende strengen. Poriën in het centrum geelachtig, naar de rand wit","Trechispora mollusca-groep","Vruchtlichaam aan de rand zonder strengen","gaatjeszwammen86","1"
+"gaatjeszwammen86","Vruchtlichaam op de bodem groeiend, aan de onderzijde van grijs kronkelsteeltje op stuifzand","Sistotrema dennisii","Vruchtlichaam op hout groeiend, niet aan de onderzijde van grijs kronkelsteeltje","gaatjeszwammen87","1"
+"gaatjeszwammen87","Vruchtlichaam met KOH niet verkleurend. Vruchtlichaam wit tot iets gelig, niet verkleurend","Ceriporia reticulata","Vruchtlichaam met KOH paars tot rood. Vruchtlichaam meestal roze tot rood of purper, soms oranje of wittig","Ceriporia purpurea-groep","1"
+"gaatjeszwammen88","Poriën paars","Trichaptum abietinum","Poriën niet paars","gaatjeszwammen89","1"
+"gaatjeszwammen89","Poriën oranjerood tot steenrood","Meruliopsis taxicola","Poriën niet oranjerood tot steenrood","gaatjeszwammen90","1"
+"gaatjeszwammen90","Poriën geel tot oranjegeel, of aanvankelijk wit en dan bij ouderdom oranje wordend","gaatjeszwammen91","Poriën zonder duidelijk gele tint, hoogstens bleekgeel","gaatjeszwammen93","1"
+"gaatjeszwammen91","Poriën oranje verkleurend. Op naaldhout","Skeletocutis amorpha","Poriën geel tot oranje. Op loof- of naaldhout","gaatjeszwammen92","1"
+"gaatjeszwammen92","Poriën oranjegeel, soms meer geel met oranje zweem. Meestal op loofhout, witrot veroorzakend","Schizopora flavipora","Poriën in jonge toestand citroengeel. Vruchtlichaam met frisse citroengeur. Op naaldhout, bruinrot veroorzakend","Antrodia xantha","1"
+"gaatjeszwammen93","Geur sterk, zurig","gaatjeszwammen94","Geur afwezig","gaatjeszwammen95","1"
+"gaatjeszwammen94","Poriën tamelijk fijn, 3-5 per mm. Vruchtlichaam op stammen en stronken van naaldhout en berk","Heterobasidion annosum","Poriën zeer fijn, 5-7 per mm. Vruchtlichaam aan de onderzijde van omgevallen loofbomen, vaak populier","Oxyporus populinus","1"
+"gaatjeszwammen95","Poriën zeer fijn, met het blote oog nauwelijks waarneembaar, wit met blauwige zweem","Skeletocutis nivea","Poriën niet zeer fijn, niet (vrijwel) wit, zonder blauwige zweem","gaatjeszwammen96","1"
+"gaatjeszwammen96","Poriën zeer onregelmatig (als een soort berglandschap, met kammen en richels), of hoekig tot langgerekt","gaatjeszwammen97","Poriën regelmatig, rondachtig","gaatjeszwammen98","1"
+"gaatjeszwammen97","Poriën zeer onregelmatig (als een soort berglandschap, met kammen en richels). Vruchtlichaam geheel resupinaat. Geurloos","Schizopora paradoxa ss. lato","Poriën hoekig tot langgerekt. Vruchtlichaam met afstaande rand en kleine hoedjes vormend. Geur naar stoofperen","Datronia mollis","1"
+"gaatjeszwammen98","Vruchtlichaam houtkleurig; poriën wittig, bij ouderdom niet grijs wordend","Antrodia serialis","Vruchtlichaam wittig tot grijzig, randzone fijn bewimperd; poriën wittig, later grijs","Cinereomyces lindbladii"
