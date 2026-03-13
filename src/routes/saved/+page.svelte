@@ -41,7 +41,7 @@
         {@const currentMushroom = state.currentQuestion}
         <div class="saved-item">
             <div class="picture-wrapper">
-                <OneZoomPicture credits={false} mushroom={data.parsedMushrooms[currentMushroom]} />
+                <OneZoomPicture mushroom={data.parsedMushrooms[currentMushroom]} />
             </div>
 
             <div class="item-text">

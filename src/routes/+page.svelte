@@ -84,6 +84,9 @@
         </form>
 
         <div class="saved-row">
+            <FancyButton color="secondary" href={resolve("/9789050117548/soorten")}>Bekijk paddenstoelen in deelsleutels</FancyButton>
+        </div>
+        <div class="saved-row">
             <FancyButton color="secondary" href="/saved">Opgeslagen zoekopdrachten</FancyButton>
         </div>
     </section>

@@ -1,6 +1,8 @@
 <script lang="ts">
     import type {Mushroom} from "$lib/viewModel/parser";
-    export let credits: boolean = true;
+    /** When true, renders the photographer credit as a translucent overlay
+     *  pinned to the bottom of the image. */
+    export let creditsOverlay: boolean = false;
     interface OneZoomImage {
         name: string;
         url: string;
@@ -33,8 +35,8 @@
                     class="fit-picture"
                     src={res.url}
                     alt={`Geverifieerde foto van ${mushroom.id} gebracht door OneZoom`} />
-            {#if credits}
-            <figcaption>{res.by}</figcaption>
+            {#if creditsOverlay}
+            <figcaption class="overlay">{res.by}</figcaption>
             {/if}
         </figure>
     {:catch}
@@ -59,13 +61,22 @@
         justify-content: center;
         flex-direction: column;
         width: 100%;
+        position: relative;
     }
-    figure figcaption {
-        caption-side: bottom;
-        margin: 5px auto;
-        font-size: 0.75em;
-        color: var(--c-text-muted, #888);
+    figure figcaption.overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: 0;
+        padding: 2px 4px;
+        background: rgba(0, 0, 0, 0.45);
+        color: #fff;
+        font-size: 0.65em;
         text-align: center;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
     img {
         width: 100%;

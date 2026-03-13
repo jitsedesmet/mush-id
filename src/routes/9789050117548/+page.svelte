@@ -71,7 +71,7 @@
                    class="mushroom-link">{currentMushroom.id}</a>
             </p>
             <div class="image-wrapper">
-                <OneZoomPicture mushroom={currentMushroom} />
+                <OneZoomPicture mushroom={currentMushroom} creditsOverlay={true} />
             </div>
             <p class="sources-label">Raadpleeg bronnen:</p>
             <div class="mushroom-info">
