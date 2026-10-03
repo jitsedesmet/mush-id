@@ -12,7 +12,7 @@
 </script>
 
 <div class="button-wrapper">
-    <FancyButton class="outlined" color="secondary" href={nextOptionUrl}>
+    <FancyButton color="secondary" href={nextOptionUrl}>
         Probeer alternatief
     </FancyButton>
 </div>

@@ -37,199 +37,167 @@
     let selectedKeys = $preferredSubKeys || [];
 </script>
 
-<div vocab="https://schema.org/" typeof="WebApplication" class="home-wrapper">
+<div vocab="https://schema.org/" typeof="WebApplication" class="home">
     <meta property="name" content="Mush-ID">
     <meta property="applicationCategory" content="UtilityApplication">
     <meta property="operatingSystem" content="All">
     <meta property="inLanguage" content="nl">
     <link property="url" href="https://mush-id.jitsedesmet.be/">
-    <!-- Hero section -->
-    <section class="hero">
-        <h1>Welkom bij Mush-ID</h1>
-        <p class="subtitle" property="description">
-            Identificeer paddenstoelen stap voor stap met behulp van binaire sleutels.
-            Installeer de app op je thuisscherm — ook offline beschikbaar!
+
+    <section class="intro">
+        <h1>Paddenstoelen op naam brengen</h1>
+        <p class="lead" property="description">
+            Doorloop de tweedelige sleutel uit de Veldgids Paddenstoelen&nbsp;I, één vraag tegelijk.
+            Twijfel je? Geef aan hoe zeker je bent, dan kan je later een ander pad proberen.
         </p>
+        <p class="muted small">Zet de app op je thuisscherm om hem ook offline te gebruiken.</p>
     </section>
 
-    <!-- Start form card -->
-    <section class="card start-card">
-        <form method="POST" on:submit|preventDefault={() => {
-            const limiter = questionLimiter(data.parsedQuestions, selectedKeys);
-            preferredSubKeys.set(selectedKeys);
+    <form method="POST" class="start" on:submit|preventDefault={() => {
+        const limiter = questionLimiter(data.parsedQuestions, selectedKeys);
+        preferredSubKeys.set(selectedKeys);
 
-            if (selectedKeys.length > 0) {
-                goto(resolve(`/9789050117548?keys=${selectedKeys.join(';')}&state=${limiter.start}`))
-            } else {
-                goto(resolve(`/9789050117548?state=start1`))
-            }
-        }}>
-            <div class="start-btn-row">
-                <FancyButton color="primary">START DE SLEUTEL</FancyButton>
+        if (selectedKeys.length > 0) {
+            goto(resolve(`/9789050117548?keys=${selectedKeys.join(';')}&state=${limiter.start}`))
+        } else {
+            goto(resolve(`/9789050117548?state=start1`))
+        }
+    }}>
+        <FancyButton color="primary">Start de sleutel</FancyButton>
+
+        <details class="key-filter">
+            <summary>
+                Beperken tot deelsleutels
+                <span class="muted">({selectedKeys.length === 0 ? "alle" : `${selectedKeys.length} gekozen`})</span>
+            </summary>
+            <div id='active_keys'>
+                {#each keys as key (key.value)}
+                <label class="key-option">
+                    <input type="checkbox" value={key.value} name="keys" bind:group={selectedKeys}>
+                    <span>{key.name}</span>
+                </label>
+                {/each}
             </div>
+        </details>
+    </form>
 
-            <details class="key-filter">
-                <summary>Deelsleutels filteren
-                    <span class="badge">{selectedKeys.length === 0 ? "alle" : String(selectedKeys.length)}</span>
-                </summary>
-                <div id='active_keys'>
-                    {#each keys as key (key.value)}
-                    <label class="key-option">
-                        <input type="checkbox" value={key.value} name="keys" bind:group={selectedKeys}>
-                        <span>{key.name}</span>
-                    </label>
-                    {/each}
-                </div>
-            </details>
-        </form>
+    <ul class="more">
+        <li><a href={resolve("/9789050117548/soorten")}>Soorten per deelsleutel bekijken</a></li>
+        <li><a href={resolve("/saved")}>Opgeslagen zoekopdrachten</a></li>
+    </ul>
 
-        <div class="saved-row">
-            <FancyButton color="secondary" href={resolve("/9789050117548/soorten")}>Bekijk paddenstoelen in deelsleutels</FancyButton>
-        </div>
-        <div class="saved-row">
-            <FancyButton color="secondary" href="/saved">Opgeslagen zoekopdrachten</FancyButton>
-        </div>
-    </section>
-
-    <!-- Attribution -->
-    <p class="attribution" property="isBasedOn" typeof="Book">
+    <footer class="attribution" property="isBasedOn" typeof="Book">
         Sleutel ontleend aan de
         <a href="https://knnvuitgeverij.nl/artikel/veldgids-paddenstoelen-i-2.html" target="_blank" rel="noopener" property="url">
-            <span property="name">Veldgids Paddenstoelen I</span>
-        </a>
+            <span property="name">Veldgids Paddenstoelen I</span></a>
         door <span property="author" typeof="Person"><span property="name">Nico Dam</span></span> &amp;
         <span property="author" typeof="Person"><span property="name">Thomas W. Kuyper</span></span>
         (<span property="publisher" typeof="Organization"><span property="name">KNNV Uitgeverij</span></span>,
         ISBN&nbsp;<span property="isbn">9789050117548</span>).
         Toestemming voor gebruik wordt nog aangevraagd.
-    </p>
+    </footer>
 </div>
 
 
 <style>
-    .home-wrapper {
+    .home {
         display: flex;
         flex-direction: column;
-        align-items: center;
-        gap: 24px;
-        padding: 8px 0 32px;
-        width: 100%;
+        gap: 28px;
+        flex: 1;
+        max-width: 560px;
     }
 
-    /* ── Hero ── */
-    .hero {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        gap: 8px;
-        width: 100%;
+    .intro h1 {
+        margin-bottom: 12px;
     }
 
-    .subtitle {
-        color: var(--c-text-muted);
-        font-size: 1em;
-        max-width: 480px;
-        line-height: 1.6;
+    .lead {
+        font-size: 1.08em;
+        margin: 0 0 8px;
+    }
+
+    .small {
+        font-size: 0.88em;
         margin: 0;
     }
 
-    /* ── Card ── */
-    .card {
-        background: var(--c-surface);
-        border: 1px solid var(--c-border);
-        border-radius: var(--radius-lg);
-        box-shadow: var(--shadow-sm);
-        padding: 24px;
-        width: 100%;
-        max-width: 480px;
-    }
-
-    .start-btn-row {
+    .start {
         display: flex;
-        justify-content: center;
-        margin-bottom: 20px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
     }
 
-    /* ── Key filter ── */
     .key-filter {
-        border: 1px solid var(--c-border);
-        border-radius: var(--radius-md);
-        padding: 0;
-        overflow: hidden;
+        width: 100%;
     }
 
     .key-filter summary {
         cursor: pointer;
         user-select: none;
-        padding: 10px 14px;
-        font-weight: 500;
-        list-style: none;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        background: var(--c-surface-alt);
+        color: var(--c-primary);
+    }
+
+    .key-filter summary:hover {
         color: var(--c-primary-dark);
-    }
-
-    .key-filter summary::-webkit-details-marker { display: none; }
-
-    .key-filter[open] summary {
-        border-bottom: 1px solid var(--c-border);
-    }
-
-    .badge {
-        background: var(--c-primary);
-        color: #fff;
-        font-size: 0.78em;
-        font-weight: 700;
-        padding: 2px 8px;
-        border-radius: 99px;
-        min-width: 2em;
-        text-align: center;
     }
 
     #active_keys {
         display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 4px 8px;
-        padding: 12px 14px;
+        grid-template-columns: repeat(auto-fill, minmax(9em, 1fr));
+        gap: 0 12px;
+        margin-top: 10px;
+        padding: 8px 12px;
+        background: var(--c-surface);
+        border: 1px solid var(--c-border);
+        border-radius: var(--radius-md);
     }
 
     .key-option {
         display: flex;
         align-items: center;
-        gap: 6px;
-        font-size: 0.95em;
+        gap: 8px;
+        padding: 5px 0;
         cursor: pointer;
-        padding: 4px 2px;
-        border-radius: var(--radius-sm);
-    }
-
-    .key-option:hover {
-        background: var(--c-primary-pale);
     }
 
     .key-option input[type="checkbox"] {
         accent-color: var(--c-primary);
         width: 16px;
         height: 16px;
+        margin: 0;
     }
 
-    /* ── Saved row ── */
-    .saved-row {
-        margin-top: 16px;
-        display: flex;
-        justify-content: center;
+    .more {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        border-top: 1px solid var(--c-border);
     }
 
-    /* ── Attribution ── */
+    .more li {
+        border-bottom: 1px solid var(--c-border);
+    }
+
+    .more a {
+        display: block;
+        padding: 12px 0;
+        text-decoration: none;
+    }
+
+    .more a::after {
+        content: " →";
+    }
+
+    .more a:hover {
+        text-decoration: underline;
+    }
+
     .attribution {
+        margin-top: auto;
+        padding: 16px 0 24px;
         font-size: 0.82em;
         color: var(--c-text-muted);
-        text-align: center;
-        max-width: 480px;
-        line-height: 1.6;
-        margin: 0;
     }
 </style>

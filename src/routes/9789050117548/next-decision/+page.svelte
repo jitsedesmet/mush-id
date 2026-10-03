@@ -39,37 +39,36 @@
 </script>
 
 
-<h2>Alternatieve paden</h2>
+<h2>Ander pad proberen</h2>
 
 <p class="intro">
-    Kies het punt waarvan je wenst verder te zoeken.
-    De vragen zijn gesorteerd op zekerheid — het meest onzekere antwoord staat bovenaan.
+    Kies een eerdere stap en volg daar de andere mogelijkheid.
+    De antwoorden waar je het minst zeker van was staan bovenaan.
 </p>
 
-<div class="question-list">
-        {#each questionsWithConfidence as question (question.question)}
-            <AlternativeItem
-                question={limitedQuestions.complete[question.question]}
-                vote={question.voting}
-                confidence={question.confidence}
-            />
-        {/each}
-    </div>
-
+<ol class="question-list">
+    {#each questionsWithConfidence as question (question.question)}
+        <AlternativeItem
+            question={limitedQuestions.complete[question.question]}
+            vote={question.voting}
+            confidence={question.confidence}
+        />
+    {/each}
+</ol>
 
 
 <style>
     .intro {
         color: var(--c-text-muted);
-        font-size: 0.95em;
         margin: 0 0 20px;
-        line-height: 1.6;
     }
 
     .question-list {
-        width: 100%;
+        list-style: none;
+        margin: 0 0 32px;
+        padding: 0;
         display: flex;
         flex-direction: column;
-        gap: 6px;
+        gap: 10px;
     }
 </style>

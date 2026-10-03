@@ -27,50 +27,39 @@
         display: inline-flex;
         justify-content: center;
         align-items: center;
-        font-weight: 600;
-        letter-spacing: 0.03em;
-        border: none;
+        padding: 10px 18px;
+        font-weight: 500;
+        line-height: 1.3;
+        text-align: center;
         text-decoration: none;
         cursor: pointer;
         border-radius: var(--radius-md);
-        transition: background 0.18s, box-shadow 0.18s, transform 0.12s, color 0.18s;
-        white-space: nowrap;
+        border: 1px solid transparent;
+        transition: background 0.12s, border-color 0.12s;
         -webkit-tap-highlight-color: transparent;
     }
 
-    .button:active {
-        transform: scale(0.97);
-    }
-
     .primary {
-        padding: 14px 32px;
         color: #fff;
         background: var(--c-primary);
-        box-shadow: var(--shadow-sm);
     }
 
     .primary:hover,
     .primary:focus-visible {
+        color: #fff;
         background: var(--c-primary-dark);
-        box-shadow: var(--shadow-md);
     }
 
     .secondary {
-        padding: 8px 20px;
-        color: var(--c-primary-dark);
+        color: var(--c-text);
         background: var(--c-surface);
-        border: 1.5px solid var(--c-border);
-        box-shadow: var(--shadow-sm);
+        border-color: var(--c-border);
     }
 
     .secondary:hover,
     .secondary:focus-visible {
-        background: var(--c-primary-pale);
+        color: var(--c-text);
         border-color: var(--c-primary-light);
-        box-shadow: var(--shadow-md);
-    }
-
-    .outlined {
-        /* already handled by .secondary; keep for legacy compatibility */
+        background: var(--c-primary-pale);
     }
 </style>

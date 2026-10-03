@@ -12,8 +12,8 @@
 <script lang="ts">
     import type { PageData } from './$types';
     import OneZoomPicture from "#lib/OneZoomPicture.svelte";
-    import InfoIcon from "#lib/heroicons/InfoIcon.svelte";
     import FancyButton from "#lib/FancyButton.svelte";
+    import {resolve} from "$app/paths";
 
     export let data: PageData;
 
@@ -27,127 +27,92 @@
     }));
 </script>
 
-<div class="page">
 <div class="content">
     {#if data.key && data.mushrooms}
-        <!-- ── Species list for a single sub-key ── -->
-        <a class="back-link" href="/9789050117548/soorten">← Alle deelsleutels</a>
+        <a class="back-link" href={resolve("/9789050117548/soorten")}>← Alle deelsleutels</a>
         <h2>{displayName}</h2>
         <p class="subtitle">
             {data.mushrooms.length} soort{data.mushrooms.length === 1 ? "" : "en"} in deze deelsleutel
         </p>
 
-        <div class="species-grid">
+        <ul class="species-list">
             {#each data.mushrooms as mushroom (mushroom.id)}
-            <div class="species-card">
+            <li class="species">
                 <div class="picture-wrapper">
-                    <OneZoomPicture {mushroom} creditsOverlay={true} />
+                    <OneZoomPicture {mushroom} />
                 </div>
                 <div class="species-info">
                     <a class="species-name"
                        href={`https://www.google.com/search?q=${encodeURIComponent(mushroom.id)}`}
-                       target="_blank" rel="noopener">
-                        {mushroom.id}
-                    </a>
+                       target="_blank" rel="noopener">{mushroom.id}</a>
                     <div class="species-links">
                         <a href={`https://www.google.com/search?tbm=isch&q=${encodeURIComponent(mushroom.id)}`}
-                           target="_blank" rel="noopener" class="species-link">
-                            <InfoIcon/>Google afbeeldingen
-                        </a>
-                        <a href={`https://en.wikipedia.org/w/index.php?search=${encodeURIComponent(mushroom.id)}&title=Special:Search`}
-                           target="_blank" rel="noopener" class="species-link">
-                            <InfoIcon/>Engelse Wikipedia
-                        </a>
+                           target="_blank" rel="noopener">Afbeeldingen</a>
                         <a href={`https://nl.wikipedia.org/w/index.php?search=${encodeURIComponent(mushroom.id)}&title=Special:Search`}
-                           target="_blank" rel="noopener" class="species-link">
-                            <InfoIcon/>Nederlandse Wikipedia
-                        </a>
+                           target="_blank" rel="noopener">Wikipedia NL</a>
+                        <a href={`https://en.wikipedia.org/w/index.php?search=${encodeURIComponent(mushroom.id)}&title=Special:Search`}
+                           target="_blank" rel="noopener">EN</a>
+                        {#if mushroom.waarnemingId}
+                        <a href={`https://waarnemingen.be/species/${mushroom.waarnemingId}/`}
+                           target="_blank" rel="noopener">Waarnemingen.be</a>
+                        {/if}
                         {#if mushroom.OToLId}
                         <a href={`https://tree.opentreeoflife.org/opentree/argus/ottol@${mushroom.OToLId}/`}
-                           target="_blank" rel="noopener" class="species-link">
-                            <InfoIcon/>Open Tree of Life
-                        </a>
+                           target="_blank" rel="noopener">Open Tree of Life</a>
                         <a href={`https://www.onezoom.org/life/@=${mushroom.OToLId}`}
-                           target="_blank" rel="noopener" class="species-link">
-                            <InfoIcon/>OneZoom
-                        </a>
+                           target="_blank" rel="noopener">OneZoom</a>
                         {/if}
                         {#if mushroom.lifeUrl}
                         <a href={`https://eol.org/pages/${mushroom.lifeUrl}`}
-                           target="_blank" rel="noopener" class="species-link">
-                            <InfoIcon/>Encyclopedia of Life
-                        </a>
-                        {/if}
-                        {#if mushroom.waarnemingId}
-                        <a href={`https://waarnemingen.be/species/${mushroom.waarnemingId}/`}
-                           target="_blank" rel="noopener" class="species-link">
-                            <InfoIcon/>Waarnemingen.be
-                        </a>
+                           target="_blank" rel="noopener">EoL</a>
                         {/if}
                     </div>
                 </div>
-            </div>
+            </li>
             {/each}
-        </div>
+        </ul>
     {:else}
-        <!-- ── Sub-key index ── -->
-        <h2>Paddenstoelen per deelsleutel</h2>
-        <p class="subtitle">Kies een deelsleutel om alle bijbehorende soorten te bekijken.</p>
+        <h2>Soorten per deelsleutel</h2>
+        <p class="subtitle">Kies een deelsleutel om alle soorten erin te zien.</p>
 
-        <div class="subkey-grid">
+        <ul class="subkey-list">
             {#each subKeyList as key (key.value)}
-            <a class="subkey-card" href={`/9789050117548/soorten?key=${key.value}`}>
-                <span class="subkey-name">{key.name}</span>
-                <span class="subkey-arrow">→</span>
-            </a>
+            <li>
+                <a href={`${resolve("/9789050117548/soorten")}?key=${key.value}`}>{key.name}</a>
+            </li>
             {/each}
-        </div>
+        </ul>
     {/if}
 </div>
 
-<div class="nav-bar">
-    <FancyButton color="secondary" href="/">Home</FancyButton>
-    {#if data.key}
-    <FancyButton color="primary" href={`/9789050117548?keys=${data.key}&state=${data.key}`}>
-        Sleutel starten
+{#if data.key}
+<div class="action-bar">
+    <FancyButton color="primary" href={`${resolve("/9789050117548")}?keys=${data.key}&state=${data.key}`}>
+        Deze deelsleutel doorlopen
     </FancyButton>
-    {/if}
 </div>
-</div>
+{/if}
 
 
 <style>
-    .page {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        justify-content: flex-start;
-        min-height: calc(100dvh - 20px);
-        width: 100%;
-    }
-
     .content {
-        flex: 1 1 0;
-        width: 100%;
+        padding-bottom: 24px;
     }
 
     h2 {
-        margin: 0 0 4px;
-        font-size: 1.5em;
+        margin-bottom: 4px;
     }
 
     .subtitle {
-        font-size: 0.9em;
         color: var(--c-text-muted);
         margin: 0 0 20px;
     }
 
     .back-link {
         display: inline-block;
-        font-size: 0.88em;
-        color: var(--c-primary);
+        font-size: 0.92em;
         text-decoration: none;
-        margin-bottom: 10px;
+        margin-bottom: 12px;
     }
 
     .back-link:hover {
@@ -155,68 +120,52 @@
     }
 
     /* ── Sub-key index ── */
-    .subkey-grid {
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-        width: 100%;
+    .subkey-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        columns: 2 12em;
+        column-gap: 32px;
     }
 
-    .subkey-card {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 14px 18px;
-        background: var(--c-surface);
-        border: 1px solid var(--c-border);
-        border-radius: var(--radius-lg);
-        box-shadow: var(--shadow-sm);
+    .subkey-list li {
+        break-inside: avoid;
+        border-bottom: 1px solid var(--c-border);
+    }
+
+    .subkey-list a {
+        display: block;
+        padding: 9px 0;
         text-decoration: none;
-        transition: background 0.15s, box-shadow 0.15s;
+        color: var(--c-text);
     }
 
-    .subkey-card:hover {
-        background: var(--c-primary-pale);
-        box-shadow: var(--shadow-md);
-    }
-
-    .subkey-name {
-        font-size: 1em;
-        font-weight: 600;
+    .subkey-list a:hover {
         color: var(--c-primary-dark);
+        text-decoration: underline;
     }
 
-    .subkey-arrow {
-        font-size: 1em;
-        color: var(--c-text-muted);
+    /* ── Species list ── */
+    .species-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        border-top: 1px solid var(--c-border);
     }
 
-    /* ── Species grid ── */
-    .species-grid {
+    .species {
         display: flex;
-        flex-direction: column;
-        gap: 12px;
-        width: 100%;
-    }
-
-    .species-card {
-        display: flex;
-        flex-direction: row;
         align-items: center;
         gap: 14px;
-        background: var(--c-surface);
-        border: 1px solid var(--c-border);
-        border-radius: var(--radius-lg);
-        box-shadow: var(--shadow-sm);
-        padding: 12px;
-        min-height: 80px;
+        padding: 12px 0;
+        border-bottom: 1px solid var(--c-border);
     }
 
     .picture-wrapper {
-        height: 72px;
-        width: 72px;
+        height: 64px;
+        width: 64px;
         flex-shrink: 0;
-        border-radius: var(--radius-md);
+        border-radius: var(--radius-sm);
         overflow: hidden;
         background: var(--c-surface-alt);
         display: flex;
@@ -224,23 +173,25 @@
         justify-content: center;
     }
 
+    .picture-wrapper :global(img) {
+        height: 64px;
+        object-fit: cover;
+    }
+
     .species-info {
         display: flex;
         flex-direction: column;
-        gap: 8px;
+        gap: 2px;
         min-width: 0;
         flex: 1;
     }
 
     .species-name {
-        font-size: 1em;
-        font-weight: 600;
+        font-family: var(--font-serif);
+        font-size: 1.1em;
         font-style: italic;
-        color: var(--c-primary-dark);
+        color: var(--c-text);
         text-decoration: none;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
     }
 
     .species-name:hover {
@@ -250,46 +201,15 @@
     .species-links {
         display: flex;
         flex-wrap: wrap;
-        gap: 6px;
+        gap: 0 12px;
+        font-size: 0.85em;
     }
 
-    .species-link {
-        display: inline-flex;
-        align-items: center;
-        gap: 4px;
-        font-size: 0.8em;
-        padding: 4px 8px;
-        border-radius: var(--radius-sm);
-        background: var(--c-surface-alt);
-        border: 1px solid var(--c-border);
-        text-decoration: none;
-        color: var(--c-text);
-        transition: background 0.15s;
-        white-space: nowrap;
+    .species-links a {
+        color: var(--c-text-muted);
     }
 
-    .species-link:hover {
-        background: var(--c-primary-pale);
-    }
-
-    /* ── Sticky nav bar ── */
-    .nav-bar {
-        position: -webkit-sticky;
-        position: sticky;
-        width: min(calc(1000px - 40px), calc(100svw - 24px));
-        height: min-content;
-        min-height: min-content;
-        background: var(--c-surface);
-        padding: 14px 16px 8px;
-        bottom: 0;
-        align-self: center;
-        z-index: 999;
-        border-top: 1px solid var(--c-border);
-        box-shadow: 0 -4px 16px rgba(0,0,0,.08);
-        border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-        display: flex;
-        gap: 12px;
-        justify-content: center;
+    .species-links a:hover {
+        color: var(--c-primary-dark);
     }
 </style>
-

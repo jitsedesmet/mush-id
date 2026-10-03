@@ -40,7 +40,7 @@
             {/if}
         </figure>
     {:catch}
-        <p>Er kan geen foto worden opgehaald</p>
+        <p class="no-photo">Geen foto</p>
     {/await}
 </div>
 {/if}
@@ -70,13 +70,19 @@
         right: 0;
         margin: 0;
         padding: 2px 4px;
-        background: rgba(0, 0, 0, 0.45);
+        background: rgba(0, 0, 0, 0.5);
         color: #fff;
         font-size: 0.65em;
         text-align: center;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
+    }
+    .no-photo {
+        margin: 0;
+        font-size: 0.75em;
+        color: var(--c-text-muted);
+        text-align: center;
     }
     img {
         width: 100%;

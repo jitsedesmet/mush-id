@@ -15,83 +15,45 @@
     const alternativeQuestion = $derived((vote > 0) ? question.second_option : question.first_option);
     const alternativeOption = $derived((vote > 0) ? question.second_link : question.first_link);
 
-    // Saturation: 18% (very uncertain) → 65% (very certain)
-    // Lightness:  75% (very uncertain) → 35% (very certain)
-    const borderColor = $derived(`hsl(142, ${Math.round(18 + confidence * 47)}%, ${Math.round(75 - confidence * 40)}%)`);
+    // Less certain answers get a stronger marker: they are the best places to branch off.
+    const borderColor = $derived(`color-mix(in srgb, var(--c-amber) ${Math.round((1 - confidence) * 100)}%, var(--c-border))`);
     const isLeastCertain = $derived(confidence === 0);
 </script>
 
 {#if !page.url.searchParams.has(alternativeOption)}
-    <div class="alt-item" style="border-left-color: {borderColor}">
-        {#if isLeastCertain}
-            <span class="uncertainty-badge">Meest onzeker</span>
-        {/if}
+    <li class="alt-item" style="border-left-color: {borderColor}">
         <div class="chosen">
-            <span class="chosen-label">Gekozen:</span>
+            <span class="label">Gekozen{#if isLeastCertain}&#32;<em>(minst zeker)</em>{/if}</span>
             <MarkdownQuestion markdownText={chosenQuestion} renderDetails={false}/>
         </div>
         <div class="alternative">
-            <span class="alt-label">Alternatief:</span>
+            <span class="label">Andere mogelijkheid</span>
             <MarkdownQuestion markdownText={alternativeQuestion} renderDetails={false}/>
-            <TryOtherButton alternative={alternativeOption}/>
         </div>
-    </div>
+        <TryOtherButton alternative={alternativeOption}/>
+    </li>
 {/if}
 
 <style>
     .alt-item {
         background: var(--c-surface);
         border: 1px solid var(--c-border);
-        border-left: 5px solid var(--c-primary-light); /* overridden by inline style */
+        border-left-width: 4px;
         border-radius: var(--radius-md);
         padding: 12px 14px;
         display: flex;
         flex-direction: column;
-        gap: 8px;
+        gap: 10px;
     }
 
-    .uncertainty-badge {
-        display: inline-block;
-        font-size: 0.72em;
-        font-weight: 700;
-        letter-spacing: 0.05em;
-        text-transform: uppercase;
-        background: var(--c-primary-pale);
-        color: var(--c-primary-dark);
-        border: 1px solid var(--c-primary-light);
-        border-radius: 99px;
-        padding: 2px 10px;
-        align-self: flex-start;
+    .label {
+        display: block;
+        font-size: 0.82em;
+        color: var(--c-text-muted);
+        margin-bottom: 2px;
     }
 
     .chosen {
-        font-size: 0.9em;
         color: var(--c-text-muted);
-        display: flex;
-        gap: 6px;
-        align-items: flex-start;
     }
-
-    .alternative {
-        padding: 8px 10px;
-        background: var(--c-surface-alt);
-        border: 1px solid var(--c-border);
-        border-radius: var(--radius-sm);
-        font-size: 0.9em;
-        display: flex;
-        flex-direction: column;
-        gap: 6px;
-    }
-
-    .chosen-label,
-    .alt-label {
-        font-weight: 700;
-        font-size: 0.8em;
-        text-transform: uppercase;
-        letter-spacing: 0.04em;
-        white-space: nowrap;
-        padding-top: 2px;
-    }
-
-    .alt-label { color: var(--c-primary-dark); }
 </style>

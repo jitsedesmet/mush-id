@@ -10,6 +10,7 @@
     import {computeTagListUnsafe} from "#lib/viewModel/paramHelper.js";
     import FancyButton from "#lib/FancyButton.svelte";
     import OneZoomPicture from "#lib/OneZoomPicture.svelte";
+    import {resolve} from "$app/paths";
     export let data: PageData;
 
     $: sortedSavedHistory = $savedHistory.links.toSorted((a, b) => b.creationDate.getTime() - a.creationDate.getTime());
@@ -18,28 +19,24 @@
         return num < 10 ? `0${num}` : num;
     }
     function formatDate(date: Date) {
-        return `${toTwoDigits(date.getHours())}:${toTwoDigits(date.getMinutes())}  ${toTwoDigits(date.getDate())}/${toTwoDigits(date.getMonth() + 1)}/${date.getFullYear()}`;
+        return `${toTwoDigits(date.getDate())}/${toTwoDigits(date.getMonth() + 1)}/${date.getFullYear()} om ${toTwoDigits(date.getHours())}:${toTwoDigits(date.getMinutes())}`;
     }
 </script>
-
-<div class="page">
-<div class="content">
 
 <h2>Opgeslagen zoekopdrachten</h2>
 
 {#if sortedSavedHistory.length === 0}
     <div class="empty-state">
-        <span class="empty-icon">🍄</span>
-        <p>Nog niets opgeslagen. Identificeer een paddenstoel en sla de resultaten op!</p>
-        <FancyButton color="primary" href="/">Beginnen</FancyButton>
+        <p>Je hebt nog niets opgeslagen. Kom je in de sleutel bij een soort uit die klopt, kies dan <em>Da is em! Opslaan</em>.</p>
+        <FancyButton color="primary" href={resolve("/")}>Naar de sleutel</FancyButton>
     </div>
 {:else}
-<div class="complete-saved">
+<ul class="complete-saved">
     {#each sortedSavedHistory as item (item.link)}
         {@const date = new Date(item.creationDate)}
         {@const state = computeTagListUnsafe(new URL(item.link).searchParams)}
         {@const currentMushroom = state.currentQuestion}
-        <div class="saved-item">
+        <li class="saved-item">
             <div class="picture-wrapper">
                 <OneZoomPicture mushroom={data.parsedMushrooms[currentMushroom]} />
             </div>
@@ -47,102 +44,74 @@
             <div class="item-text">
                 <a class="item-title"
                    href={`https://www.google.com/search?tbm=isch&q=${state.currentQuestion}`}
-                   target="_blank" rel="noopener">
-                    {state.currentQuestion}
-                </a>
-                <div class="item-time">{formatDate(date)}</div>
+                   target="_blank" rel="noopener">{state.currentQuestion}</a>
+                <span class="item-time">{formatDate(date)}</span>
                 <!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
-                <a class="item-continue" href={item.link}>
-                    Ga verder →
-                </a>
+                <a class="item-continue" href={item.link}>Verder zoeken vanaf hier →</a>
             </div>
-        </div>
+        </li>
     {/each}
-</div>
+</ul>
 {/if}
-</div>
-
-<div class="home-wrapper">
-    <FancyButton color="primary" href="/">
-        HOME
-    </FancyButton>
-</div>
-
-</div>
 
 <style>
-    .page {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        justify-content: flex-start;
-        min-height: calc(100dvh - 20px);
-        width: 100%;
-    }
-
-    .content {
-        flex: 1 1 0;
-        width: 100%;
-    }
-
-    /* ── Empty state ── */
     .empty-state {
         display: flex;
         flex-direction: column;
-        align-items: center;
-        gap: 14px;
-        padding: 40px 20px;
-        text-align: center;
+        align-items: flex-start;
+        gap: 16px;
+        max-width: 480px;
         color: var(--c-text-muted);
     }
 
-    .empty-icon {
-        font-size: 3em;
+    .empty-state p {
+        margin: 0;
     }
 
-    /* ── Saved list ── */
     .complete-saved {
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-        padding: 8px 0;
-        width: 100%;
+        list-style: none;
+        margin: 0 0 32px;
+        padding: 0;
+        border-top: 1px solid var(--c-border);
     }
 
     .saved-item {
         display: flex;
-        flex-direction: row;
         align-items: center;
         gap: 14px;
-        background: var(--c-surface);
-        border: 1px solid var(--c-border);
-        border-radius: var(--radius-lg);
-        box-shadow: var(--shadow-sm);
-        padding: 12px;
-        height: 100px;
+        padding: 12px 0;
+        border-bottom: 1px solid var(--c-border);
     }
 
     .picture-wrapper {
-        height: 76px;
-        width: 76px;
+        height: 72px;
+        width: 72px;
         flex-shrink: 0;
-        border-radius: var(--radius-md);
+        border-radius: var(--radius-sm);
         overflow: hidden;
         background: var(--c-surface-alt);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .picture-wrapper :global(img) {
+        height: 72px;
+        object-fit: cover;
     }
 
     .item-text {
         display: flex;
         flex-direction: column;
-        gap: 6px;
+        gap: 2px;
         min-width: 0;
     }
 
     .item-title {
-        font-size: 1.05em;
-        font-weight: 600;
+        font-family: var(--font-serif);
+        font-size: 1.1em;
         font-style: italic;
-        color: var(--c-primary-dark);
+        color: var(--c-text);
         text-decoration: none;
         white-space: nowrap;
         overflow: hidden;
@@ -152,40 +121,16 @@
     .item-title:hover { text-decoration: underline; }
 
     .item-time {
-        font-size: 0.8em;
+        font-size: 0.85em;
         color: var(--c-text-muted);
     }
 
     .item-continue {
-        font-size: 0.88em;
-        font-weight: 600;
-        color: var(--c-primary);
+        font-size: 0.92em;
         text-decoration: none;
     }
 
     .item-continue:hover {
-        color: var(--c-primary-dark);
         text-decoration: underline;
-    }
-
-    /* ── Sticky home button ── */
-    .home-wrapper {
-        position: -webkit-sticky;
-        position: sticky;
-        width: min(calc(1000px - 40px), calc(100svw - 24px));
-        height: min-content;
-        min-height: min-content;
-        background: var(--c-surface);
-        padding: 14px 16px 8px;
-        bottom: 0;
-        align-content: center;
-        align-self: flex-end;
-        margin: auto;
-        z-index: 999;
-        border-top: 1px solid var(--c-border);
-        box-shadow: 0 -4px 16px rgba(0,0,0,.08);
-        border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-        display: flex;
-        justify-content: center;
     }
 </style>
