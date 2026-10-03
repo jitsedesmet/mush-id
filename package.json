@@ -23,7 +23,6 @@
 		"@types/papaparse": "^5.5.2",
 		"@typescript-eslint/eslint-plugin": "^8.57.0",
 		"@typescript-eslint/parser": "^8.57.0",
-		"@vite-pwa/sveltekit": "^1.1.0",
 		"eslint": "^10.12.0",
 		"eslint-plugin-svelte": "^3.23.0",
 		"globals": "^17.13.0",
@@ -39,10 +38,5 @@
 	"dependencies": {
 		"dompurify": "^3.4.16",
 		"marked": "^18.0.14"
-	},
-	"overrides": {
-		"@vite-pwa/sveltekit": {
-			"@sveltejs/kit": "$@sveltejs/kit"
-		}
 	}
 }
