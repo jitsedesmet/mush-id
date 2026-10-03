@@ -6,34 +6,36 @@
 
 <script lang="ts">
     import type { PageData } from './$types';
-    import {page} from "$app/stores";
+    import {page} from "$app/state";
     import {goto} from "$app/navigation";
-    import {computeCombinedScore} from "$lib/viewModel/viewModel.js";
-    import {computeLimitedQuestions, computeTagList} from "$lib/viewModel/paramHelper";
-    import AlternativeItem from "$lib/history/AlternativeItem.svelte";
+    import {computeCombinedScore} from "#lib/viewModel/viewModel.js";
+    import {computeLimitedQuestions, computeTagList} from "#lib/viewModel/paramHelper.js";
+    import AlternativeItem from "#lib/history/AlternativeItem.svelte";
     import {resolve} from "$app/paths";
 
-    export let data: PageData;
+    let { data }: { data: PageData } = $props();
 
-    $: stateTagList = computeTagList($page.url.searchParams);
-    $: limitedQuestions = computeLimitedQuestions($page.url.searchParams, data.parsedQuestions);
+    const stateTagList = $derived(computeTagList(page.url.searchParams));
+    const limitedQuestions = $derived(computeLimitedQuestions(page.url.searchParams, data.parsedQuestions));
 
-    $: if (!stateTagList) {
-        goto(resolve(`/9789050117548?state=${limitedQuestions.start}`), {
-            replaceState: true,
-        })
-    }
+    $effect(() => {
+        if (!stateTagList) {
+            goto(resolve(`/9789050117548?state=${limitedQuestions.start}`), {
+                replaceState: true,
+            })
+        }
+    });
 
-    $: questionsByConfidence = stateTagList?.questionHistory
+    const questionsByConfidence = $derived(stateTagList?.questionHistory
         .filter(x => limitedQuestions.complete[x.question] !== undefined)
         .map(x => ({ voting: computeCombinedScore(x.question, x.voting, limitedQuestions.complete), question: x.question }))
-        .toSorted((a, b) => Math.abs(a.voting) - Math.abs(b.voting)) ?? [];
+        .toSorted((a, b) => Math.abs(a.voting) - Math.abs(b.voting)) ?? []);
 
     // normalised: 0 = most uncertain (top), 1 = most certain (bottom)
-    $: questionsWithConfidence = questionsByConfidence.map((q, i) => ({
+    const questionsWithConfidence = $derived(questionsByConfidence.map((q, i) => ({
         ...q,
         confidence: questionsByConfidence.length > 1 ? i / (questionsByConfidence.length - 1) : 0,
-    }));
+    })));
 </script>
 
 

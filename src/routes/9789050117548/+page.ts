@@ -1,4 +1,4 @@
-import {parseMushroomCSV, parseQuestionsCSV} from "$lib/viewModel/parser";
+import {parseMushroomCSV, parseQuestionsCSV} from "#lib/viewModel/parser.js";
 
 export const ssr = false;
 

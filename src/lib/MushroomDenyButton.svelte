@@ -1,11 +1,11 @@
 <script lang="ts">
-    import {page} from "$app/stores";
-    import FancyButton from "$lib/FancyButton.svelte";
-    import {savedHistory} from "$lib/viewModel/viewModel";
+    import {page} from "$app/state";
+    import FancyButton from "#lib/FancyButton.svelte";
+    import {savedHistory} from "#lib/viewModel/viewModel.js";
     import {goto} from "$app/navigation";
     import {resolve} from "$app/paths";
 
-    $: nextOptionUrl = `${$page.route.id!}/next-decision${$page.url.search}`;
+    const nextOptionUrl = $derived(`${page.route.id!}/next-decision${page.url.search}`);
 </script>
 
 <div class="deny-container">
@@ -13,10 +13,11 @@
                  href={nextOptionUrl}>Niet deze
     </FancyButton>
 
-    <form method="POST" on:submit|preventDefault={() => {
+    <form method="POST" onsubmit={(event) => {
+        event.preventDefault();
         savedHistory.set({
             ...$savedHistory,
-            links: $savedHistory.links.concat([{ creationDate: new Date(Date.now()), link: $page.url.href }])
+            links: $savedHistory.links.concat([{ creationDate: new Date(Date.now()), link: page.url.href }])
         });
         goto(resolve(`/saved`))
     }}>

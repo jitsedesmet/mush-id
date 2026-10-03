@@ -1,14 +1,14 @@
 <script lang="ts">
-    import FancyButton from "$lib/FancyButton.svelte";
-    import {page} from "$app/stores";
+    import FancyButton from "#lib/FancyButton.svelte";
+    import {page} from "$app/state";
 
-    export let alternative: string;
+    let { alternative }: { alternative: string } = $props();
 
-    $: otherOptions = [...$page.url.searchParams.entries()]
+    const otherOptions = $derived([...page.url.searchParams.entries()]
         .filter(([key]) => key !== "state")
-        .map(([key, value]) => `${key}=${value}`).join("&");
-    $: fillIn = otherOptions.length > 0 ? "&" : "";
-    $: nextOptionUrl = `${$page.route.id!.replace("/next-decision", "")}?${otherOptions}${fillIn}state=${$page.url.searchParams.get("state") || ""};${alternative}`;
+        .map(([key, value]) => `${key}=${value}`).join("&"));
+    const fillIn = $derived(otherOptions.length > 0 ? "&" : "");
+    const nextOptionUrl = $derived(`${page.route.id!.replace("/next-decision", "")}?${otherOptions}${fillIn}state=${page.url.searchParams.get("state") || ""};${alternative}`);
 </script>
 
 <div class="button-wrapper">

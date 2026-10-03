@@ -6,10 +6,10 @@
 
 <script lang="ts">
     import type { PageData } from './$types';
-    import {savedHistory} from "$lib/viewModel/viewModel.js";
-    import {computeTagListUnsafe} from "$lib/viewModel/paramHelper";
-    import FancyButton from "$lib/FancyButton.svelte";
-    import OneZoomPicture from "$lib/OneZoomPicture.svelte";
+    import {savedHistory} from "#lib/viewModel/viewModel.js";
+    import {computeTagListUnsafe} from "#lib/viewModel/paramHelper.js";
+    import FancyButton from "#lib/FancyButton.svelte";
+    import OneZoomPicture from "#lib/OneZoomPicture.svelte";
     export let data: PageData;
 
     $: sortedSavedHistory = $savedHistory.links.toSorted((a, b) => b.creationDate.getTime() - a.creationDate.getTime());

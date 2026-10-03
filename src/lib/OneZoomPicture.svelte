@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type {Mushroom} from "$lib/viewModel/parser";
+    import type {Mushroom} from "#lib/viewModel/parser.js";
     /** When true, renders the photographer credit as a translucent overlay
      *  pinned to the bottom of the image. */
     export let creditsOverlay: boolean = false;
