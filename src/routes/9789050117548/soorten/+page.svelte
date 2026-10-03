@@ -11,9 +11,9 @@
 
 <script lang="ts">
     import type { PageData } from './$types';
-    import OneZoomPicture from "$lib/OneZoomPicture.svelte";
-    import InfoIcon from "$lib/heroicons/InfoIcon.svelte";
-    import FancyButton from "$lib/FancyButton.svelte";
+    import OneZoomPicture from "#lib/OneZoomPicture.svelte";
+    import InfoIcon from "#lib/heroicons/InfoIcon.svelte";
+    import FancyButton from "#lib/FancyButton.svelte";
 
     export let data: PageData;
 

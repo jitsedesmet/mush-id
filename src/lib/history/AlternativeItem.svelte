@@ -1,25 +1,27 @@
 <script lang="ts">
-    import MarkdownQuestion from "$lib/MarkdownQuestion.svelte";
-    import TryOtherButton from "$lib/history/TryOtherButton.svelte";
-    import {page} from "$app/stores";
-    import type {ParsedQuestion} from "$lib/viewModel/parser";
+    import MarkdownQuestion from "#lib/MarkdownQuestion.svelte";
+    import TryOtherButton from "#lib/history/TryOtherButton.svelte";
+    import {page} from "$app/state";
+    import type {ParsedQuestion} from "#lib/viewModel/parser.js";
 
-    export let question: ParsedQuestion;
-    export let vote: number;
-    /** 0 = most uncertain (top of list), 1 = most certain (bottom of list) */
-    export let confidence: number = 0;
+    let { question, vote, confidence = 0 }: {
+        question: ParsedQuestion;
+        vote: number;
+        /** 0 = most uncertain (top of list), 1 = most certain (bottom of list) */
+        confidence?: number;
+    } = $props();
 
-    $: chosenQuestion = (vote > 0) ? question.first_option : question.second_option;
-    $: alternativeQuestion = (vote > 0) ? question.second_option : question.first_option;
-    $: alternativeOption = (vote > 0) ? question.second_link : question.first_link;
+    const chosenQuestion = $derived((vote > 0) ? question.first_option : question.second_option);
+    const alternativeQuestion = $derived((vote > 0) ? question.second_option : question.first_option);
+    const alternativeOption = $derived((vote > 0) ? question.second_link : question.first_link);
 
     // Saturation: 18% (very uncertain) → 65% (very certain)
     // Lightness:  75% (very uncertain) → 35% (very certain)
-    $: borderColor = `hsl(142, ${Math.round(18 + confidence * 47)}%, ${Math.round(75 - confidence * 40)}%)`;
-    $: isLeastCertain = confidence === 0;
+    const borderColor = $derived(`hsl(142, ${Math.round(18 + confidence * 47)}%, ${Math.round(75 - confidence * 40)}%)`);
+    const isLeastCertain = $derived(confidence === 0);
 </script>
 
-{#if !$page.url.searchParams.has(alternativeOption)}
+{#if !page.url.searchParams.has(alternativeOption)}
     <div class="alt-item" style="border-left-color: {borderColor}">
         {#if isLeastCertain}
             <span class="uncertainty-badge">Meest onzeker</span>

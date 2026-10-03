@@ -6,33 +6,34 @@
 
 <script lang="ts">
     import type { PageData } from './$types';
-    import Rater from "$lib/Rater.svelte";
-    import {page} from "$app/stores";
+    import Rater from "#lib/Rater.svelte";
+    import {page} from "$app/state";
     import {goto} from "$app/navigation";
-    import MushroomDenyButton from "$lib/MushroomDenyButton.svelte";
-    import {computeLimitedQuestions, computeTagList} from "$lib/viewModel/paramHelper";
-    import OneZoomPicture from "$lib/OneZoomPicture.svelte";
-    import QuestionHistory from "$lib/history/QuestionHistory.svelte";
-    import MarkdownQuestion from "$lib/MarkdownQuestion.svelte";
-    import InfoIcon from "$lib/heroicons/InfoIcon.svelte";
+    import MushroomDenyButton from "#lib/MushroomDenyButton.svelte";
+    import {computeLimitedQuestions, computeTagList} from "#lib/viewModel/paramHelper.js";
+    import OneZoomPicture from "#lib/OneZoomPicture.svelte";
+    import QuestionHistory from "#lib/history/QuestionHistory.svelte";
+    import MarkdownQuestion from "#lib/MarkdownQuestion.svelte";
+    import InfoIcon from "#lib/heroicons/InfoIcon.svelte";
 
-    export let data: PageData;
+    let { data }: { data: PageData } = $props();
 
-    $: stateTagList = computeTagList($page.url.searchParams);
-    $: limitedQuestions = computeLimitedQuestions($page.url.searchParams, data.parsedQuestions);
+    const stateTagList = $derived(computeTagList(page.url.searchParams));
+    const limitedQuestions = $derived(computeLimitedQuestions(page.url.searchParams, data.parsedQuestions));
 
-    $: if (!stateTagList) {
-        // eslint-disable-next-line svelte/no-navigation-without-resolve
-        goto(`?state=${limitedQuestions.start}`, {
-            replaceState: true,
-        })
-    }
+    $effect(() => {
+        if (!stateTagList) {
+            goto(`?state=${limitedQuestions.start}`, {
+                replaceState: true,
+            })
+        }
+    });
 
-    $: scopedSubKeys = $page.url.searchParams.get("keys")?.split(";") || [];
+    const scopedSubKeys = $derived(page.url.searchParams.get("keys")?.split(";") || []);
 
-    $: currentItem = stateTagList?.currentQuestion
-    $: currentQuestion = limitedQuestions.complete[currentItem!]
-    $: currentMushroom = data.parsedMushrooms[currentItem!]
+    const currentItem = $derived(stateTagList?.currentQuestion)
+    const currentQuestion = $derived(limitedQuestions.complete[currentItem!])
+    const currentMushroom = $derived(data.parsedMushrooms[currentItem!])
 </script>
 
 <div class="page">

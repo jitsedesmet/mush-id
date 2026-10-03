@@ -1,15 +1,18 @@
 <script lang="ts">
-    import { page } from "$app/stores";
-    import { resolve } from "$app/paths";
+    import type { Snippet } from "svelte";
+    import { page } from "$app/state";
+    import { asset, resolve } from "$app/paths";
 
-    $: isHome = $page.url.pathname === "/";
+    let { children }: { children: Snippet } = $props();
+
+    const isHome = $derived(page.url.pathname === "/");
     const homeUrl = resolve("/");
 </script>
 
 <header class="site-header">
     <div class="header-inner">
         <a href={homeUrl} class="brand" aria-label="Mush ID home">
-            <img src={resolve('/cropped_orig.png')} class="brand-logo" alt="" />
+            <img src={asset('cropped_orig.png')} class="brand-logo" alt="" />
             <span class="brand-name">Mush ID</span>
         </a>
         {#if !isHome}
@@ -18,7 +21,7 @@
     </div>
 </header>
 
-<slot />
+{@render children()}
 
 <style>
     .site-header {
