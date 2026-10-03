@@ -10,11 +10,11 @@ export interface pageRatingOptions {
     questionHistory: QuestionHistoryItem[]
 }
 
-export function computeTagListUnsafe(params: URLSearchParams): pageRatingOptions {
+export function computeTagListUnsafe(params: Pick<URLSearchParams, "get">): pageRatingOptions {
     return computeTagList(params)!;
 }
 
-export function computeTagList(params: URLSearchParams): pageRatingOptions | undefined {
+export function computeTagList(params: Pick<URLSearchParams, "get">): pageRatingOptions | undefined {
     const states = params.get("state")?.split(";");
     if (! states) {
         return undefined;
@@ -63,7 +63,7 @@ export function computeNextItem(history: QuestionHistoryItem[], parsedQuestions:
     throw new Error("Damn son, you went through the whole key?")
 }
 
-export function computeLimitedQuestions(params: URLSearchParams, parsedQuestions: ParsedQuestions): { complete: ParsedQuestions; start: string } {
+export function computeLimitedQuestions(params: Pick<URLSearchParams, "get">, parsedQuestions: ParsedQuestions): { complete: ParsedQuestions; start: string } {
     const states = params.get("keys")?.split(";") || [];
     return questionLimiter(parsedQuestions, states);
 }

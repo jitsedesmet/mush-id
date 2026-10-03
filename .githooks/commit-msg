@@ -1,0 +1,9 @@
+#!/bin/sh
+# Setting core.hooksPath for this repo overrides any global hooksPath, so
+# hand off to the global commit-msg hook (if one is configured) to keep it running.
+
+global_dir=$(git config --global core.hooksPath)
+case "$global_dir" in "~/"*) global_dir="$HOME/${global_dir#\~/}" ;; esac
+if [ -n "$global_dir" ] && [ -x "$global_dir/commit-msg" ]; then
+    exec "$global_dir/commit-msg" "$@"
+fi

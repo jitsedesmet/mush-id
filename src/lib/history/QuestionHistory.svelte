@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type {pageRatingOptions} from "$lib/viewModel/paramHelper";
+    import type {pageRatingOptions} from "#lib/viewModel/paramHelper.js";
 
     export let stateTagList: pageRatingOptions | undefined;
     export let currentItem: string | undefined;

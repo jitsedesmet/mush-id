@@ -1,4 +1,4 @@
-import {extractSubKeys, parseMushroomCSV, parseQuestionsCSV} from "$lib/viewModel/parser";
+import {extractSubKeys, parseMushroomCSV, parseQuestionsCSV} from "#lib/viewModel/parser.js";
 
 export const prerender = true;
 

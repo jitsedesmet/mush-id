@@ -1,18 +1,18 @@
 <script lang="ts">
-    import {page} from "$app/stores";
+    import {page} from "$app/state";
     import {resolve} from "$app/paths";
-    import type {ParsedQuestion} from "$lib/viewModel/parser";
+    import type {ParsedQuestion} from "#lib/viewModel/parser.js";
 
-    export let currentQuestion: ParsedQuestion;
+    let { currentQuestion }: { currentQuestion: ParsedQuestion } = $props();
 
-    $: otherOptions = [...$page.url.searchParams.entries()]
+    const otherOptions = $derived([...page.url.searchParams.entries()]
         .filter(([key]) => key !== "state")
-        .map(([key, value]) => `${key}=${value}`).join("&");
-    $: fillIn = otherOptions.length > 0 ? "&" : "";
-    $: baseRoute = resolve($page.route.id!);
-    $: firstUrl = `${baseRoute}?${otherOptions}${fillIn}state=${$page.url.searchParams.get("state") || ""};${currentQuestion.first_link}`;
-    $: secondUrl = `${baseRoute}?${otherOptions}${fillIn}state=${$page.url.searchParams.get("state") || ""};${currentQuestion.second_link}`;
-    $: qId = currentQuestion.id;
+        .map(([key, value]) => `${key}=${value}`).join("&"));
+    const fillIn = $derived(otherOptions.length > 0 ? "&" : "");
+    const baseRoute = $derived(resolve(page.route.id!));
+    const firstUrl = $derived(`${baseRoute}?${otherOptions}${fillIn}state=${page.url.searchParams.get("state") || ""};${currentQuestion.first_link}`);
+    const secondUrl = $derived(`${baseRoute}?${otherOptions}${fillIn}state=${page.url.searchParams.get("state") || ""};${currentQuestion.second_link}`);
+    const qId = $derived(currentQuestion.id);
 </script>
 
 <div class="rater">

@@ -1,4 +1,4 @@
-import {extractSubKeys, getMushroomsForSubKey, parseMushroomCSV, parseQuestionsCSV} from "$lib/viewModel/parser";
+import {extractSubKeys, getMushroomsForSubKey, parseMushroomCSV, parseQuestionsCSV} from "#lib/viewModel/parser.js";
 import {error} from "@sveltejs/kit";
 
 export const ssr = false;

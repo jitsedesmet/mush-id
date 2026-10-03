@@ -22,11 +22,11 @@
 
 <script lang="ts">
     import type { PageData } from './$types';
-    import { preferredSubKeys } from "$lib/viewModel/viewModel";
+    import { preferredSubKeys } from "#lib/viewModel/viewModel.js";
     import {goto} from "$app/navigation";
     import {resolve} from "$app/paths";
-    import {questionLimiter} from "$lib/viewModel/paramHelper";
-    import FancyButton from "$lib/FancyButton.svelte";
+    import {questionLimiter} from "#lib/viewModel/paramHelper.js";
+    import FancyButton from "#lib/FancyButton.svelte";
     export let data: PageData;
 
     $: keys = data.subKeys.map(val => ({
