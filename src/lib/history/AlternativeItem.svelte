@@ -23,7 +23,7 @@
 {#if !page.url.searchParams.has(alternativeOption)}
     <li class="alt-item" style="border-left-color: {borderColor}">
         <div class="chosen">
-            <span class="label">Gekozen{#if isLeastCertain}&#32;<em>(minst zeker)</em>{/if}</span>
+            <span class="label">Gekozen{#if isLeastCertain}<em class="least">(minst zeker)</em>{/if}</span>
             <MarkdownQuestion markdownText={chosenQuestion} renderDetails={false}/>
         </div>
         <div class="alternative">
@@ -51,6 +51,10 @@
         font-size: 0.82em;
         color: var(--c-text-muted);
         margin-bottom: 2px;
+    }
+
+    .least {
+        margin-left: 0.3em;
     }
 
     .chosen {

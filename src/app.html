@@ -120,6 +120,13 @@
 		border-top: 1px solid var(--c-border);
 	}
 
+	/* Landscape phones: a pinned bar would cover most of the screen. */
+	@media (orientation: landscape) and (max-height: 500px) {
+		.action-bar {
+			position: static;
+		}
+	}
+
 	.muted {
 		color: var(--c-text-muted);
 	}

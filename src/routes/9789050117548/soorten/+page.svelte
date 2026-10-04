@@ -206,6 +206,7 @@
     }
 
     .species-links a {
+        padding: 4px 0;
         color: var(--c-text-muted);
     }
 

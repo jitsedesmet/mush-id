@@ -52,6 +52,7 @@
         display: flex;
         align-items: center;
         gap: 8px;
+        min-height: 44px;
         text-decoration: none;
         color: var(--c-primary-dark);
     }
@@ -70,10 +71,14 @@
 
     nav {
         display: flex;
-        gap: 18px;
+        gap: 10px;
     }
 
     nav a {
+        display: inline-flex;
+        align-items: center;
+        min-height: 44px;
+        padding: 0 4px;
         font-size: 0.92em;
         color: var(--c-text-muted);
         text-decoration: none;
