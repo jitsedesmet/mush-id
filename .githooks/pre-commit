@@ -10,6 +10,11 @@ if [ ! -d node_modules ]; then
     npm ci || exit 1
 fi
 
+if ! npm run --silent validate:key; then
+    echo "pre-commit: commit aborted. Fix the key data or use --no-verify." >&2
+    exit 1
+fi
+
 if ! npm run --silent build >/dev/null 2>&1; then
     echo "pre-commit: build failed, re-running to show output:" >&2
     npm run build >&2
