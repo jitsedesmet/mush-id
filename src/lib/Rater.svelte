@@ -15,26 +15,26 @@
     const qId = $derived(currentQuestion.id);
 </script>
 
-<div class="rater">
-    <!-- Column headers -->
-    <div class="col-header col-a"><span class="mark">a</span></div>
-    <div class="col-header col-b"><span class="mark">b</span></div>
+<div class="rater" role="group" aria-label="Kies a of b en hoe zeker je bent">
+    <!-- Column headers; screen readers get the lead in each button's label instead -->
+    <div class="col-header col-a" aria-hidden="true"><span class="mark">a</span></div>
+    <div class="col-header col-b" aria-hidden="true"><span class="mark">b</span></div>
 
     <!-- Confidence rows -->
     <!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
-    <a class="answer-btn a-low"  href={`${firstUrl}&${qId}=1`}>Mogelijks</a>
+    <a class="answer-btn a-low"  href={`${firstUrl}&${qId}=1`} aria-label="a, mogelijks">Mogelijks</a>
     <!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
-    <a class="answer-btn b-low"  href={`${secondUrl}&${qId}=-1`}>Mogelijks</a>
+    <a class="answer-btn b-low"  href={`${secondUrl}&${qId}=-1`} aria-label="b, mogelijks">Mogelijks</a>
 
     <!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
-    <a class="answer-btn a-mid"  href={`${firstUrl}&${qId}=2`}>Waarschijnlijk</a>
+    <a class="answer-btn a-mid"  href={`${firstUrl}&${qId}=2`} aria-label="a, waarschijnlijk">Waarschijnlijk</a>
     <!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
-    <a class="answer-btn b-mid"  href={`${secondUrl}&${qId}=-2`}>Waarschijnlijk</a>
+    <a class="answer-btn b-mid"  href={`${secondUrl}&${qId}=-2`} aria-label="b, waarschijnlijk">Waarschijnlijk</a>
 
     <!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
-    <a class="answer-btn a-high" href={`${firstUrl}&${qId}=3`}>Zeker</a>
+    <a class="answer-btn a-high" href={`${firstUrl}&${qId}=3`} aria-label="a, zeker">Zeker</a>
     <!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
-    <a class="answer-btn b-high" href={`${secondUrl}&${qId}=-3`}>Zeker</a>
+    <a class="answer-btn b-high" href={`${secondUrl}&${qId}=-3`} aria-label="b, zeker">Zeker</a>
 </div>
 
 
@@ -77,12 +77,12 @@
     }
 
     /* Confidence increases top to bottom: outline → tint → solid. */
-    .a-low  { border-color: var(--c-primary-light); background: var(--c-surface);      color: var(--c-primary-dark); }
-    .a-mid  { border-color: var(--c-primary-light); background: var(--c-primary-pale); color: var(--c-primary-dark); }
-    .a-high { border-color: var(--c-primary);       background: var(--c-primary);      color: #fff; }
+    .a-low  { border-color: var(--c-primary-border); background: var(--c-surface);      color: var(--c-primary-dark); }
+    .a-mid  { border-color: var(--c-primary-border); background: var(--c-primary-pale); color: var(--c-primary-dark); }
+    .a-high { border-color: var(--c-primary);        background: var(--c-primary);      color: #fff; }
 
-    .b-low  { border-color: var(--c-amber-light);   background: var(--c-surface);      color: #5E3D1D; }
-    .b-mid  { border-color: var(--c-amber-light);   background: var(--c-amber-pale);   color: #5E3D1D; }
+    .b-low  { border-color: var(--c-amber-border);  background: var(--c-surface);      color: #5E3D1D; }
+    .b-mid  { border-color: var(--c-amber-border);  background: var(--c-amber-pale);   color: #5E3D1D; }
     .b-high { border-color: var(--c-amber);         background: var(--c-amber);        color: #fff; }
 
     .a-low:hover, .a-mid:hover { background: #D5E3D9; color: var(--c-primary-dark); }

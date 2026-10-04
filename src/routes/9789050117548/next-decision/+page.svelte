@@ -46,7 +46,7 @@
 </script>
 
 
-<h2>Ander pad proberen</h2>
+<h1>Ander pad proberen</h1>
 
 <p class="intro">
     Kies een eerdere stap en volg daar de andere mogelijkheid.
@@ -76,6 +76,10 @@
 
 
 <style>
+    h1 {
+        font-size: 1.6em;
+    }
+
     .intro {
         color: var(--c-text-muted);
         margin: 0 0 20px;

@@ -30,7 +30,7 @@
 <div class="content">
     {#if data.key && data.mushrooms}
         <a class="back-link" href={resolve("/9789050117548/soorten")}>← Alle deelsleutels</a>
-        <h2>{displayName}</h2>
+        <h1>{displayName}</h1>
         <p class="subtitle">
             {data.mushrooms.length} soort{data.mushrooms.length === 1 ? "" : "en"} in deze deelsleutel
         </p>
@@ -78,7 +78,7 @@
             </p>
         {/if}
     {:else}
-        <h2>Soorten per deelsleutel</h2>
+        <h1>Soorten per deelsleutel</h1>
         <p class="subtitle">Kies een deelsleutel om alle soorten erin te zien.</p>
 
         <ul class="subkey-list">
@@ -105,7 +105,8 @@
         padding-bottom: 24px;
     }
 
-    h2 {
+    h1 {
+        font-size: 1.6em;
         margin-bottom: 4px;
     }
 
