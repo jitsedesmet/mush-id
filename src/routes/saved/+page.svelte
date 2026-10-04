@@ -23,7 +23,7 @@
     }
 </script>
 
-<h2>Opgeslagen zoekopdrachten</h2>
+<h1>Opgeslagen zoekopdrachten</h1>
 
 {#if sortedSavedHistory.length === 0}
     <div class="empty-state">
@@ -58,6 +58,10 @@
 {/if}
 
 <style>
+    h1 {
+        font-size: 1.6em;
+    }
+
     .empty-state {
         display: flex;
         flex-direction: column;

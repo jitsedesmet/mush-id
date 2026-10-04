@@ -54,13 +54,15 @@
 </script>
 
 <div class="content">
-    <p class="context muted">
-        Veldgids Paddenstoelen I
-        {#if currentItem}· <span class="code">{currentItem}</span>{/if}
+    <div class="context muted">
+        <h1>
+            Veldgids Paddenstoelen I
+            {#if currentItem}· <span class="code">{currentItem}</span>{/if}
+        </h1>
         {#if scopedSubKeys.length > 0}
-            <br>Beperkt tot: {scopedSubKeys.map(x => x.substring(0, x.length - 1)).join(", ")}
+            <p>Beperkt tot: {scopedSubKeys.map(x => x.substring(0, x.length - 1)).join(", ")}</p>
         {/if}
-    </p>
+    </div>
 
     <div id="focus-point">
         {#if currentQuestion}
@@ -109,7 +111,7 @@
             <div class="image-wrapper">
                 <OneZoomPicture mushroom={currentMushroom} creditsOverlay={true} />
             </div>
-            <h4>Meer over deze soort</h4>
+            <h3 class="sources-title">Meer over deze soort</h3>
             <ul class="sources">
                 <li><a href={`https://www.google.com/search?tbm=isch&q=${currentMushroom.id}`}>Google afbeeldingen</a></li>
                 <li><a href={`https://nl.wikipedia.org/w/index.php?search=${currentMushroom.id}&title=Special:Search`}>Wikipedia (NL)</a></li>
@@ -152,6 +154,14 @@
     .context {
         font-size: 0.88em;
         margin: 0 0 12px;
+    }
+
+    /* The page heading is the step you are on; it stays as quiet as the line it replaced. */
+    .context h1,
+    .context p {
+        font: inherit;
+        color: inherit;
+        margin: 0;
     }
 
     .code {
@@ -230,6 +240,12 @@
 
     .image-wrapper:empty {
         display: none;
+    }
+
+    .sources-title {
+        font-family: var(--font-sans);
+        font-size: 1em;
+        color: var(--c-text);
     }
 
     .sources {
