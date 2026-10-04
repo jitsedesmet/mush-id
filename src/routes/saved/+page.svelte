@@ -11,9 +11,9 @@
     import FancyButton from "#lib/FancyButton.svelte";
     import OneZoomPicture from "#lib/OneZoomPicture.svelte";
     import {resolve} from "$app/paths";
-    export let data: PageData;
+    let { data }: { data: PageData } = $props();
 
-    $: sortedSavedHistory = $savedHistory.links.toSorted((a, b) => b.creationDate.getTime() - a.creationDate.getTime());
+    const sortedSavedHistory = $derived($savedHistory.links.toSorted((a, b) => b.creationDate.getTime() - a.creationDate.getTime()));
 
     function toTwoDigits(num: number) {
         return num < 10 ? `0${num}` : num;
@@ -50,7 +50,7 @@
                 <a class="item-continue" href={item.link}>Verder zoeken vanaf hier →</a>
             </div>
 
-            <button type="button" class="item-remove" on:click={() => removeSavedLink(item.link)}
+            <button type="button" class="item-remove" onclick={() => removeSavedLink(item.link)}
                     aria-label={`${state.currentQuestion} verwijderen`}>Verwijderen</button>
         </li>
     {/each}

@@ -26,15 +26,15 @@
     import {goto} from "$app/navigation";
     import {resolve} from "$app/paths";
     import FancyButton from "#lib/FancyButton.svelte";
-    export let data: PageData;
+    let { data }: { data: PageData } = $props();
 
-    $: keys = data.subKeys.map(val => ({
+    const keys = $derived(data.subKeys.map(val => ({
         value: val,
         name: val.substring(0,1).toUpperCase() + val.substring(1, val.length - 1),
-    })) || [];
+    })));
 
     // Saved preferences may name sub-keys that no longer exist.
-    let selectedKeys = ($preferredSubKeys || []).filter(x => data.subKeys.includes(x));
+    let selectedKeys = $state(($preferredSubKeys || []).filter(x => data.subKeys.includes(x)));
 </script>
 
 <div vocab="https://schema.org/" typeof="WebApplication" class="home">
@@ -53,7 +53,8 @@
         <p class="muted small">Zet de app op je thuisscherm om hem ook offline te gebruiken.</p>
     </section>
 
-    <form method="POST" class="start" on:submit|preventDefault={() => {
+    <form method="POST" class="start" onsubmit={(event) => {
+        event.preventDefault();
         preferredSubKeys.set(selectedKeys);
 
         if (selectedKeys.length > 0) {

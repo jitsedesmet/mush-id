@@ -2,9 +2,11 @@
     import DOMPurify from "dompurify";
     import {marked} from "marked";
 
-    export let markdownText = "";
-    export let link: string | undefined = undefined;
-    export let renderDetails = true;
+    let { markdownText = "", link, renderDetails = true }: {
+        markdownText?: string;
+        link?: string;
+        renderDetails?: boolean;
+    } = $props();
 
     function removeImages(markdown : string): { markdown: string, details: {term: string, details: string}[], images: {src: string, alt: string}[] } {
         const images = [...markdown.matchAll(/<img alt="([^"]*)" src="([^"]+)">/g)];
@@ -25,8 +27,8 @@
         };
     }
 
-    $: parsedMarkdown =  DOMPurify.sanitize(marked.parseInline(markdownText, { gfm: true, breaks: true, async: false }));
-    $: cleansed = removeImages(parsedMarkdown);
+    const parsedMarkdown = $derived(DOMPurify.sanitize(marked.parseInline(markdownText, { gfm: true, breaks: true, async: false })));
+    const cleansed = $derived(removeImages(parsedMarkdown));
 </script>
 
 <div>
