@@ -27,6 +27,43 @@ const ASSETS = [...new Set([
 // route, so it is served for page loads that are not cached while offline.
 const FALLBACK = new URL('404.html', self.registration.scope).pathname;
 
+// OneZoom photos and the API answers that point to them. Kept across
+// deployments so species you looked at before still have a photo offline.
+// Images are cross-origin without CORS, so they are stored as opaque responses.
+const PHOTOS = 'onezoom-photos';
+const MAX_PHOTO_ENTRIES = 400;
+const ONEZOOM = 'https://www.onezoom.org';
+
+async function trimPhotos(cache) {
+    const keys = await cache.keys(); // oldest first
+    for (const request of keys.slice(0, Math.max(0, keys.length - MAX_PHOTO_ENTRIES))) {
+        await cache.delete(request);
+    }
+}
+
+async function respondOneZoom(event, url) {
+    const cache = await caches.open(PHOTOS);
+    const isImage = url.pathname.startsWith('/OZtree/static/');
+
+    // Photos never change for a given URL: use the cached one if we have it.
+    if (isImage) {
+        const cached = await cache.match(event.request);
+        if (cached) return cached;
+    }
+
+    try {
+        const response = await fetch(event.request);
+        if (response.ok || response.type === 'opaque') {
+            event.waitUntil(cache.put(event.request, response.clone()).then(() => trimPhotos(cache)));
+        }
+        return response;
+    } catch (error) {
+        const cached = await cache.match(event.request);
+        if (cached) return cached;
+        throw error;
+    }
+}
+
 self.addEventListener('install', (event) => {
     // Create a new cache and add all files to it
     async function addFilesToCache() {
@@ -47,7 +84,7 @@ self.addEventListener('activate', (event) => {
     // Remove previous cached data from disk
     async function deleteOldCaches() {
         for (const key of await caches.keys()) {
-            if (key !== CACHE) await caches.delete(key);
+            if (key !== CACHE && key !== PHOTOS) await caches.delete(key);
         }
     }
 
@@ -57,6 +94,12 @@ self.addEventListener('activate', (event) => {
 self.addEventListener('fetch', (event) => {
     // ignore POST requests etc
     if (event.request.method !== 'GET') return;
+
+    const requestUrl = new URL(event.request.url);
+    if (requestUrl.origin === ONEZOOM) {
+        event.respondWith(respondOneZoom(event, requestUrl));
+        return;
+    }
 
     async function respond() {
         const url = new URL(event.request.url);
