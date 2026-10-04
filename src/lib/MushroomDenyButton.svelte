@@ -1,7 +1,7 @@
 <script lang="ts">
     import {page} from "$app/state";
     import FancyButton from "#lib/FancyButton.svelte";
-    import {savedHistory} from "#lib/viewModel/viewModel.js";
+    import {saveLink} from "#lib/viewModel/viewModel.js";
     import {goto} from "$app/navigation";
     import {resolve} from "$app/paths";
 
@@ -15,10 +15,7 @@
 
     <form method="POST" onsubmit={(event) => {
         event.preventDefault();
-        savedHistory.set({
-            ...$savedHistory,
-            links: $savedHistory.links.concat([{ creationDate: new Date(Date.now()), link: page.url.href }])
-        });
+        saveLink(page.url.href);
         goto(resolve(`/saved`))
     }}>
         <FancyButton color="secondary">

@@ -6,7 +6,7 @@
 
 <script lang="ts">
     import type { PageData } from './$types';
-    import {savedHistory} from "#lib/viewModel/viewModel.js";
+    import {removeSavedLink, savedHistory} from "#lib/viewModel/viewModel.js";
     import {computeTagListUnsafe} from "#lib/viewModel/paramHelper.js";
     import FancyButton from "#lib/FancyButton.svelte";
     import OneZoomPicture from "#lib/OneZoomPicture.svelte";
@@ -49,6 +49,9 @@
                 <!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
                 <a class="item-continue" href={item.link}>Verder zoeken vanaf hier →</a>
             </div>
+
+            <button type="button" class="item-remove" on:click={() => removeSavedLink(item.link)}
+                    aria-label={`${state.currentQuestion} verwijderen`}>Verwijderen</button>
         </li>
     {/each}
 </ul>
@@ -105,6 +108,24 @@
         flex-direction: column;
         gap: 2px;
         min-width: 0;
+        flex: 1;
+    }
+
+    .item-remove {
+        align-self: center;
+        flex-shrink: 0;
+        min-height: 44px;
+        padding: 0 4px;
+        border: none;
+        background: none;
+        font-size: 0.85em;
+        color: var(--c-text-muted);
+        text-decoration: underline;
+        cursor: pointer;
+    }
+
+    .item-remove:hover {
+        color: #9B2C1F;
     }
 
     .item-title {
