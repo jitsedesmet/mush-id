@@ -1,24 +1,23 @@
 <script lang="ts">
-    export let href : string | undefined = undefined;
-    let className: string = "";
-    export let color: "primary" | "secondary" = "primary";
-    export let id: string | undefined = undefined;
-    export let style: string | undefined = undefined;
+    import type {Snippet} from "svelte";
 
-    export { className as class };
+    let { href, class: className = "", color = "primary", id, style, children }: {
+        href?: string;
+        class?: string;
+        color?: "primary" | "secondary";
+        id?: string;
+        style?: string;
+        children: Snippet;
+    } = $props();
 </script>
 
 {#if href}
-    <a {id} class="button {className} {color}" href={href} {style}>
-        <slot>
-            No Content?
-        </slot>
+    <a {id} class="button {className} {color}" {href} {style}>
+        {@render children()}
     </a>
 {:else}
     <button {id} class="button {className} {color}" {style}>
-        <slot>
-            No Content?
-        </slot>
+        {@render children()}
     </button>
 {/if}
 

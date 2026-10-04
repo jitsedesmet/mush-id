@@ -110,16 +110,16 @@
         <section class="result">
             <p class="muted result-intro">Je antwoorden wijzen op</p>
             <h2 class="species">
-                <a href={`https://www.google.com/search?q=${currentMushroom.id}`}>{currentMushroom.id}</a>
+                <a href={`https://www.google.com/search?q=${encodeURIComponent(currentMushroom.id)}`}>{currentMushroom.id}</a>
             </h2>
             <div class="image-wrapper">
                 <OneZoomPicture mushroom={currentMushroom} creditsOverlay={true} />
             </div>
             <h3 class="sources-title">Meer over deze soort</h3>
             <ul class="sources">
-                <li><a href={`https://www.google.com/search?tbm=isch&q=${currentMushroom.id}`}>Google afbeeldingen</a></li>
-                <li><a href={`https://nl.wikipedia.org/w/index.php?search=${currentMushroom.id}&title=Special:Search`}>Wikipedia (NL)</a></li>
-                <li><a href={`https://en.wikipedia.org/w/index.php?search=${currentMushroom.id}&title=Special:Search`}>Wikipedia (EN)</a></li>
+                <li><a href={`https://www.google.com/search?tbm=isch&q=${encodeURIComponent(currentMushroom.id)}`}>Google afbeeldingen</a></li>
+                <li><a href={`https://nl.wikipedia.org/w/index.php?search=${encodeURIComponent(currentMushroom.id)}&title=Special:Search`}>Wikipedia (NL)</a></li>
+                <li><a href={`https://en.wikipedia.org/w/index.php?search=${encodeURIComponent(currentMushroom.id)}&title=Special:Search`}>Wikipedia (EN)</a></li>
                 {#if currentMushroom.waarnemingId}
                     <li><a href={`https://waarnemingen.be/species/${currentMushroom.waarnemingId}/`}>Waarnemingen.be</a></li>
                 {/if}

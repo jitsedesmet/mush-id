@@ -15,16 +15,16 @@
     import FancyButton from "#lib/FancyButton.svelte";
     import {resolve} from "$app/paths";
 
-    export let data: PageData;
+    let { data }: { data: PageData } = $props();
 
-    $: displayName = data.keyName
+    const displayName = $derived(data.keyName
         ? data.keyName.charAt(0).toUpperCase() + data.keyName.slice(1)
-        : "";
+        : "");
 
-    $: subKeyList = data.subKeys.map(val => ({
+    const subKeyList = $derived(data.subKeys.map(val => ({
         value: val,
         name: val.charAt(0).toUpperCase() + val.substring(1, val.length - 1),
-    }));
+    })));
 </script>
 
 <div class="content">

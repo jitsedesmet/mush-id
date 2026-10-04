@@ -1,8 +1,10 @@
 <script lang="ts">
     import type {pageRatingOptions} from "#lib/viewModel/paramHelper.js";
 
-    export let stateTagList: pageRatingOptions | undefined;
-    export let currentItem: string | undefined;
+    let { stateTagList, currentItem }: {
+        stateTagList: pageRatingOptions | undefined;
+        currentItem: string | undefined;
+    } = $props();
 
     const labels = ["zeker b", "waarschijnlijk b", "mogelijks b", "onzeker",
         "mogelijks a", "waarschijnlijk a", "zeker a"];

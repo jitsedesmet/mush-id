@@ -30,39 +30,6 @@ export function computeTagList(params: Pick<URLSearchParams, "get">): pageRating
     }
 }
 
-export function computeNextItem(history: QuestionHistoryItem[], parsedQuestions: ParsedQuestions): { splitPoint: string, otherBranch: string } {
-    const reversedHistory = history.reverse();
-    let certaintyLevel = 0;
-    while (certaintyLevel <= 3) {
-        let index = 0;
-        while (index < reversedHistory.length) {
-            if (Math.abs(reversedHistory[index].voting) === certaintyLevel) {
-                const focusQuestion: ParsedQuestion | null = parsedQuestions[reversedHistory[index].question]
-
-                // It might not be a question but a mushroom
-                if (focusQuestion) {
-                    const hasFirstOption = history.some(x => x.question === focusQuestion.first_link);
-                    const hasSecondOption = history.some(x => x.question === focusQuestion.second_link);
-                    if (hasFirstOption && !hasSecondOption) {
-                        return {
-                            otherBranch: focusQuestion.second_link,
-                            splitPoint: focusQuestion.id,
-                        };
-                    } else if (hasSecondOption && !hasFirstOption) {
-                        return {
-                            otherBranch: focusQuestion.first_link,
-                            splitPoint: focusQuestion.id,
-                        }
-                    }
-                }
-            }
-            index++;
-        }
-        certaintyLevel++;
-    }
-    throw new Error("Damn son, you went through the whole key?")
-}
-
 export interface LimitedQuestions {
     complete: ParsedQuestions;
     start: string;

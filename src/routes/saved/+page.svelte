@@ -11,9 +11,9 @@
     import FancyButton from "#lib/FancyButton.svelte";
     import OneZoomPicture from "#lib/OneZoomPicture.svelte";
     import {resolve} from "$app/paths";
-    export let data: PageData;
+    let { data }: { data: PageData } = $props();
 
-    $: sortedSavedHistory = $savedHistory.links.toSorted((a, b) => b.creationDate.getTime() - a.creationDate.getTime());
+    const sortedSavedHistory = $derived($savedHistory.links.toSorted((a, b) => b.creationDate.getTime() - a.creationDate.getTime()));
 
     function toTwoDigits(num: number) {
         return num < 10 ? `0${num}` : num;
@@ -43,14 +43,14 @@
 
             <div class="item-text">
                 <a class="item-title"
-                   href={`https://www.google.com/search?tbm=isch&q=${state.currentQuestion}`}
+                   href={`https://www.google.com/search?tbm=isch&q=${encodeURIComponent(state.currentQuestion)}`}
                    target="_blank" rel="noopener">{state.currentQuestion}</a>
                 <span class="item-time">{formatDate(date)}</span>
                 <!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
                 <a class="item-continue" href={item.link}>Verder zoeken vanaf hier →</a>
             </div>
 
-            <button type="button" class="item-remove" on:click={() => removeSavedLink(item.link)}
+            <button type="button" class="item-remove" onclick={() => removeSavedLink(item.link)}
                     aria-label={`${state.currentQuestion} verwijderen`}>Verwijderen</button>
         </li>
     {/each}
