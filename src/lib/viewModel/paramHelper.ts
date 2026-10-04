@@ -1,4 +1,4 @@
-import type {ParsedQuestion, ParsedQuestions} from "./parser";
+import {extractSubKeys, type ParsedQuestion, type ParsedQuestions} from "./parser";
 
 export interface QuestionHistoryItem {
     question: string,
@@ -63,16 +63,33 @@ export function computeNextItem(history: QuestionHistoryItem[], parsedQuestions:
     throw new Error("Damn son, you went through the whole key?")
 }
 
-export function computeLimitedQuestions(params: Pick<URLSearchParams, "get">, parsedQuestions: ParsedQuestions): { complete: ParsedQuestions; start: string } {
+export interface LimitedQuestions {
+    complete: ParsedQuestions;
+    start: string;
+    /** The requested sub-keys that exist; unknown ones are dropped. */
+    scopedSubKeys: string[];
+}
+
+export function computeLimitedQuestions(params: Pick<URLSearchParams, "get">, parsedQuestions: ParsedQuestions): LimitedQuestions {
     const states = params.get("keys")?.split(";") || [];
     return questionLimiter(parsedQuestions, states);
 }
 
-export function questionLimiter(parsedQuestions: ParsedQuestions, scopedSubKeys: string[]): { complete: ParsedQuestions; start: string } {
+/** Keeps only the sub-keys that exist in the key, without duplicates. */
+export function validSubKeys(parsedQuestions: ParsedQuestions, subKeys: string[]): string[] {
+    const known = extractSubKeys(parsedQuestions).filter(x => x !== "start1");
+    return [...new Set(subKeys)].filter(x => known.includes(x));
+}
+
+export function questionLimiter(parsedQuestions: ParsedQuestions, requestedSubKeys: string[]): LimitedQuestions {
+    // Unknown keys can come from an edited URL or from preferences saved by an
+    // older version of the key; they would crash the search below.
+    let scopedSubKeys = validSubKeys(parsedQuestions, requestedSubKeys);
     if (scopedSubKeys.length === 0) {
         return {
             complete: parsedQuestions,
-            start: "start1"
+            start: "start1",
+            scopedSubKeys,
         }
     }
 
@@ -95,6 +112,11 @@ export function questionLimiter(parsedQuestions: ParsedQuestions, scopedSubKeys:
         }
     }
     buildHistory(parsedQuestions["start1"], []);
+    // Only sub-keys reachable through the start questions can be scoped to.
+    scopedSubKeys = scopedSubKeys.filter(x => scopedSubKeysHistory[x]);
+    if (scopedSubKeys.length === 0) {
+        return { complete: parsedQuestions, start: "start1", scopedSubKeys };
+    }
 
     const minimalSplits: string[] = [];
     for (let scopedSubKeyIndex = 0; scopedSubKeyIndex < scopedSubKeys.length -1; scopedSubKeyIndex++) {
@@ -172,5 +194,5 @@ export function questionLimiter(parsedQuestions: ParsedQuestions, scopedSubKeys:
         copyRecursive(parsedQuestions[key]);
     }
 
-    return { complete, start: question.id };
+    return { complete, start: question.id, scopedSubKeys };
 }

@@ -14,6 +14,9 @@
     import OneZoomPicture from "#lib/OneZoomPicture.svelte";
     import QuestionHistory from "#lib/history/QuestionHistory.svelte";
     import MarkdownQuestion from "#lib/MarkdownQuestion.svelte";
+    import {isNotCovered, notCoveredGroupName} from "#lib/viewModel/parser.js";
+    import {resolve} from "$app/paths";
+    import {SvelteURLSearchParams} from "svelte/reactivity";
 
     let { data }: { data: PageData } = $props();
 
@@ -28,11 +31,26 @@
         }
     });
 
-    const scopedSubKeys = $derived(page.url.searchParams.get("keys")?.split(";") || []);
+    const scopedSubKeys = $derived(limitedQuestions.scopedSubKeys);
 
     const currentItem = $derived(stateTagList?.currentQuestion)
     const currentQuestion = $derived(limitedQuestions.complete[currentItem!])
     const currentMushroom = $derived(data.parsedMushrooms[currentItem!])
+    const notCovered = $derived(currentMushroom ? isNotCovered(currentMushroom) : false);
+    const unknownStep = $derived(stateTagList !== undefined && !currentQuestion && !currentMushroom);
+
+    // Same URL with the last step removed, for a link back out of an unknown step.
+    const previousStepUrl = $derived.by(() => {
+        const params = new SvelteURLSearchParams(page.url.search);
+        const states = (params.get("state") ?? "").split(";").slice(0, -1);
+        if (states.length === 0) {
+            params.set("state", limitedQuestions.start);
+        } else {
+            params.set("state", states.join(";"));
+            params.delete(states[states.length - 1]);
+        }
+        return `${resolve("/9789050117548")}?${params}`;
+    });
 </script>
 
 <div class="content">
@@ -58,7 +76,31 @@
         </ol>
         {/if}
 
-        {#if currentMushroom}
+        {#if unknownStep}
+        <section class="notice">
+            <h2>Deze stap bestaat niet</h2>
+            <p>
+                De link verwijst naar <span class="code">{currentItem}</span>, maar die stap staat niet in de sleutel.
+                Misschien is de link onvolledig of komt hij uit een oudere versie van de app.
+            </p>
+            <p class="notice-links">
+                <!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
+                <a href={previousStepUrl}>← Terug naar de vorige stap</a>
+                <a href={resolve("/")}>Opnieuw beginnen</a>
+            </p>
+        </section>
+        {/if}
+
+        {#if currentMushroom && notCovered}
+        <section class="result">
+            <p class="muted result-intro">Je antwoorden wijzen op een groep die niet in deze gids staat</p>
+            <h2>{notCoveredGroupName(currentMushroom)}</h2>
+            <p>
+                De Veldgids Paddenstoelen I behandelt deze groep niet, dus de sleutel stopt hier.
+                Twijfel je aan een eerder antwoord? Kies dan <em>Niet deze</em> om een ander pad te proberen.
+            </p>
+        </section>
+        {:else if currentMushroom}
         <section class="result">
             <p class="muted result-intro">Je antwoorden wijzen op</p>
             <h2 class="species">
@@ -90,14 +132,16 @@
     <QuestionHistory stateTagList={stateTagList} currentItem={currentItem} />
 </div>
 
+{#if currentQuestion || currentMushroom}
 <div class="action-bar">
     {#if currentQuestion}
         <Rater currentQuestion={currentQuestion}/>
     {/if}
     {#if currentMushroom}
-        <MushroomDenyButton />
+        <MushroomDenyButton canSave={!notCovered} />
     {/if}
 </div>
+{/if}
 
 
 <style>
@@ -151,6 +195,13 @@
 
     .lead-a .lead-mark { color: var(--c-primary); }
     .lead-b .lead-mark { color: var(--c-amber); }
+
+    /* ── Unknown step ── */
+    .notice-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px 20px;
+    }
 
     /* ── Result ── */
     .result-intro {

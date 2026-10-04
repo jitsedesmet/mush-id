@@ -20,15 +20,6 @@ export interface Mushroom extends StateItem {
     waarnemingId: string | null
 }
 
-interface Question {
-    id: string;
-    first_option: string;
-    first_link: StateItem;
-    second_option: string;
-    second_link: StateItem;
-    probability: number;
-}
-
 export interface ParsedQuestion {
     id: string;
     first_option: string;
@@ -98,44 +89,20 @@ export async function parseQuestionsCSV(fetchApi?: Fetch): Promise<ParsedQuestio
     return unpopulated;
 }
 
+/**
+ * Some end points of the key are groups the book does not cover, stored as
+ * e.g. "gaatjeszwammen1, niet behandeld" instead of a species.
+ */
+export function isNotCovered(item: StateItem): boolean {
+    return item.id.includes("niet behandeld");
+}
+
+/** "gaatjeszwammen1, niet behandeld" → "Gaatjeszwammen" */
+export function notCoveredGroupName(item: StateItem): string {
+    const name = item.id.split(",")[0].replace(/\d+$/, "");
+    return name.charAt(0).toUpperCase() + name.slice(1);
+}
+
 export function extractSubKeys(parsedQuestions: ParsedQuestions): string[] {
     return Object.keys(parsedQuestions).filter(x => x.match(/^[a-z]+1$/));
 }
-
-export async function validateGraph(): Promise<Question> {
-    const mushrooms = await parseMushroomCSVAsList();
-    const parsedQuestions = await parseQuestionsCSV();
-    function recursiveFilling(parsedQuestion: ParsedQuestion): Question {
-        const partialAnswer: Partial<Question> = {
-            id: parsedQuestion.id,
-            first_option: parsedQuestion.first_option,
-            second_option: parsedQuestion.second_option,
-        }
-        //Recursive first
-        const firstAsMushroom = mushrooms.find(x => x.id === parsedQuestion.first_link)
-        if (firstAsMushroom) {
-            partialAnswer.first_link = firstAsMushroom;
-        } else {
-            const firstAsQuestion = parsedQuestions[parsedQuestion.first_link];
-            if (!firstAsQuestion) {
-                throw new Error(`Could not find a mushroom or question with id ${parsedQuestion.first_link}`)
-            }
-            partialAnswer.first_link = recursiveFilling(firstAsQuestion);
-        }
-
-        // Recursive second
-        const secondAsMushroom = mushrooms.find(x => x.id === parsedQuestion.second_link)
-        if (secondAsMushroom) {
-            partialAnswer.second_link = secondAsMushroom;
-        } else {
-            const secondAsQuestion = parsedQuestions[parsedQuestion.second_link];
-            if (!secondAsQuestion) {
-                throw new Error(`Could not find a mushroom or question with id ${parsedQuestion.second_link}`)
-            }
-            partialAnswer.second_link = recursiveFilling(secondAsQuestion);
-        }
-        return <Question> partialAnswer;
-    }
-    return recursiveFilling(parsedQuestions["start1"]);
-}
-

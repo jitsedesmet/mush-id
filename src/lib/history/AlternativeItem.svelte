@@ -1,7 +1,6 @@
 <script lang="ts">
     import MarkdownQuestion from "#lib/MarkdownQuestion.svelte";
     import TryOtherButton from "#lib/history/TryOtherButton.svelte";
-    import {page} from "$app/state";
     import type {ParsedQuestion} from "#lib/viewModel/parser.js";
 
     let { question, vote, confidence = 0 }: {
@@ -20,19 +19,17 @@
     const isLeastCertain = $derived(confidence === 0);
 </script>
 
-{#if !page.url.searchParams.has(alternativeOption)}
-    <li class="alt-item" style="border-left-color: {borderColor}">
-        <div class="chosen">
-            <span class="label">Gekozen{#if isLeastCertain}<em class="least">(minst zeker)</em>{/if}</span>
-            <MarkdownQuestion markdownText={chosenQuestion} renderDetails={false}/>
-        </div>
-        <div class="alternative">
-            <span class="label">Andere mogelijkheid</span>
-            <MarkdownQuestion markdownText={alternativeQuestion} renderDetails={false}/>
-        </div>
-        <TryOtherButton alternative={alternativeOption}/>
-    </li>
-{/if}
+<li class="alt-item" style="border-left-color: {borderColor}">
+    <div class="chosen">
+        <span class="label">Gekozen{#if isLeastCertain}<em class="least">(minst zeker)</em>{/if}</span>
+        <MarkdownQuestion markdownText={chosenQuestion} renderDetails={false}/>
+    </div>
+    <div class="alternative">
+        <span class="label">Andere mogelijkheid</span>
+        <MarkdownQuestion markdownText={alternativeQuestion} renderDetails={false}/>
+    </div>
+    <TryOtherButton alternative={alternativeOption}/>
+</li>
 
 <style>
     .alt-item {

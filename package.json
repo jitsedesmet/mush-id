@@ -12,7 +12,8 @@
 		"preview": "vite preview",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-		"lint": "eslint ."
+		"lint": "eslint .",
+		"validate:key": "node scripts/validate-key.js"
 	},
 	"devDependencies": {
 		"@eslint/js": "^10.0.1",
