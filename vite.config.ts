@@ -8,7 +8,9 @@ export default defineConfig({
 		sveltekit({
 			preprocess: vitePreprocess(),
 			adapter: adapter({
-				fallback: '200.html'
+				// GitHub Pages serves 404.html for unknown paths, so the SPA shell
+				// must use that name for deep links and reloads to work.
+				fallback: '404.html'
 			})
 		})
 	],

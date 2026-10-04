@@ -18,9 +18,9 @@ const ASSETS = [...new Set([
     ...prerendered // prerendered pages such as `/`
 ].map(({ path }) => new URL(path, self.registration.scope).pathname))];
 
-// SPA shell from adapter-static (`fallback: '200.html'`). It can render any
+// SPA shell from adapter-static (`fallback: '404.html'`). It can render any
 // route, so it is served for page loads that are not cached while offline.
-const FALLBACK = new URL('200.html', self.registration.scope).pathname;
+const FALLBACK = new URL('404.html', self.registration.scope).pathname;
 
 self.addEventListener('install', (event) => {
     // Create a new cache and add all files to it
