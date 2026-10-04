@@ -8,13 +8,18 @@ import { version } from '$app/env';
 // Create a unique cache name for this deployment
 const CACHE = `cache-${version}`;
 
+// Files in `static` the app itself never loads: install icons for each OS
+// (fetched by the OS from the network when installing), the social preview
+// image and the Google site verification file. Caching them only costs space.
+const NOT_PRECACHED = /^(android|ios|windows11)\/|^og-image\.png$|^google[0-9a-f]+\.html$/;
+
 // Manifest paths are relative to the base path; turn them into absolute
 // pathnames so they can be compared against `url.pathname` below.
 // Deduplicated: `prerendered` repeats static files fetched during prerendering,
 // and `cache.addAll` rejects the whole install on duplicate requests.
 const ASSETS = [...new Set([
     ...immutable,  // the app itself
-    ...assets,     // everything in `static`
+    ...assets.filter((asset) => !NOT_PRECACHED.test(asset.path)), // `static`
     ...prerendered // prerendered pages such as `/`
 ].map(({ path }) => new URL(path, self.registration.scope).pathname))];
 
