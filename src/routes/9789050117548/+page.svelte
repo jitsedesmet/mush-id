@@ -28,7 +28,7 @@
         }
     });
 
-    const scopedSubKeys = $derived(page.url.searchParams.get("keys")?.split(";") || []);
+    const scopedSubKeys = $derived(limitedQuestions.scopedSubKeys);
 
     const currentItem = $derived(stateTagList?.currentQuestion)
     const currentQuestion = $derived(limitedQuestions.complete[currentItem!])

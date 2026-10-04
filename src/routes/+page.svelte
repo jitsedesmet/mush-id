@@ -34,7 +34,8 @@
         name: val.substring(0,1).toUpperCase() + val.substring(1, val.length - 1),
     })) || [];
 
-    let selectedKeys = $preferredSubKeys || [];
+    // Saved preferences may name sub-keys that no longer exist.
+    let selectedKeys = ($preferredSubKeys || []).filter(x => data.subKeys.includes(x));
 </script>
 
 <div vocab="https://schema.org/" typeof="WebApplication" class="home">
