@@ -12,7 +12,7 @@
 <header class="site-header">
     <div class="header-inner">
         <a href={resolve("/")} class="brand" aria-label="Mush-ID home">
-            <img src={asset('cropped_orig.png')} class="brand-logo" alt="" />
+            <img src={asset('logo.png')} class="brand-logo" alt="" />
             <span class="brand-name">Mush-ID</span>
         </a>
         <nav>

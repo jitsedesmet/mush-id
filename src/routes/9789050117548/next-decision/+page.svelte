@@ -13,6 +13,7 @@
     import AlternativeItem from "#lib/history/AlternativeItem.svelte";
     import FancyButton from "#lib/FancyButton.svelte";
     import {resolve} from "$app/paths";
+    import {SvelteURLSearchParams} from "svelte/reactivity";
 
     let { data }: { data: PageData } = $props();
 
@@ -21,7 +22,9 @@
 
     $effect(() => {
         if (!stateTagList) {
-            goto(resolve(`/9789050117548?state=${limitedQuestions.start}`), {
+            const params = new SvelteURLSearchParams(page.url.search);
+            params.set("state", limitedQuestions.start);
+            goto(`${resolve("/9789050117548")}?${params}`, {
                 replaceState: true,
             })
         }

@@ -1,14 +1,19 @@
 <script lang="ts">
     import type {Mushroom} from "#lib/viewModel/parser.js";
-    /** When true, renders the photographer credit as a translucent overlay
-     *  pinned to the bottom of the image. */
-    export let creditsOverlay: boolean = false;
+
     interface OneZoomImage {
         name: string;
         url: string;
         by: string;
         licence: string;
     }
+
+    let { mushroom, creditsOverlay = false }: {
+        mushroom: Mushroom | null;
+        /** When true, renders the photographer credit as a translucent overlay
+         *  pinned to the bottom of the image. */
+        creditsOverlay?: boolean;
+    } = $props();
 
     async function fetchOneZoomPic(mushId: string): Promise<OneZoomImage> {
         const web = await fetch(`https://www.onezoom.org/API/node_images?key=0&otts=${mushId}&type=verified`);
@@ -22,25 +27,37 @@
         }
     }
 
-    export let mushroom: Mushroom | null;
+    const picture = $derived(mushroom?.OToLId ? fetchOneZoomPic(mushroom.OToLId) : null);
+
+    // The API answer can be cached while the image itself is not (or fails).
+    let failedUrl: string | null = $state(null);
 </script>
 
-{#if mushroom && mushroom.OToLId}
+{#snippet noPhoto()}
+    <p class="no-photo">{typeof navigator !== "undefined" && !navigator.onLine ? "Geen foto (offline)" : "Geen foto"}</p>
+{/snippet}
+
+{#if picture}
 <div class="image-div">
-    {#await fetchOneZoomPic(mushroom.OToLId)}
+    {#await picture}
+        <div class="loading" aria-label="Foto laden" role="img"></div>
     {:then res}
+        {#if failedUrl === res.url}
+            {@render noPhoto()}
+        {:else}
         <figure>
             <img
-                    id="image1"
                     class="fit-picture"
                     src={res.url}
-                    alt={`Geverifieerde foto van ${mushroom.id} gebracht door OneZoom`} />
+                    onerror={() => failedUrl = res.url}
+                    alt={`Geverifieerde foto van ${mushroom!.id} gebracht door OneZoom`} />
             {#if creditsOverlay}
             <figcaption class="overlay">{res.by}</figcaption>
             {/if}
         </figure>
+        {/if}
     {:catch}
-        <p class="no-photo">Geen foto</p>
+        {@render noPhoto()}
     {/await}
 </div>
 {/if}
@@ -77,6 +94,20 @@
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
+    }
+    .loading {
+        width: 100%;
+        aspect-ratio: 3 / 2;
+        max-height: 220px;
+        border-radius: var(--radius-sm);
+        background: var(--c-surface-alt);
+        animation: pulse 1.4s ease-in-out infinite;
+    }
+    @keyframes pulse {
+        50% { opacity: 0.5; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+        .loading { animation: none; }
     }
     .no-photo {
         margin: 0;

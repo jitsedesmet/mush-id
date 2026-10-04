@@ -25,7 +25,6 @@
     import { preferredSubKeys } from "#lib/viewModel/viewModel.js";
     import {goto} from "$app/navigation";
     import {resolve} from "$app/paths";
-    import {questionLimiter} from "#lib/viewModel/paramHelper.js";
     import FancyButton from "#lib/FancyButton.svelte";
     export let data: PageData;
 
@@ -55,11 +54,10 @@
     </section>
 
     <form method="POST" class="start" on:submit|preventDefault={() => {
-        const limiter = questionLimiter(data.parsedQuestions, selectedKeys);
         preferredSubKeys.set(selectedKeys);
 
         if (selectedKeys.length > 0) {
-            goto(resolve(`/9789050117548?keys=${selectedKeys.join(';')}&state=${limiter.start}`))
+            goto(resolve(`/9789050117548?keys=${selectedKeys.join(';')}`))
         } else {
             goto(resolve(`/9789050117548?state=start1`))
         }
