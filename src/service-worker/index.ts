@@ -2,7 +2,7 @@
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
-import { immutable, assets } from '$app/manifest';
+import { immutable, assets, prerendered } from '$app/manifest';
 import { version } from '$app/env';
 
 // Create a unique cache name for this deployment
@@ -10,16 +10,23 @@ const CACHE = `cache-${version}`;
 
 // Manifest paths are relative to the base path; turn them into absolute
 // pathnames so they can be compared against `url.pathname` below.
-const ASSETS = [
-    ...immutable, // the app itself
-    ...assets     // everything in `static`
-].map(({ path }) => new URL(path, self.registration.scope).pathname);
+// Deduplicated: `prerendered` repeats static files fetched during prerendering,
+// and `cache.addAll` rejects the whole install on duplicate requests.
+const ASSETS = [...new Set([
+    ...immutable,  // the app itself
+    ...assets,     // everything in `static`
+    ...prerendered // prerendered pages such as `/`
+].map(({ path }) => new URL(path, self.registration.scope).pathname))];
+
+// SPA shell from adapter-static (`fallback: '200.html'`). It can render any
+// route, so it is served for page loads that are not cached while offline.
+const FALLBACK = new URL('200.html', self.registration.scope).pathname;
 
 self.addEventListener('install', (event) => {
     // Create a new cache and add all files to it
     async function addFilesToCache() {
         const cache = await caches.open(CACHE);
-        await cache.addAll(ASSETS);
+        await cache.addAll([...ASSETS, FALLBACK]);
     }
 
     event.waitUntil(addFilesToCache());
@@ -59,8 +66,18 @@ self.addEventListener('fetch', (event) => {
             }
 
             return response;
-        } catch {
-            return cache.match(event.request);
+        } catch (error) {
+            const cached = await cache.match(event.request);
+            if (cached) return cached;
+
+            // Offline load of a page we never cached (e.g. a reload on a
+            // question with a new `?state=`): let the SPA shell render it.
+            if (event.request.mode === 'navigate') {
+                const fallback = await cache.match(FALLBACK);
+                if (fallback) return fallback;
+            }
+
+            throw error;
         }
     }
 

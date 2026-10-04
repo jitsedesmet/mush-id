@@ -6,10 +6,10 @@
 		<meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
 		<link rel="manifest" href="%sveltekit.assets%/manifest.json" />
 
-		<link href="/css/inter.scss" rel="stylesheet">
+		<link href="/css/fonts.css" rel="stylesheet">
 
 		<link rel="apple-touch-icon" href="/apple-touch-icon.png" type="image/png">
-		<meta name="theme-color" content="#1B4332"/>
+		<meta name="theme-color" content="#F7F5F0"/>
 		<!-- Google Tag Manager -->
 		<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 					new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -32,102 +32,108 @@
 
 <style>
 	:root {
-		/* Forest / nature colour palette */
-		--c-primary:        #2D6A4F;
-		--c-primary-dark:   #1B4332;
-		--c-primary-mid:    #40916C;
-		--c-primary-light:  #74C69D;
-		--c-primary-pale:   #D8F3DC;
+		--c-primary:        #2F5D46;
+		--c-primary-dark:   #1F3F30;
+		--c-primary-mid:    #3E7558;
+		--c-primary-light:  #9DBBA9;
+		--c-primary-pale:   #E6EEE8;
 
-		--c-amber:          #E07B39;
-		--c-amber-light:    #F4A261;
-		--c-amber-pale:     #FDEBD0;
+		--c-amber:          #8A5A2B;
+		--c-amber-light:    #C9A27C;
+		--c-amber-pale:     #F3EADF;
 
-		--c-bg:             #F4F8F5;
+		--c-bg:             #F7F5F0;
 		--c-surface:        #FFFFFF;
-		--c-surface-alt:    #EEF4F0;
+		--c-surface-alt:    #EFECE4;
 
-		--c-text:           #1A1A1A;
-		--c-text-muted:     #5A6B62;
-		--c-border:         #C9DDD2;
+		--c-text:           #23241F;
+		--c-text-muted:     #6B6A62;
+		--c-border:         #DEDAD0;
 
-		/* Spacing / radius tokens */
-		--radius-sm:  6px;
-		--radius-md:  10px;
-		--radius-lg:  16px;
-		--shadow-sm:  0 1px 3px rgba(0,0,0,.08);
-		--shadow-md:  0 4px 12px rgba(0,0,0,.12);
+		--radius-sm:  4px;
+		--radius-md:  6px;
+		--radius-lg:  8px;
+
+		--font-sans:  "Inter", system-ui, sans-serif;
+		--font-serif: "Source Serif 4", Georgia, serif;
 	}
 
 	*, *::before, *::after {
 		box-sizing: border-box;
 	}
 
-	* {
-		font-family: "Inter", sans-serif;
-		font-optical-sizing: auto;
-		font-weight: 300;
-		font-style: normal;
-		font-variation-settings: "slnt" 0;
-		font-size: 1em;
+	html {
+		background: var(--c-bg);
+		-webkit-text-size-adjust: 100%;
 	}
 
 	body {
-		text-align: left;
-		display: table-cell;
-		vertical-align: top;
-		padding: 0;
 		margin: 0;
-		background: var(--c-bg);
+		font-family: var(--font-sans);
+		font-optical-sizing: auto;
+		font-weight: 400;
+		font-size: 16px;
+		line-height: 1.5;
 		color: var(--c-text);
-		width: min(1000px, 100svw);
+		background: var(--c-bg);
 	}
 
-	h1 {
-		font-size: 2.8em;
-		font-weight: 700;
-		text-align: center;
-		color: var(--c-primary-dark);
-		margin: 0.4em 0;
-		line-height: 1.15;
+	button, input, select, textarea {
+		font: inherit;
 	}
 
-	h2 {
-		font-size: 2em;
+	h1, h2, h3 {
+		font-family: var(--font-serif);
 		font-weight: 600;
-		text-align: center;
 		color: var(--c-primary-dark);
-		margin: 0.4em 0 0.6em;
+		line-height: 1.2;
+		margin: 0 0 0.5em;
 	}
 
-	h3 { font-size: 1.75em; font-weight: 600; }
-	h4 { font-size: 1.5em;  font-weight: 600; }
-	h5 { font-size: 0.9em;  font-weight: 500; }
+	h1 { font-size: 2.2em; }
+	h2 { font-size: 1.6em; }
+	h3 { font-size: 1.25em; }
 
-	h6 {
-		font-size: 1.1em;
+	h4, h5, h6 {
+		font-size: 1em;
 		font-weight: 600;
-		padding: 3px 0;
-		margin: 0;
-		color: var(--c-primary-dark);
+		margin: 0 0 0.5em;
+		color: var(--c-text);
 	}
 
 	a {
-		color: var(--c-primary-mid);
-	}
-	a:visited {
 		color: var(--c-primary);
+		text-underline-offset: 0.15em;
 	}
 	a:hover {
 		color: var(--c-primary-dark);
 	}
 
-	html {
-		display: table;
-		margin: auto;
+	/* Sticky bar at the bottom of a page for the main actions. */
+	.action-bar {
+		position: sticky;
+		bottom: 0;
+		z-index: 999;
+		margin: auto -16px 0;
+		padding: 12px 16px calc(12px + env(safe-area-inset-bottom, 0px));
+		background: var(--c-bg);
+		border-top: 1px solid var(--c-border);
+	}
+
+	/* Landscape phones: a pinned bar would cover most of the screen. */
+	@media (orientation: landscape) and (max-height: 500px) {
+		.action-bar {
+			position: static;
+		}
+	}
+
+	.muted {
+		color: var(--c-text-muted);
 	}
 
 	.padder {
-		padding: 10px 12px;
+		min-height: 100dvh;
+		display: flex;
+		flex-direction: column;
 	}
 </style>

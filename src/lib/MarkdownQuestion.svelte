@@ -34,11 +34,11 @@
 
     {#if (cleansed.images.length === 0 && cleansed.details.length === 0) || !renderDetails}
         <!-- eslint-disable-next-line svelte/no-at-html-tags -->
-        {@html cleansed.markdown} {#if link}-> {link}{/if}
+        {@html cleansed.markdown} {#if link}<span class="dest">→&nbsp;{link}</span>{/if}
     {:else}
         <details>
             <!-- eslint-disable-next-line svelte/no-at-html-tags -->
-            <summary>{@html cleansed.markdown} <em>(<u>Meer info</u>)</em> {#if link}-> {link}{/if}</summary>
+            <summary>{@html cleansed.markdown} {#if link}<span class="dest">→&nbsp;{link}</span>{/if} <span class="more-info">meer info</span></summary>
 
             <div class="term-definitions">
                 {#each cleansed.details as detail (detail.term)}
@@ -62,6 +62,31 @@
 </div>
 
 <style>
+    .dest {
+        color: var(--c-text-muted);
+        font-size: 0.88em;
+        white-space: nowrap;
+    }
+    summary {
+        cursor: pointer;
+        list-style: none;
+    }
+    summary::-webkit-details-marker {
+        display: none;
+    }
+    .more-info {
+        font-size: 0.88em;
+        color: var(--c-primary);
+        text-decoration: underline;
+        white-space: nowrap;
+    }
+    details[open] .more-info {
+        display: none;
+    }
+    .term-definitions {
+        margin-top: 8px;
+        font-size: 0.92em;
+    }
     .image-div {
         margin: auto auto;
         padding: 10px 0;
@@ -82,6 +107,8 @@
         object-fit: scale-down;
     }
     .image-div p {
+        font-size: 0.88em;
+        color: var(--c-text-muted);
         word-wrap: break-word;
         padding: 0;
         margin: 0;

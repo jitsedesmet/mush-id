@@ -17,8 +17,8 @@
 
 <div class="rater">
     <!-- Column headers -->
-    <div class="col-header col-a">Antwoord A</div>
-    <div class="col-header col-b">Antwoord B</div>
+    <div class="col-header col-a"><span class="mark">a</span></div>
+    <div class="col-header col-b"><span class="mark">b</span></div>
 
     <!-- Confidence rows -->
     <!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
@@ -42,49 +42,51 @@
     .rater {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 6px;
+        gap: 6px 10px;
         width: 100%;
     }
 
     .col-header {
-        font-size: 0.78em;
-        font-weight: 700;
-        letter-spacing: 0.05em;
-        text-transform: uppercase;
         text-align: center;
-        padding: 4px 0 2px;
-        border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+        font-size: 0.88em;
+        color: var(--c-text-muted);
     }
 
-    .col-a { color: var(--c-primary-dark); border-bottom: 2px solid var(--c-primary); }
-    .col-b { color: #7C4A0A;               border-bottom: 2px solid var(--c-amber); }
+    .mark {
+        font-family: var(--font-serif);
+        font-weight: 700;
+        font-size: 1.2em;
+    }
 
-    /* Shared answer button */
+    .col-a .mark { color: var(--c-primary); }
+    .col-b .mark { color: var(--c-amber); }
+
     .answer-btn {
         display: flex;
         align-items: center;
         justify-content: center;
-        padding: 10px 6px;
+        padding: 9px 6px;
         border-radius: var(--radius-md);
-        font-weight: 600;
-        font-size: 0.88em;
+        border: 1px solid;
+        font-weight: 500;
+        font-size: 0.92em;
         text-decoration: none;
         text-align: center;
-        transition: filter 0.15s, transform 0.1s, box-shadow 0.15s;
-        box-shadow: var(--shadow-sm);
+        transition: background 0.12s;
         -webkit-tap-highlight-color: transparent;
     }
 
-    .answer-btn:hover  { filter: brightness(0.9); box-shadow: var(--shadow-md); }
-    .answer-btn:active { transform: scale(0.96); }
+    /* Confidence increases top to bottom: outline → tint → solid. */
+    .a-low  { border-color: var(--c-primary-light); background: var(--c-surface);      color: var(--c-primary-dark); }
+    .a-mid  { border-color: var(--c-primary-light); background: var(--c-primary-pale); color: var(--c-primary-dark); }
+    .a-high { border-color: var(--c-primary);       background: var(--c-primary);      color: #fff; }
 
-    /* A column — green palette (light → dark = low → high confidence) */
-    .a-low  { background: #B7E4C7; color: #1B4332; }
-    .a-mid  { background: #52B788; color: #fff; }
-    .a-high { background: #1B4332; color: #fff; }
+    .b-low  { border-color: var(--c-amber-light);   background: var(--c-surface);      color: #5E3D1D; }
+    .b-mid  { border-color: var(--c-amber-light);   background: var(--c-amber-pale);   color: #5E3D1D; }
+    .b-high { border-color: var(--c-amber);         background: var(--c-amber);        color: #fff; }
 
-    /* B column — amber palette */
-    .b-low  { background: #FDEBD0; color: #7C4A0A; }
-    .b-mid  { background: #E07B39; color: #fff; }
-    .b-high { background: #7C4A0A; color: #fff; }
+    .a-low:hover, .a-mid:hover { background: #D5E3D9; color: var(--c-primary-dark); }
+    .b-low:hover, .b-mid:hover { background: #EADBC8; color: #5E3D1D; }
+    .a-high:hover { background: var(--c-primary-dark); color: #fff; }
+    .b-high:hover { background: #6E4620; color: #fff; }
 </style>

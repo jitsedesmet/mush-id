@@ -5,41 +5,46 @@
 
     let { children }: { children: Snippet } = $props();
 
-    const isHome = $derived(page.url.pathname === "/");
-    const homeUrl = resolve("/");
+    const path = $derived(page.url.pathname);
 </script>
 
 <header class="site-header">
     <div class="header-inner">
-        <a href={homeUrl} class="brand" aria-label="Mush ID home">
+        <a href={resolve("/")} class="brand" aria-label="Mush-ID home">
             <img src={asset('cropped_orig.png')} class="brand-logo" alt="" />
-            <span class="brand-name">Mush ID</span>
+            <span class="brand-name">Mush-ID</span>
         </a>
-        {#if !isHome}
-            <a href={homeUrl} class="nav-home">Home</a>
-        {/if}
+        <nav>
+            <a href={resolve("/9789050117548/soorten")}
+               aria-current={path.startsWith("/9789050117548/soorten") ? "page" : undefined}>Soorten</a>
+            <a href={resolve("/saved")}
+               aria-current={path.startsWith("/saved") ? "page" : undefined}>Opgeslagen</a>
+        </nav>
     </div>
 </header>
 
-{@render children()}
+<main>
+    {@render children()}
+</main>
 
 <style>
     .site-header {
         position: sticky;
         top: 0;
         z-index: 1000;
-        background: var(--c-primary-dark);
-        box-shadow: 0 2px 8px rgba(0,0,0,.25);
-        margin: -10px -12px 16px;
-        padding: 0 12px;
+        background: var(--c-bg);
+        border-bottom: 1px solid var(--c-border);
+        padding: 0 16px;
+        padding-top: env(safe-area-inset-top, 0px);
     }
 
     .header-inner {
         display: flex;
         align-items: center;
         justify-content: space-between;
+        gap: 16px;
         height: 52px;
-        max-width: 976px;
+        max-width: 720px;
         margin: 0 auto;
     }
 
@@ -47,36 +52,51 @@
         display: flex;
         align-items: center;
         gap: 8px;
+        min-height: 44px;
         text-decoration: none;
-        color: #fff;
+        color: var(--c-primary-dark);
     }
 
     .brand-logo {
-        width: 32px;
-        height: 32px;
+        width: 28px;
+        height: 28px;
         object-fit: contain;
     }
 
     .brand-name {
+        font-family: var(--font-serif);
         font-size: 1.2em;
-        font-weight: 700;
-        letter-spacing: 0.02em;
-        color: #fff;
+        font-weight: 600;
     }
 
-    .nav-home {
-        font-size: 0.9em;
-        font-weight: 500;
-        color: var(--c-primary-pale);
+    nav {
+        display: flex;
+        gap: 10px;
+    }
+
+    nav a {
+        display: inline-flex;
+        align-items: center;
+        min-height: 44px;
+        padding: 0 4px;
+        font-size: 0.92em;
+        color: var(--c-text-muted);
         text-decoration: none;
-        padding: 6px 14px;
-        border: 1px solid var(--c-primary-light);
-        border-radius: var(--radius-sm);
-        transition: background 0.15s, color 0.15s;
     }
 
-    .nav-home:hover {
-        background: var(--c-primary-mid);
-        color: #fff;
+    nav a:hover,
+    nav a[aria-current="page"] {
+        color: var(--c-primary-dark);
+        text-decoration: underline;
+    }
+
+    main {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        max-width: 752px;
+        margin: 0 auto;
+        padding: 24px 16px 0;
     }
 </style>

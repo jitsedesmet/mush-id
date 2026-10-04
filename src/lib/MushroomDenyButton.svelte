@@ -30,7 +30,7 @@
                  href="/">Stoppen
     </FancyButton>
 </div>
-<p class="deny-hint">Bekijk je geschiedenis en kies een punt om verder te gaan.</p>
+<p class="deny-hint">"Niet deze" toont je eerdere antwoorden, zodat je op een twijfelpunt een ander pad kan kiezen.</p>
 
 
 <style>
@@ -52,9 +52,8 @@
     }
 
     .deny-hint {
-        font-size: 0.8em;
+        font-size: 0.82em;
         color: var(--c-text-muted);
-        margin: 6px 0 0;
-        text-align: center;
+        margin: 8px 0 0;
     }
 </style>
