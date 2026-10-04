@@ -32,6 +32,12 @@ self.addEventListener('install', (event) => {
     event.waitUntil(addFilesToCache());
 });
 
+// Sent by the update banner (src/lib/UpdateBanner.svelte) when the user
+// chooses to load the new version.
+self.addEventListener('message', (event) => {
+    if (event.data?.type === 'SKIP_WAITING') self.skipWaiting();
+});
+
 self.addEventListener('activate', (event) => {
     // Remove previous cached data from disk
     async function deleteOldCaches() {

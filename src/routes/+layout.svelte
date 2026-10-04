@@ -2,6 +2,7 @@
     import type { Snippet } from "svelte";
     import { page } from "$app/state";
     import { asset, resolve } from "$app/paths";
+    import UpdateBanner from "#lib/UpdateBanner.svelte";
 
     let { children }: { children: Snippet } = $props();
 
@@ -21,6 +22,7 @@
                aria-current={path.startsWith("/saved") ? "page" : undefined}>Opgeslagen</a>
         </nav>
     </div>
+    <UpdateBanner />
 </header>
 
 <main>
