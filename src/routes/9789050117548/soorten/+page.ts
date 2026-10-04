@@ -1,4 +1,4 @@
-import {extractSubKeys, getMushroomsForSubKey, parseMushroomCSV, parseQuestionsCSV} from "#lib/viewModel/parser.js";
+import {extractSubKeys, getMushroomsForSubKey, isNotCovered, notCoveredGroupName, parseMushroomCSV, parseQuestionsCSV} from "#lib/viewModel/parser.js";
 import {error} from "@sveltejs/kit";
 
 export const ssr = false;
@@ -14,6 +14,7 @@ export async function load({ fetch, url }) {
             key: null,
             keyName: null,
             mushrooms: null,
+            notCovered: [],
             subKeys,
         };
     }
@@ -23,10 +24,12 @@ export async function load({ fetch, url }) {
     }
 
     const parsedMushrooms = await parseMushroomCSV(fetch);
+    const endPoints = getMushroomsForSubKey(keyParam, parsedQuestions, parsedMushrooms);
     return {
         key: keyParam,
         keyName: keyParam.substring(0, keyParam.length - 1),
-        mushrooms: getMushroomsForSubKey(keyParam, parsedQuestions, parsedMushrooms),
+        mushrooms: endPoints.filter(x => !isNotCovered(x)),
+        notCovered: endPoints.filter(isNotCovered).map(notCoveredGroupName),
         subKeys,
     };
 }

@@ -71,6 +71,12 @@
             </li>
             {/each}
         </ul>
+        {#if data.notCovered.length > 0}
+            <p class="not-covered">
+                Niet behandeld in deze gids, maar wel een uitkomst van deze deelsleutel:
+                {data.notCovered.join(", ")}.
+            </p>
+        {/if}
     {:else}
         <h2>Soorten per deelsleutel</h2>
         <p class="subtitle">Kies een deelsleutel om alle soorten erin te zien.</p>
@@ -117,6 +123,12 @@
 
     .back-link:hover {
         text-decoration: underline;
+    }
+
+    .not-covered {
+        margin: 16px 0 0;
+        font-size: 0.92em;
+        color: var(--c-text-muted);
     }
 
     /* ── Sub-key index ── */

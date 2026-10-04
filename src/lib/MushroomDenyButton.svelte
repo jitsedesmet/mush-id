@@ -5,6 +5,8 @@
     import {goto} from "$app/navigation";
     import {resolve} from "$app/paths";
 
+    let { canSave = true }: { canSave?: boolean } = $props();
+
     const nextOptionUrl = $derived(`${page.route.id!}/next-decision${page.url.search}`);
 </script>
 
@@ -13,6 +15,7 @@
                  href={nextOptionUrl}>Niet deze
     </FancyButton>
 
+    {#if canSave}
     <form method="POST" onsubmit={(event) => {
         event.preventDefault();
         saveLink(page.url.href);
@@ -22,6 +25,7 @@
             Da is em! Opslaan
         </FancyButton>
     </form>
+    {/if}
 
     <FancyButton color="secondary"
                  href="/">Stoppen

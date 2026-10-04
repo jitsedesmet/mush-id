@@ -89,6 +89,20 @@ export async function parseQuestionsCSV(fetchApi?: Fetch): Promise<ParsedQuestio
     return unpopulated;
 }
 
+/**
+ * Some end points of the key are groups the book does not cover, stored as
+ * e.g. "gaatjeszwammen1, niet behandeld" instead of a species.
+ */
+export function isNotCovered(item: StateItem): boolean {
+    return item.id.includes("niet behandeld");
+}
+
+/** "gaatjeszwammen1, niet behandeld" → "Gaatjeszwammen" */
+export function notCoveredGroupName(item: StateItem): string {
+    const name = item.id.split(",")[0].replace(/\d+$/, "");
+    return name.charAt(0).toUpperCase() + name.slice(1);
+}
+
 export function extractSubKeys(parsedQuestions: ParsedQuestions): string[] {
     return Object.keys(parsedQuestions).filter(x => x.match(/^[a-z]+1$/));
 }
