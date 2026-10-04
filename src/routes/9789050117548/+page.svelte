@@ -1,5 +1,5 @@
 <svelte:head>
-    <title>Paddenstoelen 1 sleutel | Mush ID</title>
+    <title>Paddenstoelen 1 sleutel | Mush-ID</title>
     <meta name="description" content="Vragenlijst paddenstoelen 1">
     <meta name="robots" content="noindex, nofollow">
 </svelte:head>

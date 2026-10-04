@@ -1,9 +1,9 @@
 <svelte:head>
     {#if data.key}
-    <title>{data.keyName} — Soortenoverzicht | Mush ID</title>
+    <title>{data.keyName} — Soortenoverzicht | Mush-ID</title>
     <meta name="description" content="Overzicht van alle soorten in de deelsleutel {data.keyName}">
     {:else}
-    <title>Paddenstoelen per deelsleutel | Mush ID</title>
+    <title>Paddenstoelen per deelsleutel | Mush-ID</title>
     <meta name="description" content="Bekijk alle paddenstoelen per deelsleutel">
     {/if}
     <meta name="robots" content="noindex">

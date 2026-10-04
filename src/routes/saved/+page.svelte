@@ -1,5 +1,5 @@
 <svelte:head>
-    <title>Opgeslagen zoekopdrachten | Mush ID</title>
+    <title>Opgeslagen zoekopdrachten | Mush-ID</title>
     <meta name="description" content="Lijst van opgeslagen zoekopdrachten in mush-id">
     <meta name="robots" content="noindex">
 </svelte:head>
