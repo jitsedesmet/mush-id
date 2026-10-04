@@ -49,7 +49,7 @@
 
 {#if waiting}
     <div class="update" role="status">
-        <span>Er is een nieuwe versie van Mush-ID.</span>
+        <span>Nieuwe versie beschikbaar.</span>
         <button type="button" onclick={update}>Herladen</button>
     </div>
 {/if}
