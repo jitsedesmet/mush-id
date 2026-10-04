@@ -42,9 +42,6 @@ async function parseMushroomCSVAsList(fetchApi?: Fetch): Promise<Mushroom[]> {
         ({ id: x.id, OToLId: x.OToLId, lifeUrl:  x.lifeUrl, waarnemingId: x.waarnemingId }))
 }
 
-export function OidExtraction() {
-}
-
 export async function parseMushroomCSV(fetchApi?: Fetch): Promise<{ [key: string]: Mushroom }> {
     const res: { [key: string]: Mushroom } = {};
     (await parseMushroomCSVAsList(fetchApi)).forEach(x => res[x.id] = x)

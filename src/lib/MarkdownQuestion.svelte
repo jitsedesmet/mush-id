@@ -17,7 +17,6 @@
         for (const detail of details) {
             markdown = markdown.replace(detail[0], detail[1]);
         }
-        console.log(details);
 
         return {
             markdown,
