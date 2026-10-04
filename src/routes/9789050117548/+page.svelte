@@ -23,9 +23,13 @@
     const stateTagList = $derived(computeTagList(page.url.searchParams));
     const limitedQuestions = $derived(computeLimitedQuestions(page.url.searchParams, data.parsedQuestions));
 
+    // No step in the URL yet (e.g. coming from the home page): start at the
+    // first step of the chosen sub-keys, keeping `keys` and the other params.
     $effect(() => {
         if (!stateTagList) {
-            goto(`?state=${limitedQuestions.start}`, {
+            const params = new SvelteURLSearchParams(page.url.search);
+            params.set("state", limitedQuestions.start);
+            goto(`?${params}`, {
                 replaceState: true,
             })
         }
