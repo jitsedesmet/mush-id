@@ -1,5 +1,5 @@
 import { browser } from '$app/env';
-import {writable} from "svelte/store";
+import {get, writable} from "svelte/store";
 import {type ParsedQuestions} from "./parser";
 import type {SavedLink, SavedLinks} from "./savedLinks";
 
@@ -11,10 +11,21 @@ preferredSubKeys.subscribe(x => {
     if (browser) localStorage.setItem("preferredSubKeys", x.join(";"));
 });
 
+// Keeps only the newest entry per link. Older versions of the app could save
+// the same link twice, which broke the keyed list on the saved page.
+function dedupeLinks(links: SavedLink[]): SavedLink[] {
+    const newest = new Map<string, SavedLink>();
+    for (const item of links) {
+        const existing = newest.get(item.link);
+        if (!existing || existing.creationDate < item.creationDate) newest.set(item.link, item);
+    }
+    return [...newest.values()];
+}
+
 function loadSavedHistory(): SavedLinks {
     const raw = JSON.parse(localStorage.getItem("savedHistory") || "{}");
     if (!raw.version) return { version: "1", links: [] };
-    return Object.fromEntries(
+    const parsed = Object.fromEntries(
         Object.entries(raw).map(([key, value]) => {
             if (key === "links") {
                 return [key, (value as SavedLink[]).map((x: { creationDate: Date, link: string }) => ({
@@ -25,6 +36,7 @@ function loadSavedHistory(): SavedLinks {
             return [key, value];
         })
     ) as unknown as SavedLinks;
+    return { ...parsed, links: dedupeLinks(parsed.links) };
 }
 
 export const savedHistory = writable<SavedLinks>(
@@ -46,6 +58,25 @@ savedHistory.subscribe(x => {
         })
     }));
 });
+
+/** Saves a link, or moves it to the top with a fresh date if it was already saved. */
+export function saveLink(link: string) {
+    const current = get(savedHistory);
+    savedHistory.set({
+        ...current,
+        links: current.links
+            .filter(x => x.link !== link)
+            .concat([{ link, creationDate: new Date() }]),
+    });
+}
+
+export function removeSavedLink(link: string) {
+    const current = get(savedHistory);
+    savedHistory.set({
+        ...current,
+        links: current.links.filter(x => x.link !== link),
+    });
+}
 
 export function computeCombinedScore(questionId: string, userAnswer: number, parsedQuestions: ParsedQuestions): number {
     const question = parsedQuestions[questionId];
