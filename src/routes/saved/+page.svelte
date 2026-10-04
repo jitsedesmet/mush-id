@@ -43,7 +43,7 @@
 
             <div class="item-text">
                 <a class="item-title"
-                   href={`https://www.google.com/search?tbm=isch&q=${state.currentQuestion}`}
+                   href={`https://www.google.com/search?tbm=isch&q=${encodeURIComponent(state.currentQuestion)}`}
                    target="_blank" rel="noopener">{state.currentQuestion}</a>
                 <span class="item-time">{formatDate(date)}</span>
                 <!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->

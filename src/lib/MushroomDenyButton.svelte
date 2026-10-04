@@ -7,7 +7,7 @@
 
     let { canSave = true }: { canSave?: boolean } = $props();
 
-    const nextOptionUrl = $derived(`${page.route.id!}/next-decision${page.url.search}`);
+    const nextOptionUrl = $derived(`${resolve("/9789050117548/next-decision")}${page.url.search}`);
 </script>
 
 <div class="deny-container">
@@ -28,7 +28,7 @@
     {/if}
 
     <FancyButton color="secondary"
-                 href="/">Stoppen
+                 href={resolve("/")}>Stoppen
     </FancyButton>
 </div>
 <p class="deny-hint">"Niet deze" toont je eerdere antwoorden, zodat je op een twijfelpunt een ander pad kan kiezen.</p>
