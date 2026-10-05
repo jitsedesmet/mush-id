@@ -26,6 +26,7 @@
     import {goto} from "$app/navigation";
     import {resolve} from "$app/paths";
     import FancyButton from "#lib/FancyButton.svelte";
+    import {install, promptInstall} from "#lib/install.svelte.js";
     let { data }: { data: PageData } = $props();
 
     const keys = $derived(data.subKeys.map(val => ({
@@ -50,7 +51,23 @@
             Doorloop de tweedelige sleutel uit de Veldgids Paddenstoelen&nbsp;I, één vraag tegelijk.
             Twijfel je? Geef aan hoe zeker je bent, dan kan je later een ander pad proberen.
         </p>
-        <p class="muted small">Zet de app op je thuisscherm om hem ook offline te gebruiken.</p>
+        {#if install.mode === "prompt"}
+            <div class="install">
+                <FancyButton color="secondary" onclick={promptInstall}>Installeer de app</FancyButton>
+                <span class="muted small">Dan werkt hij ook offline.</span>
+            </div>
+        {:else if install.mode === "ios"}
+            <p class="muted small">
+                Zet de app op je beginscherm om hem ook offline te gebruiken: tik op
+                <svg class="ios-share" viewBox="0 0 24 24" width="15" height="15" role="img" aria-label="Deel">
+                    <path d="M12 3v12M7 8l5-5 5 5M5 11v8a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-8"
+                          fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                en kies <em>Zet op beginscherm</em>.
+            </p>
+        {:else if install.mode === "manual"}
+            <p class="muted small">Zet de app op je thuisscherm om hem ook offline te gebruiken.</p>
+        {/if}
     </section>
 
     <form method="POST" class="start" onsubmit={(event) => {
@@ -120,6 +137,18 @@
     .small {
         font-size: 0.88em;
         margin: 0;
+    }
+
+    .install {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 8px 12px;
+        margin-top: 12px;
+    }
+
+    .ios-share {
+        vertical-align: -2px;
     }
 
     .start {
