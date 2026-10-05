@@ -59,11 +59,29 @@
         {:else if install.mode === "ios"}
             <p class="muted small">
                 Zet de app op je beginscherm om hem ook offline te gebruiken: tik op
-                <svg class="ios-share" viewBox="0 0 24 24" width="15" height="15" role="img" aria-label="Deel">
+                <svg class="inline-icon" viewBox="0 0 24 24" width="15" height="15" role="img" aria-label="Deel">
                     <path d="M12 3v12M7 8l5-5 5 5M5 11v8a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-8"
                           fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
                 en kies <em>Zet op beginscherm</em>.
+            </p>
+        {:else if install.mode === "android"}
+            <p class="muted small">
+                Zet de app op je startscherm om hem ook offline te gebruiken: open het browsermenu
+                <span aria-label="menu">⋮</span> en kies <em>App installeren</em> of <em>Toevoegen aan startscherm</em>.
+            </p>
+        {:else if install.mode === "chromium"}
+            <p class="muted small">
+                Installeer de app om hem ook offline te gebruiken: klik op het installatie-icoon
+                <svg class="inline-icon" viewBox="0 0 24 24" width="15" height="15" role="img" aria-label="Installeren">
+                    <path d="M9 17h6M12 17v3M8 20h8M4 4h16v13H4zM12 7v6M9 10l3 3 3-3"
+                          fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                rechts in de adresbalk.
+            </p>
+        {:else if install.mode === "safari"}
+            <p class="muted small">
+                Zet de app in je Dock om hem ook offline te gebruiken: kies <em>Archief › Voeg toe aan Dock</em>.
             </p>
         {:else if install.mode === "manual"}
             <p class="muted small">Zet de app op je thuisscherm om hem ook offline te gebruiken.</p>
@@ -147,7 +165,7 @@
         margin-top: 12px;
     }
 
-    .ios-share {
+    .inline-icon {
         vertical-align: -2px;
     }
 
