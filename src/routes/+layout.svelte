@@ -3,6 +3,8 @@
     import { page } from "$app/state";
     import { asset, resolve } from "$app/paths";
     import UpdateBanner from "#lib/UpdateBanner.svelte";
+    // Starts listening for the browser's install prompt as soon as the app loads.
+    import "#lib/install.svelte.js";
 
     let { children }: { children: Snippet } = $props();
 

@@ -14,6 +14,7 @@
     import OneZoomPicture from "#lib/OneZoomPicture.svelte";
     import QuestionHistory from "#lib/history/QuestionHistory.svelte";
     import MarkdownQuestion from "#lib/MarkdownQuestion.svelte";
+    import ShareButton from "#lib/ShareButton.svelte";
     import {isNotCovered, notCoveredGroupName} from "#lib/viewModel/parser.js";
     import {resolve} from "$app/paths";
     import {SvelteURLSearchParams} from "svelte/reactivity";
@@ -41,7 +42,10 @@
     const currentQuestion = $derived(limitedQuestions.complete[currentItem!])
     const currentMushroom = $derived(data.parsedMushrooms[currentItem!])
     const notCovered = $derived(currentMushroom ? isNotCovered(currentMushroom) : false);
-    const unknownStep = $derived(stateTagList !== undefined && !currentQuestion && !currentMushroom);
+    const shareText = $derived(currentMushroom && !notCovered
+        ? `${currentMushroom.id}, op naam gebracht met Mush-ID`
+        : `Stap ${currentItem} in de paddenstoelensleutel van Mush-ID`);
+    const unknownStep =$derived(stateTagList !== undefined && !currentQuestion && !currentMushroom);
 
     // Same URL with the last step removed, for a link back out of an unknown step.
     const previousStepUrl = $derived.by(() => {
@@ -58,13 +62,18 @@
 </script>
 
 <div class="content">
-    <div class="context muted">
-        <h1>
-            Veldgids Paddenstoelen I
-            {#if currentItem}· <span class="code">{currentItem}</span>{/if}
-        </h1>
-        {#if scopedSubKeys.length > 0}
-            <p>Beperkt tot: {scopedSubKeys.map(x => x.substring(0, x.length - 1)).join(", ")}</p>
+    <div class="context-row">
+        <div class="context muted">
+            <h1>
+                Veldgids Paddenstoelen I
+                {#if currentItem}· <span class="code">{currentItem}</span>{/if}
+            </h1>
+            {#if scopedSubKeys.length > 0}
+                <p>Beperkt tot: {scopedSubKeys.map(x => x.substring(0, x.length - 1)).join(", ")}</p>
+            {/if}
+        </div>
+        {#if currentQuestion || currentMushroom}
+            <ShareButton title="Mush-ID" text={shareText} url={page.url.href} />
         {/if}
     </div>
 
@@ -155,9 +164,17 @@
         padding-bottom: 24px;
     }
 
+    .context-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin: 0 0 12px;
+    }
+
     .context {
         font-size: 0.88em;
-        margin: 0 0 12px;
+        min-width: 0;
     }
 
     /* The page heading is the step you are on; it stays as quiet as the line it replaced. */

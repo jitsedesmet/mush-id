@@ -1,12 +1,14 @@
 <script lang="ts">
     import type {Snippet} from "svelte";
 
-    let { href, class: className = "", color = "primary", id, style, children }: {
+    let { href, class: className = "", color = "primary", id, style, onclick, children }: {
         href?: string;
         class?: string;
         color?: "primary" | "secondary";
         id?: string;
         style?: string;
+        // Makes it a plain button instead of one that submits its form.
+        onclick?: () => void;
         children: Snippet;
     } = $props();
 </script>
@@ -15,6 +17,10 @@
     <a {id} class="button {className} {color}" {href} {style}>
         {@render children()}
     </a>
+{:else if onclick}
+    <button type="button" {id} class="button {className} {color}" {style} {onclick}>
+        {@render children()}
+    </button>
 {:else}
     <button {id} class="button {className} {color}" {style}>
         {@render children()}
